@@ -1,8 +1,7 @@
-package game;
+package game.behaviours;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
@@ -14,6 +13,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
+ * @author Vasi Karabourniotis
  *
  */
 public class WanderBehaviour implements Behaviour {
