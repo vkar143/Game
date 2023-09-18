@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Ability;
-import game.items.Broadsword;
 
 /**
  * Class representing the Focus Action

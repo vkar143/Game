@@ -76,7 +76,6 @@ public class Broadsword extends WeaponItem {
         } else if (counter > 5){
             this.updateDamageMultiplier(1.0f);
             this.updateHitRate(originalHitRate);
-            actor.removeCapability(Ability.HAS_BROADSWORD);
             actor.removeCapability(Ability.HAS_FOCUS_ACTION);
             counter = 0;
         }
