@@ -7,29 +7,26 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.general.Status;
+import game.items.Consumable;
 
 /**
  * an action that can be used by any class that uses an item
  */
 public class ConsumableAction extends Action {
-
-    private BaseActorAttributes attribute;
-    private int percentage;
     private String description;
-    private Item item;
+    private Consumable consumable;
+
 
     /**
-     * sets all of the params for this class
-     * @param attribute
-     * @param percentage
+     * sets all the params for this class
+     * @param consumable
      * @param description
-     * @param item
+     *
      */
-    public ConsumableAction(BaseActorAttributes attribute, int percentage, String description, Item item) {
-        this.attribute = attribute;
-        this.percentage = percentage;
+    public ConsumableAction(String description, Consumable consumable) {
+        this.consumable = consumable;
         this.description = description;
-        this.item = item;
+
     }
 
     /**
@@ -40,11 +37,7 @@ public class ConsumableAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.modifyAttribute(attribute, ActorAttributeOperations.INCREASE,actor.getAttributeMaximum(attribute)*percentage/100);
-        if(!(item.hasCapability(Status.REUSABLE))){
-            actor.removeItemFromInventory(item);
-            }
-
+        consumable.consume(actor);
         return actor + " " + description + " Replenished";
     }
 
