@@ -54,6 +54,18 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
 
+        if(!this.isConscious()){
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+                try {
+                    Thread.sleep(200);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            System.exit(0);
+        }
+
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
@@ -95,6 +107,7 @@ public class Player extends Actor {
      * @param map where the actor fell unconscious
      * @return
      */
+//  Currently not in use
     @Override
     public String unconscious(GameMap map) {
         map.removeActor(this);

@@ -1,6 +1,8 @@
 package game.ground;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.general.Ability;
@@ -34,9 +36,8 @@ public class Void extends Ground {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        Actor actor = location.getActor();
-        if (!(actor == null) && !(actor.hasCapability(Ability.WALK_ON_VOID))) {
-            actor.unconscious(location.map());
+        if (location.containsAnActor() && (!location.getActor().hasCapability(Ability.WALK_ON_VOID))) {
+            location.getActor().modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, Integer.MAX_VALUE);
         }
     }
 
