@@ -14,7 +14,10 @@ import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.Broadsword;
 import game.items.Gate;
+import game.items.Key;
+import game.spawner.ForestKeeperSpawner;
 import game.spawner.HollowSoldierSpawner;
+import game.spawner.RedWolfSpawner;
 import game.spawner.WanderingUndeadSpawner;
 
 /**
@@ -29,8 +32,6 @@ public class  Application {
     public static void main(String[] args) {
         World world = new World(new Display());
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
-                new Wall(), new Floor(), new Puddle(), new Void());
-        FancyGroundFactory groundFactory2 = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
         List<String> map = Arrays.asList(
                 "...........................................................",
@@ -65,9 +66,24 @@ public class  Application {
                 "......~~....++..~~~~~~~~~~~......~......",
                 "....+~~~~..++++++++~~~~~~~~~....~~~.....",
                 "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
+        List<String> map3 = Arrays.asList(
+                "....+++..............................+++++++++....~~~....~~~",
+                "+...+++..............................++++++++.....~~~.....~~",
+                "++...............#######..............++++.........~~.......",
+                "++...............#_____#...........................~~~......",
+                "+................#_____#............................~~......",
+                ".................###_###............~...............~~.....~",
+                "...............................~.+++~~..............~~....~~",
+                ".....................~........~~+++++...............~~~...~~",
+                "....................~~~.........++++............~~~~~~~...~~",
+                "....................~~~~.~~~~..........~........~~~~~~.....~",
+                "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
+                "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
 
-        GameMap gameMap2 = new GameMap(groundFactory2, map2);
+        GameMap gameMap2 = new GameMap(groundFactory, map2);
+        GameMap gameMap3 = new GameMap(groundFactory, map3);
         world.addGameMap(gameMap2);
+        world.addGameMap(gameMap3);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -79,14 +95,20 @@ public class  Application {
         }
         gameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         gameMap2.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
+        gameMap.at(20, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         Gate gate1 = new Gate();
         gate1.addAllowableAction(new MoveActorAction(gameMap2.at(1,1),"to the next level!"));
         Gate gate2 = new Gate();
         gate2.addAllowableAction(new MoveActorAction(gameMap.at(1,1), "Back to level 1"));
-        gameMap.at(25, 9).addItem(gate1);
+        Gate gate3 = new Gate();
+        gate3.addAllowableAction(new MoveActorAction(gameMap3.at(1,1), "to the next level!"));
+        gameMap.at(28, 6).addItem(gate1);
+        gameMap2.at(1,1).addItem(gate3);
         gameMap.at(27,6).addItem(new Broadsword("Broadsword", '1', 110, "swing broadsword", 90));
         Player player = new Player("The Abstracted One", '@', 150);
-
+        gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
+        gameMap3.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
+        player.addItemToInventory(new Key());
         world.addPlayer(player, gameMap.at(29, 5));
         world.run();
     }

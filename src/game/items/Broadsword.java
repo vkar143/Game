@@ -73,5 +73,10 @@ public class Broadsword extends WeaponItem {
         actions.add(new AttackAction(target, location.toString(), this));
         return actions;
     }
+
+    @Override
+    public ActionList allowableActions(Actor owner) {
+        return super.allowableActions(owner);
+    }
 }
 

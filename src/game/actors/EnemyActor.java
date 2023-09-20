@@ -38,10 +38,12 @@ public abstract class EnemyActor extends Actor {
     public EnemyActor(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(999, new WanderBehaviour());
-        this.behaviours.put(998, new AttackBehavior());
+        this.behaviours.put(997, new AttackBehavior());
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
     }
-
+    public void addBehavior(Behaviour behaviour, int priority){
+        this.behaviours.put(priority, behaviour);
+    }
     /**
      * At each turn, select a valid action to perform.
      *

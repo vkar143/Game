@@ -1,21 +1,16 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.spawner.Spawner;
 
-/**
- * abstract class that other graveyards inherit from
- */
-public class Graveyard extends Ground {
-    protected Spawner spawner;
-
-    public Graveyard(Spawner _spawner) {
-        super('n');
-        this.spawner = _spawner;
-
+public class Hut extends Graveyard {
+    public Hut(Spawner _spawner) {
+        super(_spawner);
+        setDisplayChar('h');
     }
+
     public void Spawn(Location location) {
         for(Exit exit: location.getExits()) {
             Location _location = exit.getDestination();
@@ -35,4 +30,5 @@ public class Graveyard extends Ground {
     public void tick(Location location) {
         Spawn(location);
     }
+
 }
