@@ -9,7 +9,7 @@ import game.items.Key;
 import java.util.Random;
 
 /**
- * extends enemy actor the wanderingundead is the class of the first enemy in the game
+ * extends enemy actor the wandering undead is the class of the first enemy in the game
  */
 public class WanderingUndead extends EnemyActor {
 

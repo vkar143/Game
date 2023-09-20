@@ -83,7 +83,7 @@ public class  Application {
         gate1.addAllowableAction(new MoveActorAction(gameMap2.at(1,1),"to the next level!"));
         Gate gate2 = new Gate();
         gate2.addAllowableAction(new MoveActorAction(gameMap.at(1,1), "Back to level 1"));
-        gameMap.at(1, 1).addItem(gate1);
+        gameMap.at(25, 9).addItem(gate1);
         gameMap.at(27,6).addItem(new Broadsword("Broadsword", '1', 110, "swing broadsword", 90));
         Player player = new Player("The Abstracted One", '@', 150);
 
