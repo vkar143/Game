@@ -12,6 +12,7 @@ import game.actors.Player;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
+import game.items.BloodBerry;
 import game.items.Broadsword;
 import game.items.Gate;
 import game.items.Key;
@@ -104,6 +105,7 @@ public class  Application {
         gate3.addAllowableAction(new MoveActorAction(gameMap3.at(1,1), "to the next level!"));
         gameMap.at(28, 6).addItem(gate1);
         gameMap2.at(1,1).addItem(gate3);
+        gameMap.at(10, 10).addItem(new BloodBerry());
         gameMap.at(27,6).addItem(new Broadsword("Broadsword", '1', 110, "swing broadsword", 90));
         Player player = new Player("The Abstracted One", '@', 150);
         gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));

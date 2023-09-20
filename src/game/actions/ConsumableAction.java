@@ -38,7 +38,7 @@ public class ConsumableAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         consumable.consume(actor);
-        return actor + " " + description + " Replenished";
+        return actor + description;
     }
 
     /**
@@ -48,6 +48,6 @@ public class ConsumableAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "Replenish " + actor + " " + description;
+        return actor + " " + description;
     }
 }

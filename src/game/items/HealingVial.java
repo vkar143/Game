@@ -29,12 +29,13 @@ public class HealingVial extends Item implements Consumable{
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ConsumableAction("HP" ,this));
+        actionlist.add(new ConsumableAction(" drink healing vial" ,this));
         return actionlist;
     }
 
     @Override
     public void consume(Actor actor) {
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH)/5);
+        actor.removeItemFromInventory(this);
     }
 }

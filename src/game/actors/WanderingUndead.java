@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.Key;
+import game.items.Runes;
 
 import java.util.Random;
 
@@ -38,6 +39,7 @@ public class WanderingUndead extends EnemyActor {
             map.locationOf(this).addItem(new Key());
             builder.append("\n" + name + " dropped a key");
         }
+        map.locationOf(this).addItem(new Runes(50));
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
     }

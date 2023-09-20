@@ -1,5 +1,5 @@
 package game.actors;
-
+import game.items.Runes;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -13,6 +13,7 @@ import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.Base;
+import game.items.Wallet;
 
 /**
  * Class representing the Player.
@@ -22,6 +23,7 @@ import game.items.Base;
  *
  */
 public class Player extends Actor {
+
     /**
      * Constructor.
      *
@@ -37,6 +39,7 @@ public class Player extends Actor {
         addItemToInventory(new Base());
     }
 
+
     /**
      * simply prints current stats and then returns a menu with all possible actions in it
      * @param actions    collection of possible Actions for this Actor
@@ -50,6 +53,7 @@ public class Player extends Actor {
         display.print(getName()+ "\n");
         display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
         display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
+        display.print(getBalance() + " Ruins\n");
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
@@ -65,7 +69,6 @@ public class Player extends Actor {
             }
             System.exit(0);
         }
-
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);

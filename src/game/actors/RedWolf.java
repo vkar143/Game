@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
+import game.items.Runes;
 
 import java.util.Random;
 
@@ -25,6 +26,7 @@ public class RedWolf extends EnemyActor{
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n" + name + " dropped a healing Vial" + "\n");
         }
+        map.locationOf(this).addItem(new Runes(25));
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
     }

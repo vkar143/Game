@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.Key;
 import game.items.RefreshingFlask;
+import game.items.Runes;
 
 import java.util.Random;
 
@@ -49,6 +50,7 @@ public class HollowSoldier extends EnemyActor {
             map.locationOf(this).addItem(new RefreshingFlask());
             builder.append("\n" + name + " dropped a refreshing flask" + "\n");
         }
+        map.locationOf(this).addItem(new Runes(100));
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
 

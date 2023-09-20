@@ -27,13 +27,14 @@ public class RefreshingFlask extends Item implements Consumable {
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ConsumableAction("Stamina",this));
+        actionlist.add(new ConsumableAction(" drink refreshing flask",this));
         return actionlist;
     }
 
     @Override
     public void consume(Actor actor) {
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 40);
+        actor.removeItemFromInventory(this);
     }
 }
 
