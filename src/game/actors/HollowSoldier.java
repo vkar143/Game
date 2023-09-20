@@ -3,6 +3,8 @@ package game.actors;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.HealingVial;
+import game.items.Key;
 import game.items.RefreshingFlask;
 
 import java.util.Random;
@@ -35,14 +37,20 @@ public class HollowSoldier extends EnemyActor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        Random random = new Random();
+
         StringBuilder builder = new StringBuilder();
+        Random random = new Random();
         int number = random.nextInt(10);
-        if(number < 4){
+        if(number < 2){
+            map.locationOf(this).addItem(new HealingVial());
+            builder.append("\n" + name + " dropped a healing Vial" + "\n");
+        }
+        if(random.nextInt() < 4){
             map.locationOf(this).addItem(new RefreshingFlask());
             builder.append("\n" + name + " dropped a refreshing flask" + "\n");
         }
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
+
     }
 }

@@ -3,6 +3,10 @@ package game.actors;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.HealingVial;
+import game.items.Key;
+
+import java.util.Random;
 
 /**
  * extends enemy actor the wanderingundead is the class of the first enemy in the game
@@ -23,7 +27,19 @@ public class WanderingUndead extends EnemyActor {
     }
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        return super.unconscious(actor, map);
+        StringBuilder builder = new StringBuilder();
+        Random random = new Random();
+        int number = random.nextInt(10);
+        if(number < 2){
+            map.locationOf(this).addItem(new HealingVial());
+            builder.append("\n" + name + " dropped a healing Vial" + "\n");
+        }
+        if(random.nextInt(4) == 1){
+            map.locationOf(this).addItem(new Key());
+            builder.append("\n" + name + " dropped a key");
+        }
+        builder.insert(0,super.unconscious(actor, map));
+        return builder.toString();
     }
 }
 

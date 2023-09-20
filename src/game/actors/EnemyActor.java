@@ -103,20 +103,5 @@ public abstract class EnemyActor extends Actor {
      * @param map where the actor fell unconscious
      * @return
      */
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        StringBuilder builder = new StringBuilder();
-        Random random = new Random();
-        int number = random.nextInt(10);
-        if(number < 2){
-            map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n" + name + " dropped a healing Vial" + "\n");
-        }
-        if(random.nextInt(4) == 1){
-            map.locationOf(this).addItem(new Key());
-            builder.append("\n" + name + " dropped a key");
-        }
-        builder.insert(0,super.unconscious(actor, map));
-        return builder.toString();
-    }
+
 }
