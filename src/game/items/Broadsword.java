@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AttackAction;
 import game.general.Ability;
 import game.actions.FocusAction;
 
@@ -60,17 +61,17 @@ public class Broadsword extends WeaponItem {
     }
 
     /**
-     * returns a list of all possible actions for this item
-     * @param owner the actor that owns the item
-     * @return
+     * Gives the actions that can be performed using the broadsword.
+     *
+     * @param target The target actor to attack.
+     * @param location The location where the attack action occurs.
+     * @return An ActionList containing allowable actions.
      */
     @Override
-    public ActionList allowableActions(Actor owner) {
-        ActionList actionlist = new ActionList();
-        actionlist.add(super.allowableActions(owner));
-        actionlist.add(new FocusAction(this));
-        return actionlist;
-
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actions = super.allowableActions(location);
+        actions.add(new AttackAction(target, location.toString(), this));
+        return actions;
     }
 }
 

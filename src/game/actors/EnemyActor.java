@@ -81,14 +81,6 @@ public abstract class EnemyActor extends Actor {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction, otherActor.getIntrinsicWeapon()));
         }
-        List<WeaponItem> weaponItems = otherActor.getItemInventory().stream()
-                .filter(item -> item.hasCapability(Ability.ATTACK))
-                .map(item -> (WeaponItem) item)
-                .collect(Collectors.toList());
-
-        for (WeaponItem weaponItem : weaponItems) {
-            actions.add(new AttackAction(this, direction, weaponItem));
-        }
         return actions;
     }
 
