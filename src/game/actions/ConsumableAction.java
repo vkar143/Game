@@ -11,7 +11,7 @@ import game.general.Status;
 /**
  * an action that can be used by any class that uses an item
  */
-public class ReplenishAction extends Action {
+public class ConsumableAction extends Action {
 
     private BaseActorAttributes attribute;
     private int percentage;
@@ -25,7 +25,7 @@ public class ReplenishAction extends Action {
      * @param description
      * @param item
      */
-    public ReplenishAction(BaseActorAttributes attribute, int percentage, String description, Item item) {
+    public ConsumableAction(BaseActorAttributes attribute, int percentage, String description, Item item) {
         this.attribute = attribute;
         this.percentage = percentage;
         this.description = description;

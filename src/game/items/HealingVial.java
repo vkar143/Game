@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.ReplenishAction;
+import game.actions.ConsumableAction;
 
 /**
  * healing vial gives the replinish action for HP
@@ -28,7 +28,7 @@ public class HealingVial extends Item {
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ReplenishAction(BaseActorAttributes.HEALTH, 20, "HP",this));
+        actionlist.add(new ConsumableAction(BaseActorAttributes.HEALTH, 20, "HP",this));
         return actionlist;
     }
 }
