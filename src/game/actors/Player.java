@@ -53,7 +53,7 @@ public class Player extends Actor {
         display.print(getName()+ "\n");
         display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
         display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
-        display.print(getBalance() + " Ruins\n");
+        display.print(getBalance() + " Runes\n");
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();

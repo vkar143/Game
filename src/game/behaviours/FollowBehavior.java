@@ -17,26 +17,41 @@ public class FollowBehavior implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         if(map.contains(target) && map.contains(actor)){
-            Location targetlocation = map.locationOf(target);
+            Location targetLocation = map.locationOf(target);
             Location enemyLocation = map.locationOf(actor);
-            int x = targetlocation.x() - enemyLocation.x();
-            int y = targetlocation.y() - enemyLocation.y();
+            int x = targetLocation.x() - enemyLocation.x();
+            int y = targetLocation.y() - enemyLocation.y();
             int xDir = Integer.compare(x, 0);
             int yDir = Integer.compare(y, 0);
-            Location movelocation = new Location(map, enemyLocation.x() + xDir, enemyLocation.y() + yDir);
-            for(Exit exit: enemyLocation.getExits()){
+
+            Location bestMoveLocation = null;
+            int bestMoveScore = Integer.MAX_VALUE;
+
+            for (Exit exit : enemyLocation.getExits()) {
                 Location dest = exit.getDestination();
-                if(dest.x() == movelocation.x() && dest.y() == movelocation.y()){
-                    if(dest.canActorEnter(actor)){
-                        return new MoveActorAction(dest, "towards player");
+                if (dest.x() == enemyLocation.x() + xDir && dest.y() == enemyLocation.y() + yDir) {
+                    int moveScore = calculateMoveScore(dest, actor);
+                    if (moveScore < bestMoveScore) {
+                        bestMoveLocation = dest;
+                        bestMoveScore = moveScore;
                     }
                 }
             }
 
+            if (bestMoveLocation != null) {
+                return new MoveActorAction(bestMoveLocation, "towards player");
+            }
         }
-        else{
-            return null;
-        }
+
         return null;
     }
+
+    private int calculateMoveScore(Location location, Actor actor) {
+        if (location.canActorEnter(actor)) {
+            return 0;
+        } else {
+            return Integer.MAX_VALUE;
+        }
+    }
+
 }

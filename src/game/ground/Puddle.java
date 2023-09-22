@@ -26,7 +26,7 @@ public class Puddle extends Ground implements Consumable {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionlist = super.allowableActions(actor, location, direction);
-        if(location.containsAnActor()){
+        if(location.getActor() == actor){
             actionlist.add(new ConsumableAction("drinks from puddle",this));
         }
         return actionlist;

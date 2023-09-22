@@ -18,7 +18,7 @@ public class Runes extends Item implements Consumable{
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = super.allowableActions(owner);
-        actionList.add(new ConsumableAction("Add " + amount + " ruins to wallet", this));
+        actionList.add(new ConsumableAction("Add " + amount + " runes to wallet", this));
         return actionList;
     }
 
