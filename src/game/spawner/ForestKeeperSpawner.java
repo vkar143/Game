@@ -24,8 +24,7 @@ public class ForestKeeperSpawner implements Spawner{
     @Override
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
-            EnemyActor newEnemy = new ForestKeeper();
-            newEnemy.addBehavior(new FollowBehavior(target),998);
+            EnemyActor newEnemy = new ForestKeeper(target);
             location.map().addActor(newEnemy,location);
         }
     }

@@ -110,8 +110,7 @@ public class  Application {
         Player player = new Player("The Abstracted One", '@', 150);
         gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
         gameMap3.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
-        player.addItemToInventory(new Key());
-        world.addPlayer(player, gameMap.at(29, 5));
+        world.addPlayer(player, gameMap3.at(29, 5));
         world.run();
     }
 }

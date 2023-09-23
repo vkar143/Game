@@ -25,8 +25,7 @@ public class RedWolfSpawner implements Spawner{
     @Override
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
-            EnemyActor newEnemy = new RedWolf();
-            newEnemy.addBehavior(new FollowBehavior(target),998);
+            EnemyActor newEnemy = new RedWolf(target);
             location.map().addActor(newEnemy,location);
         }
     }

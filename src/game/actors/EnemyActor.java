@@ -6,8 +6,11 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.behaviours.FollowBehavior;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
@@ -59,18 +62,6 @@ public abstract class EnemyActor extends Actor {
             Action action = behaviour.getAction(this, map);
             if (action != null)
                 return action;
-        }
-
-        if(!this.isConscious()){
-            for (String line : FancyMessage.YOU_DIED.split("\n")) {
-                new Display().println(line);
-                try {
-                    Thread.sleep(200);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-            System.exit(0);
         }
         return new DoNothingAction();
     }
