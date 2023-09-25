@@ -14,8 +14,8 @@ import game.behaviours.FollowBehavior;
 public abstract class FollowingEnemies extends EnemyActor {
     protected Actor target;
 
-    public FollowingEnemies(String name, char displayChar, int hitPoints, Actor target) {
-        super(name, displayChar, hitPoints);
+    public FollowingEnemies(String name, char displayChar, int hitPoints, Actor target, int runeAmount) {
+        super(name, displayChar, hitPoints, runeAmount);
         this.target = target;
     }
 

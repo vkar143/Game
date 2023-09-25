@@ -15,7 +15,7 @@ import java.util.Random;
 public class WanderingUndead extends EnemyActor {
 
     public WanderingUndead() {
-        super("Wandering Undead", 't', 100);
+        super("Wandering Undead", 't', 100, 50);
     }
 
     /**
@@ -39,7 +39,7 @@ public class WanderingUndead extends EnemyActor {
             map.locationOf(this).addItem(new Key());
             builder.append("\n" + name + " dropped a key");
         }
-        map.locationOf(this).addItem(new Runes(50));
+        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
     }

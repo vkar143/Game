@@ -17,8 +17,9 @@ public class HollowSoldier extends EnemyActor {
     /**
      * init sets name and hitpoints and display char
      */
+
     public HollowSoldier() {
-        super("Hollow soldier", '&', 200);
+        super("Hollow soldier", '&', 200, 100);
     }
 
     /**
@@ -46,12 +47,11 @@ public class HollowSoldier extends EnemyActor {
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n" + name + " dropped a healing Vial" + "\n");
         }
-        if(random.nextInt() < 4){
+        if(number < 4){
             map.locationOf(this).addItem(new RefreshingFlask());
             builder.append("\n" + name + " dropped a refreshing flask" + "\n");
         }
-        map.locationOf(this).addItem(new Runes(100));
-        builder.insert(0,super.unconscious(actor, map));
+        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();
 
     }

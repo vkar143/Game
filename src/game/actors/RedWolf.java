@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class RedWolf extends FollowingEnemies{
     public RedWolf(Actor target) {
-        super("Red Wolf", 'r',25, target);
+        super("Red Wolf", 'r',25, target, 25);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class RedWolf extends FollowingEnemies{
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n" + name + " dropped a healing Vial" + "\n");
         }
-        map.locationOf(this).addItem(new Runes(25));
+        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         builder.insert(0,super.unconscious(actor, map));
         return builder.toString();
     }

@@ -19,6 +19,7 @@ import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
 import game.items.HealingVial;
 import game.items.Key;
+import game.items.Runes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,17 +33,20 @@ import java.util.stream.Collectors;
 public abstract class EnemyActor extends Actor {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
 
+    private int runeAmount;
+
     /**
      * sets the attributes as well as the behaviours and capabilities on an enemy actor
      * @param name
      * @param displayChar
      * @param hitPoints
      */
-    public EnemyActor(String name, char displayChar, int hitPoints) {
+    public EnemyActor(String name, char displayChar, int hitPoints, int _runeAmount) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(997, new AttackBehavior());
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
+        this.runeAmount = _runeAmount;
     }
     public void addBehavior(Behaviour behaviour, int priority){
         this.behaviours.put(priority, behaviour);
@@ -64,6 +68,10 @@ public abstract class EnemyActor extends Actor {
                 return action;
         }
         return new DoNothingAction();
+    }
+
+    public int getRuneAmount() {
+        return runeAmount;
     }
 
     /**
@@ -90,11 +98,12 @@ public abstract class EnemyActor extends Actor {
         return actions;
     }
 
-    /**
-     * drops all of the items that the EnemyActors drop and then removes the actor drom the map
-     * @param actor the perpetrator
-     * @param map where the actor fell unconscious
-     * @return
-     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        StringBuilder builder = new StringBuilder();
+        map.locationOf(this).addItem(new Runes(runeAmount));
+        builder.insert(0,super.unconscious(actor, map));
+        return builder.toString();
+    }
 
 }
