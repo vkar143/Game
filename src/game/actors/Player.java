@@ -1,5 +1,5 @@
 package game.actors;
-import game.items.Runes;
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -13,7 +13,6 @@ import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.Base;
-import game.items.Wallet;
 
 /**
  * Class representing the Player.

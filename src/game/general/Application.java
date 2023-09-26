@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
+import game.actors.Traveller;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
@@ -110,7 +111,9 @@ public class  Application {
         Player player = new Player("The Abstracted One", '@', 150);
         gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
         gameMap3.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
+        Traveller traveller = new Traveller("Traveller", 'ඞ', 10);
         world.addPlayer(player, gameMap3.at(29, 5));
+        world.addPlayer(traveller, gameMap3.at(20, 3));
         world.run();
     }
 }
