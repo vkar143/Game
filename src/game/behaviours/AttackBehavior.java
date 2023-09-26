@@ -14,7 +14,7 @@ import game.general.Status;
  */
 public class AttackBehavior implements Behaviour {
     /**
-     * checcks to see if there is a enemy within its surroundings if there is it returns an attack action towards that enemy
+     * checks to see if there is a enemy within its surroundings if there is it returns an attack action towards that enemy
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
      * @return

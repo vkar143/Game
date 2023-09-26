@@ -5,12 +5,14 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Broadsword;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
+import game.items.Trade;
 
-public class Traveller extends Actor {
+public class Traveller extends Actor implements Trade {
 
     /**
      * The constructor of the Actor class.
@@ -29,5 +31,15 @@ public class Traveller extends Actor {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
+    }
+
+    @Override
+    public String buyItems(Item item, Player player) {
+        return null;
+    }
+
+    @Override
+    public String sellItems(Item item, Player player) {
+        return null;
     }
 }
