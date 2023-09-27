@@ -46,7 +46,7 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actionList = super.allowableActions(otherActor, location);
-        actionList.add(new SellAction("Sell Refreshing Flask", this));
+        actionList.add(new SellAction("Sells the Refreshing Flask", this));
         return actionList;
     }
 

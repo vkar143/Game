@@ -36,7 +36,7 @@ public class BloodBerry extends Item implements Consumable, SellableItem {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actionList =  super.allowableActions(otherActor, location);
-        actionList.add(new SellAction("Sell BloodBerry", this));
+        actionList.add(new SellAction(" Sells the BloodBerry", this));
         return actionList;
     }
 

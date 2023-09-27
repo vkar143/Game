@@ -16,12 +16,6 @@ import game.general.Status;
 public class Broadsword extends WeaponItem implements SellableItem {
     /**
      * Constructor.
-     *
-     * @param name        name of the item
-     * @param displayChar character to use for display when item is on the ground
-     * @param damage      amount of damage this weapon does
-     * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
-     * @param hitRate     the probability/chance to hit the target.
      */
     private int focusDuration;
     public Broadsword() {
@@ -31,10 +25,8 @@ public class Broadsword extends WeaponItem implements SellableItem {
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
-
     /**
      * returns focus duration
-     * @return
      */
     public int getFocusDuration() {
         return focusDuration;
@@ -57,7 +49,6 @@ public class Broadsword extends WeaponItem implements SellableItem {
 
     /**
      * sets focus duration
-     * @param focusDuration
      */
     public void setFocusDuration(int focusDuration) {
         this.focusDuration = focusDuration;
@@ -77,7 +68,7 @@ public class Broadsword extends WeaponItem implements SellableItem {
             actions.add(new AttackAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("Sell Broadsword", this));
+            actions.add(new SellAction("Sells the Broadsword", this));
         }
         return actions;
     }
