@@ -11,7 +11,7 @@ import game.actions.FocusAction;
 /**
  * weapon item
  */
-public class Broadsword extends WeaponItem {
+public class Broadsword extends WeaponItem implements SellItem{
 
     /**
      * Constructor.
@@ -27,6 +27,7 @@ public class Broadsword extends WeaponItem {
         super(name, displayChar, damage, verb, hitRate);
         this.focusDuration = 0;
         this.capabilitySet.addCapability(Ability.ATTACK);
+        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
     /**
@@ -79,6 +80,14 @@ public class Broadsword extends WeaponItem {
         ActionList actionList = super.allowableActions(owner);
         actionList.add(new FocusAction(this));
         return actionList;
+    }
+
+    @Override
+    public void sellItem(Actor actor) {
+        int sellingAmount = 100;
+        actor.addItemToInventory(new Runes(sellingAmount));
+        actor.removeItemFromInventory(this);
+
     }
 }
 
