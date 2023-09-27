@@ -5,7 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
+import game.actions.SellAction;
 import game.general.Ability;
 
 import java.util.Random;
@@ -13,7 +15,7 @@ import java.util.Random;
 /**
  * refreshing flask allows the actor to replenish stamina
  */
-public class RefreshingFlask extends Item implements Consumable, SellItem {
+public class RefreshingFlask extends Item implements Consumable, SellableItem {
     /***
      * Constructor.
      */
@@ -23,7 +25,7 @@ public class RefreshingFlask extends Item implements Consumable, SellItem {
     }
 
     /**
-     * returns a replinsh action that replenishes the users Stamina
+     * returns a replenish action that replenishes the users Stamina
      * @param owner the actor that owns the item
      * @return
      */
@@ -42,6 +44,13 @@ public class RefreshingFlask extends Item implements Consumable, SellItem {
     }
 
     @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = super.allowableActions(otherActor, location);
+        actionList.add(new SellAction("Sell Refreshing Flask", this));
+        return actionList;
+    }
+
+    @Override
     public void sellItem(Actor actor) {
         Random random = new Random();
         int chance = random.nextInt(10);
@@ -49,7 +58,7 @@ public class RefreshingFlask extends Item implements Consumable, SellItem {
         if (chance < 5){
             actor.removeItemFromInventory(this);
         } else {
-            actor.addItemToInventory(new Runes(sellingAmount));
+            actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         }
     }

@@ -6,13 +6,13 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.general.Status;
-import game.items.SellItem;
+import game.items.SellableItem;
 
 public class SellAction extends Action {
     private String description;
-    private SellItem sellItem;
+    private SellableItem sellItem;
 
-    private SellAction(String description, SellItem sellItem) {
+    public SellAction(String description, SellableItem sellItem) {
         this.description = description;
         this.sellItem = sellItem;
     }

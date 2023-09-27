@@ -46,6 +46,7 @@ public abstract class EnemyActor extends Actor {
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(997, new AttackBehavior());
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
+        this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = _runeAmount;
     }
     public void addBehavior(Behaviour behaviour, int priority){

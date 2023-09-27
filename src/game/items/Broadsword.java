@@ -5,14 +5,15 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.SellAction;
 import game.general.Ability;
 import game.actions.FocusAction;
+import game.general.Status;
 
 /**
  * weapon item
  */
-public class Broadsword extends WeaponItem implements SellItem{
-
+public class Broadsword extends WeaponItem implements SellableItem {
     /**
      * Constructor.
      *
@@ -23,12 +24,13 @@ public class Broadsword extends WeaponItem implements SellItem{
      * @param hitRate     the probability/chance to hit the target.
      */
     private int focusDuration;
-    public Broadsword(String name, char displayChar, int damage, String verb, int hitRate) {
-        super(name, displayChar, damage, verb, hitRate);
+    public Broadsword() {
+        super("BroadSword", '1', 110, "Swings at", 80);
         this.focusDuration = 0;
         this.capabilitySet.addCapability(Ability.ATTACK);
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
+
 
     /**
      * returns focus duration
@@ -71,7 +73,12 @@ public class Broadsword extends WeaponItem implements SellItem{
     @Override
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actions = super.allowableActions(location);
-        actions.add(new AttackAction(target, location.toString(), this));
+        if(target.hasCapability(Status.ENEMY)){
+            actions.add(new AttackAction(target, location.toString(), this));
+        }
+        if (target.hasCapability(Ability.CAN_TRADE)) {
+            actions.add(new SellAction("Sell Broadsword", this));
+        }
         return actions;
     }
 
@@ -85,7 +92,7 @@ public class Broadsword extends WeaponItem implements SellItem{
     @Override
     public void sellItem(Actor actor) {
         int sellingAmount = 100;
-        actor.addItemToInventory(new Runes(sellingAmount));
+        actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
 
     }

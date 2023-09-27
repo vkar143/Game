@@ -5,7 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
+import game.actions.SellAction;
 import game.general.Ability;
 
 import java.util.Random;
@@ -13,7 +15,7 @@ import java.util.Random;
 /**
  * healing vial gives the replinish action for HP
  */
-public class HealingVial extends Item implements Consumable, SellItem{
+public class HealingVial extends Item implements Consumable, SellableItem {
 
     /***
      * Constructor.
@@ -41,6 +43,12 @@ public class HealingVial extends Item implements Consumable, SellItem{
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH)/5);
         actor.removeItemFromInventory(this);
     }
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList = super.allowableActions(otherActor, location);
+        actionList.add(new SellAction("Sell Healing Vial ", this));
+        return actionList;
+    }
 
     @Override
     public void sellItem(Actor actor) {
@@ -52,7 +60,7 @@ public class HealingVial extends Item implements Consumable, SellItem{
             actor.addItemToInventory(new Runes(newSellingAmount));
             actor.removeItemFromInventory(this);
         } else {
-            actor.addItemToInventory(new Runes(sellingAmount));
+            actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         }
     }

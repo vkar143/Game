@@ -5,12 +5,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
+import game.actions.SellAction;
 import game.general.Ability;
 
-import java.util.concurrent.CopyOnWriteArrayList;
-
-public class BloodBerry extends Item implements Consumable, SellItem{
+public class BloodBerry extends Item implements Consumable, SellableItem {
 
     /***
      * Constructor.
@@ -34,9 +34,16 @@ public class BloodBerry extends Item implements Consumable, SellItem{
     }
 
     @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actionList =  super.allowableActions(otherActor, location);
+        actionList.add(new SellAction("Sell BloodBerry", this));
+        return actionList;
+    }
+
+    @Override
     public void sellItem(Actor actor) {
         int sellingAmount = 10;
-        actor.addItemToInventory(new Runes(sellingAmount));
+        actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
     }
 }

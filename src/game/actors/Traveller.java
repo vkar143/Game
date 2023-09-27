@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.general.Ability;
+import game.general.Status;
 import game.items.Broadsword;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
@@ -23,9 +25,10 @@ public class Traveller extends Actor implements Trade {
      */
     public Traveller(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        addCapability(Ability.CAN_TRADE);
         addItemToInventory(new HealingVial());
         addItemToInventory(new RefreshingFlask());
-        addItemToInventory(new Broadsword("Broadsword", '1', 110, "swing broadsword", 90));
+        addItemToInventory(new Broadsword());
     }
 
     @Override
