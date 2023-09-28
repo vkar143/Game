@@ -6,16 +6,17 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.general.Ability;
-import game.general.Status;
 import game.items.SellableItem;
 
 public class SellAction extends Action {
     private String description;
     private SellableItem sellItem;
+    private int sellingAmount;
 
-    public SellAction(String description, SellableItem sellItem) {
+    public SellAction(String description, SellableItem sellItem, int sellingAmount) {
         this.description = description;
         this.sellItem = sellItem;
+        this.sellingAmount = sellingAmount;
     }
 
     @Override
@@ -23,10 +24,10 @@ public class SellAction extends Action {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (map.isAnActorAt(destination) && map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
-                sellItem.sellItem(actor);
+                sellItem.sellItem(actor, sellingAmount);
             }
         }
-        return actor + " " + sellItem.sellItem(actor);
+        return actor + " " + sellItem.sellItem(actor, sellingAmount);
     }
 
     @Override

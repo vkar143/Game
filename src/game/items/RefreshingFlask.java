@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.BuyAction;
 import game.actions.ConsumableAction;
 import game.actions.SellAction;
 import game.general.Ability;
@@ -45,18 +44,18 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
     }
 
     @Override
-    public ActionList allowableActions(Actor otherActor, Location location) {
-        ActionList actionList = super.allowableActions(otherActor, location);
-        actionList.add(new SellAction("sells the Refreshing Flask", this));
-        actionList.add(new BuyAction("buys the Refreshing Flask", this));
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = super.allowableActions(target, location);
+        if (target.hasCapability(Ability.CAN_TRADE)) {
+            actionList.add(new SellAction("sells the Refreshing Flask", this, 25));
+        }
         return actionList;
     }
 
     @Override
-    public String sellItem(Actor actor) {
+    public String sellItem(Actor actor, int sellingAmount) {
         Random random = new Random();
         int chance = random.nextInt(10);
-        int sellingAmount = 25;
         if (chance < 5){
             actor.removeItemFromInventory(this);
         } else {
@@ -67,19 +66,20 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
     }
 
     @Override
-    public String buyItem(Actor actor) {
+    public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
         int chance = random.nextInt(10);
-        int sellingAmount = 75;
         int discountedAmount = 15;
         if (chance < 1 ){
-            sellingAmount = sellingAmount - discountedAmount;
-            actor.removeItemFromInventory(new Runes(sellingAmount));
+            buyingAmount = buyingAmount - discountedAmount;
+            actor.deductBalance(buyingAmount);
+        } else if (actor.getBalance() > buyingAmount){
+            actor.deductBalance(buyingAmount);
+            actor.addItemToInventory(this);
         } else {
-            actor.removeItemFromInventory(new Runes(sellingAmount));
-            actor.addItemToInventory(new RefreshingFlask());
+            return  "cannot afford " + this;
         }
-        return "buys the Refreshing Flask for " + sellingAmount + " runes";
+        return "buys the Refreshing Flask for " + buyingAmount + " runes";
     }
 }
 

@@ -6,13 +6,17 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.SellAction;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.Base;
+import game.items.Broadsword;
+import game.items.SellableItem;
 
 /**
  * Class representing the Player.
@@ -117,6 +121,7 @@ public class Player extends Actor {
         builder.append(FancyMessage.YOU_DIED);
         return builder.toString();
     }
+
 
     /**
      * returns the string for the player

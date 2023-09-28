@@ -108,8 +108,8 @@ public class  Application {
         Player player = new Player("The Abstracted One", '@', 150);
         player.addItemToInventory(new Broadsword());
         player.addItemToInventory(new BloodBerry());
-        player.addItemToInventory(new RefreshingFlask());
-        player.addItemToInventory(new HealingVial());
+//        player.addItemToInventory(new RefreshingFlask());
+//        player.addItemToInventory(new HealingVial());
         gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
         gameMap3.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
         Traveller traveller = new Traveller();

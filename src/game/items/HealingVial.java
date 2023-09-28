@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.BuyAction;
 import game.actions.ConsumableAction;
 import game.actions.SellAction;
 import game.general.Ability;
@@ -45,21 +44,21 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         actor.removeItemFromInventory(this);
     }
     @Override
-    public ActionList allowableActions(Actor otherActor, Location location) {
-        ActionList actionList = super.allowableActions(otherActor, location);
-        actionList.add(new SellAction("sells the Healing Vial ", this));
-        actionList.add(new BuyAction("buys the Healing Vial", this));
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = super.allowableActions(target, location);
+        if (target.hasCapability(Ability.CAN_TRADE)) {
+            actionList.add(new SellAction("sells the Healing Vial ", this, 35));
+        }
         return actionList;
     }
 
     @Override
-    public String sellItem(Actor actor) {
+    public String sellItem(Actor actor, int sellingAmount) {
         Random random = new Random();
         int chance = random.nextInt(10);
-        int sellingAmount = 35;
         if (chance < 1) {
-            int newSellingAmount = sellingAmount * 2;
-            actor.addItemToInventory(new Runes(newSellingAmount));
+            sellingAmount = sellingAmount * 2;
+            actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         } else {
             actor.addBalance(sellingAmount);
@@ -69,21 +68,20 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     }
 
     @Override
-    public String buyItem(Actor actor) {
+    public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
         int chance = random.nextInt(10);
-        int sellingAmount = 100;
         int increasedAmount = 50;
-        if (chance < 2.5 & actor.getBalance() > sellingAmount){
-            sellingAmount = sellingAmount + increasedAmount;
-            actor.removeItemFromInventory(new Runes(sellingAmount));
-            actor.addItemToInventory(new RefreshingFlask());
-        } else if (actor.getBalance() > sellingAmount){
-            actor.removeItemFromInventory(new Runes(sellingAmount));
-            actor.addItemToInventory(new RefreshingFlask());
+        if (chance < 2.5 & actor.getBalance() > buyingAmount){
+            buyingAmount = buyingAmount + increasedAmount;
+            actor.deductBalance(buyingAmount);
+            actor.addItemToInventory(this);
+        } else if (actor.getBalance() > buyingAmount){
+            actor.deductBalance(buyingAmount);
+            actor.addItemToInventory(this);
         } else {
             return  "cannot afford " + this;
         }
-        return "buys the Refreshing Flask for " + sellingAmount + " runes";
+        return "buys the Refreshing Flask for " + buyingAmount + " runes";
     }
 }

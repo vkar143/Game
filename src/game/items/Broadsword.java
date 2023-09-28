@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
-import game.actions.BuyAction;
 import game.actions.SellAction;
 import game.general.Ability;
 import game.actions.FocusAction;
@@ -71,8 +70,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
             actions.add(new AttackAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("sells the Broadsword", this));
-            actions.add(new BuyAction("buys the Broadsword", this));
+            actions.add(new SellAction("sells the Broadsword", this, 100));
         }
         return actions;
     }
@@ -85,23 +83,26 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     }
 
     @Override
-    public String sellItem(Actor actor) {
-        int sellingAmount = 100;
+    public String sellItem(Actor actor, int sellingAmount) {
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
         return "sells the Broadsword for " + sellingAmount + " runes";
     }
 
     @Override
-    public String buyItem(Actor actor) {
+    public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
         int chance = random.nextInt(10);
-        int sellingAmount = 250;
-        actor.removeItemFromInventory(new Runes(sellingAmount));
         if (!(chance < 0.5)) {
-            actor.addItemToInventory(new Broadsword());
+            actor.addItemToInventory(this);
+            actor.deductBalance(buyingAmount);
+        } else if (actor.getBalance() > buyingAmount){
+            actor.addItemToInventory(this);
+            actor.deductBalance(buyingAmount);
+        } else {
+            return  "cannot afford " + this;
         }
-        return "buys the Broadsword for " + sellingAmount + " runes";
+        return "buys the Broadsword for " + buyingAmount + " runes";
     }
 }
 
