@@ -65,7 +65,7 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
             actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         }
-        return actor + "sells the Healing Vial for " + sellingAmount + " runes";
+        return "sells the Healing Vial for " + sellingAmount + " runes";
     }
 
     @Override
@@ -82,8 +82,8 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
             actor.removeItemFromInventory(new Runes(sellingAmount));
             actor.addItemToInventory(new RefreshingFlask());
         } else {
-            return actor + "cannot afford " + this;
+            return  "cannot afford " + this;
         }
-        return actor + "buys the Refreshing Flask for " + sellingAmount + " runes";
+        return "buys the Refreshing Flask for " + sellingAmount + " runes";
     }
 }

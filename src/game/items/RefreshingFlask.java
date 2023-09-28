@@ -63,7 +63,7 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
             actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         }
-        return actor + "sells the Refreshing Flask for " + sellingAmount + " runes";
+        return "sells the Refreshing Flask for " + sellingAmount + " runes";
     }
 
     @Override
@@ -79,7 +79,7 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
             actor.removeItemFromInventory(new Runes(sellingAmount));
             actor.addItemToInventory(new RefreshingFlask());
         }
-        return actor + "buys the Refreshing Flask for " + sellingAmount + " runes";
+        return "buys the Refreshing Flask for " + sellingAmount + " runes";
     }
 }
 

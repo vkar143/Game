@@ -25,7 +25,7 @@ public class BuyAction extends Action {
                 buyItem.buyItem(actor);
             }
         }
-        return actor + " " + description;
+        return actor + " " + buyItem.buyItem(actor);
     }
 
     @Override

@@ -89,7 +89,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         int sellingAmount = 100;
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
-        return actor + "sells the Broadsword for " + sellingAmount + " runes";
+        return "sells the Broadsword for " + sellingAmount + " runes";
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         if (!(chance < 0.5)) {
             actor.addItemToInventory(new Broadsword());
         }
-        return actor + "buys the Broadsword for " + sellingAmount + " runes";
+        return "buys the Broadsword for " + sellingAmount + " runes";
     }
 }
 

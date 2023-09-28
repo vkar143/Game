@@ -26,7 +26,7 @@ public class SellAction extends Action {
                 sellItem.sellItem(actor);
             }
         }
-        return actor + " " + description;
+        return actor + " " + sellItem.sellItem(actor);
     }
 
     @Override

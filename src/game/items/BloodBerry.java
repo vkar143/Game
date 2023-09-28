@@ -45,6 +45,6 @@ public class BloodBerry extends Item implements Consumable, SellableItem {
         int sellingAmount = 10;
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
-        return actor + "sells the BloodBerry for " + sellingAmount + " runes";
+        return "sells the BloodBerry for " + sellingAmount + " runes";
     }
 }
