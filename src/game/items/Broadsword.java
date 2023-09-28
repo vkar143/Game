@@ -5,15 +5,18 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.BuyAction;
 import game.actions.SellAction;
 import game.general.Ability;
 import game.actions.FocusAction;
 import game.general.Status;
 
+import java.util.Random;
+
 /**
  * weapon item
  */
-public class Broadsword extends WeaponItem implements SellableItem {
+public class Broadsword extends WeaponItem implements SellableItem, BuyableItem {
     /**
      * Constructor.
      */
@@ -68,7 +71,8 @@ public class Broadsword extends WeaponItem implements SellableItem {
             actions.add(new AttackAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("Sells the Broadsword", this));
+            actions.add(new SellAction("sells the Broadsword", this));
+            actions.add(new BuyAction("buys the Broadsword", this));
         }
         return actions;
     }
@@ -81,11 +85,23 @@ public class Broadsword extends WeaponItem implements SellableItem {
     }
 
     @Override
-    public void sellItem(Actor actor) {
+    public String sellItem(Actor actor) {
         int sellingAmount = 100;
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
+        return actor + "sells the Broadsword for " + sellingAmount + " runes";
+    }
 
+    @Override
+    public String buyItem(Actor actor) {
+        Random random = new Random();
+        int chance = random.nextInt(10);
+        int sellingAmount = 250;
+        actor.removeItemFromInventory(new Runes(sellingAmount));
+        if (!(chance < 0.5)) {
+            actor.addItemToInventory(new Broadsword());
+        }
+        return actor + "buys the Broadsword for " + sellingAmount + " runes";
     }
 }
 

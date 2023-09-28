@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.BuyAction;
 import game.actions.ConsumableAction;
 import game.actions.SellAction;
 import game.general.Ability;
@@ -15,7 +16,7 @@ import java.util.Random;
 /**
  * refreshing flask allows the actor to replenish stamina
  */
-public class RefreshingFlask extends Item implements Consumable, SellableItem {
+public class RefreshingFlask extends Item implements Consumable, SellableItem, BuyableItem {
     /***
      * Constructor.
      */
@@ -33,7 +34,7 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem {
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ConsumableAction(" drink refreshing flask",this));
+        actionlist.add(new ConsumableAction("drink refreshing flask",this));
         return actionlist;
     }
 
@@ -46,12 +47,13 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actionList = super.allowableActions(otherActor, location);
-        actionList.add(new SellAction("Sells the Refreshing Flask", this));
+        actionList.add(new SellAction("sells the Refreshing Flask", this));
+        actionList.add(new BuyAction("buys the Refreshing Flask", this));
         return actionList;
     }
 
     @Override
-    public void sellItem(Actor actor) {
+    public String sellItem(Actor actor) {
         Random random = new Random();
         int chance = random.nextInt(10);
         int sellingAmount = 25;
@@ -61,6 +63,23 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem {
             actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         }
+        return actor + "sells the Refreshing Flask for " + sellingAmount + " runes";
+    }
+
+    @Override
+    public String buyItem(Actor actor) {
+        Random random = new Random();
+        int chance = random.nextInt(10);
+        int sellingAmount = 75;
+        int discountedAmount = 15;
+        if (chance < 1 ){
+            sellingAmount = sellingAmount - discountedAmount;
+            actor.removeItemFromInventory(new Runes(sellingAmount));
+        } else {
+            actor.removeItemFromInventory(new Runes(sellingAmount));
+            actor.addItemToInventory(new RefreshingFlask());
+        }
+        return actor + "buys the Refreshing Flask for " + sellingAmount + " runes";
     }
 }
 

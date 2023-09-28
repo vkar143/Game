@@ -2,8 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
-public interface SellableItem {
+public interface BuyableItem {
 
-    String sellItem (Actor actor);
+    String buyItem (Actor actor);
 }
-

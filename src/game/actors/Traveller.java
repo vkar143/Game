@@ -5,16 +5,13 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.general.Ability;
-import game.general.Status;
 import game.items.Broadsword;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
-import game.items.Trade;
 
-public class Traveller extends Actor implements Trade {
+public class Traveller extends Actor {
 
     /**
      * The constructor of the Actor class.
@@ -25,10 +22,10 @@ public class Traveller extends Actor implements Trade {
      */
     public Traveller(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        addCapability(Ability.CAN_TRADE);
-        addItemToInventory(new HealingVial());
-        addItemToInventory(new RefreshingFlask());
-        addItemToInventory(new Broadsword());
+        this.addCapability(Ability.CAN_TRADE);
+        this.addItemToInventory(new HealingVial());
+        this.addItemToInventory(new RefreshingFlask());
+        this.addItemToInventory(new Broadsword());
     }
 
     @Override
@@ -36,13 +33,4 @@ public class Traveller extends Actor implements Trade {
         return new DoNothingAction();
     }
 
-    @Override
-    public String buyItems(Item item, Player player) {
-        return null;
-    }
-
-    @Override
-    public String sellItems(Item item, Player player) {
-        return null;
-    }
 }
