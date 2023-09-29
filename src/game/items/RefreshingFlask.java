@@ -70,10 +70,10 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
         Random random = new Random();
         int chance = random.nextInt(10);
         int discountedAmount = 15;
-        if (chance < 1 ){
+        if (chance < 1 & actor.getBalance() > buyingAmount){
             buyingAmount = buyingAmount - discountedAmount;
-            actor.deductBalance(buyingAmount);
-        } else if (actor.getBalance() > buyingAmount){
+        }
+        if (actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
         } else {

@@ -74,9 +74,8 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         int increasedAmount = 50;
         if (chance < 2.5 & actor.getBalance() > buyingAmount){
             buyingAmount = buyingAmount + increasedAmount;
-            actor.deductBalance(buyingAmount);
-            actor.addItemToInventory(this);
-        } else if (actor.getBalance() > buyingAmount){
+        }
+        if (actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
         } else {

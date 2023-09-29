@@ -24,10 +24,10 @@ public class SellAction extends Action {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (map.isAnActorAt(destination) && map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
-                sellItem.sellItem(actor, sellingAmount);
+                return actor + " " + sellItem.sellItem(actor, sellingAmount);
             }
         }
-        return actor + " " + sellItem.sellItem(actor, sellingAmount);
+        return "Trade failed!";
     }
 
     @Override
