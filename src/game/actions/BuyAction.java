@@ -24,10 +24,10 @@ public class BuyAction extends Action {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (map.isAnActorAt(destination) && map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
-                return actor  +  " " + buyItem.buyItem(actor, buyingAmount);
+                return actor + " " + buyItem.buyItem(actor, buyingAmount);
             }
         }
-        return actor + " " + buyItem.buyItem(actor, buyingAmount);
+        return "Trade failed!";
     }
 
     @Override
