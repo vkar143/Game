@@ -16,13 +16,14 @@ import java.util.Random;
  * healing vial gives the replinish action for HP
  */
 public class HealingVial extends Item implements Consumable, SellableItem, BuyableItem {
-
+    private Random random;
     /***
      * Constructor.
      */
     public HealingVial() {
         super("Healing Vial", 'a', true);
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+        this.random = new Random();
     }
 
     /**
@@ -58,6 +59,8 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         int chance = random.nextInt(10);
         if (chance < 1) {
             sellingAmount = sellingAmount * 2;
+        }
+        if(actor.getBalance() > sellingAmount){
             actor.addBalance(sellingAmount);
             actor.removeItemFromInventory(this);
         } else {
@@ -69,19 +72,17 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
-        Random random = new Random();
-        int chance = random.nextInt(10);
-        int increasedAmount = 50;
-        if (chance < 2.5 & actor.getBalance() > buyingAmount){
-            buyingAmount = buyingAmount + increasedAmount;
-            actor.deductBalance(buyingAmount);
-            actor.addItemToInventory(this);
-        } else if (actor.getBalance() > buyingAmount){
-            actor.deductBalance(buyingAmount);
-            actor.addItemToInventory(this);
-        } else {
-            return  "cannot afford " + this;
+        int chance = random.nextInt(4);
+        double increasedAmount = 1.50;
+        if (chance < 1) {
+            buyingAmount = (int) (buyingAmount * increasedAmount);
         }
-        return "buys the Refreshing Flask for " + buyingAmount + " runes";
+        if(actor.getBalance() > buyingAmount){
+            actor.deductBalance(buyingAmount);
+            actor.addItemToInventory(this);
+            return "buys the Refreshing Flask for " + buyingAmount + " runes";
+        } else {
+            return  "cannot afford the " + this;
+        }
     }
 }

@@ -16,12 +16,14 @@ import java.util.Random;
  * refreshing flask allows the actor to replenish stamina
  */
 public class RefreshingFlask extends Item implements Consumable, SellableItem, BuyableItem {
+    private Random random;
     /***
      * Constructor.
      */
     public RefreshingFlask() {
         super("Refreshing Flask", 'u', true);
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+        this.random = new Random();
     }
 
     /**
@@ -54,7 +56,6 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
 
     @Override
     public String sellItem(Actor actor, int sellingAmount) {
-        Random random = new Random();
         int chance = random.nextInt(10);
         if (chance < 5){
             actor.removeItemFromInventory(this);
@@ -67,13 +68,12 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
-        Random random = new Random();
         int chance = random.nextInt(10);
-        int discountedAmount = 15;
+        double discountedAmount = 0.8;
         if (chance < 1 ){
-            buyingAmount = buyingAmount - discountedAmount;
-            actor.deductBalance(buyingAmount);
-        } else if (actor.getBalance() > buyingAmount){
+            buyingAmount = (int) (buyingAmount * discountedAmount);
+        }
+        if (actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
         } else {

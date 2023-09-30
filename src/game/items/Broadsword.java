@@ -92,17 +92,19 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
-        int chance = random.nextInt(10);
-        if (!(chance < 0.5)) {
-            actor.addItemToInventory(this);
-            actor.deductBalance(buyingAmount);
-        } else if (actor.getBalance() > buyingAmount){
-            actor.addItemToInventory(this);
-            actor.deductBalance(buyingAmount);
-        } else {
-            return  "cannot afford " + this;
+        int chance = random.nextInt(20);
+        if (actor.getBalance() < buyingAmount) {
+            return "cannot afford " + this;
         }
-        return "buys the Broadsword for " + buyingAmount + " runes";
+        if (chance > 1) {
+            actor.addItemToInventory(this);
+            actor.deductBalance(buyingAmount);
+            return "buys the Broadsword for " + buyingAmount + " runes";
+        } else{
+            actor.deductBalance(buyingAmount);
+            return "Your runes were stolen!";
+        }
+
     }
 }
 
