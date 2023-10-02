@@ -32,7 +32,7 @@ public class  Application {
         World world = new World(new Display());
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
-        List<String> map = Arrays.asList(
+        List<String> abandonedVillageMap = Arrays.asList(
                 "...........................................................",
                 "...#######.................................................",
                 "...#__.....................................................",
@@ -47,9 +47,10 @@ public class  Application {
                 "~~~~~~....................................#..___#..........",
                 "~~~~~~~~~.................................#######..........");
 
-        GameMap gameMap = new GameMap(groundFactory, map);
-        world.addGameMap(gameMap);
-        List<String> map2 = Arrays.asList(
+        GameMap abandonedVillageGameMap = new GameMap(groundFactory, abandonedVillageMap);
+        world.addGameMap(abandonedVillageGameMap);
+
+        List<String> burialGroundMap = Arrays.asList(
                 "...........+++++++........~~~~~~++....~~",
                 "...........++++++.........~~~~~~+.....~~",
                 "............++++...........~~~~~......++",
@@ -65,7 +66,10 @@ public class  Application {
                 "......~~....++..~~~~~~~~~~~......~......",
                 "....+~~~~..++++++++~~~~~~~~~....~~~.....",
                 "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
-        List<String> map3 = Arrays.asList(
+        GameMap burialGroundGameMap = new GameMap(groundFactory, burialGroundMap);
+        world.addGameMap(burialGroundGameMap);
+
+        List<String> ancientWoodsMap = Arrays.asList(
                 "....+++..............................+++++++++....~~~....~~~",
                 "+...+++..............................++++++++.....~~~.....~~",
                 "++...............#######..............++++.........~~.......",
@@ -78,11 +82,32 @@ public class  Application {
                 "....................~~~~.~~~~..........~........~~~~~~.....~",
                 "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
                 "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
+        GameMap ancientWoodsGameMap = new GameMap(groundFactory, ancientWoodsMap);
+        world.addGameMap(ancientWoodsGameMap);
 
-        GameMap gameMap2 = new GameMap(groundFactory, map2);
-        GameMap gameMap3 = new GameMap(groundFactory, map3);
-        world.addGameMap(gameMap2);
-        world.addGameMap(gameMap3);
+        List<String> abxervyerMap = Arrays.asList(
+                "~~~~.......+++......~+++++..............",
+                "~~~~.......+++.......+++++..............",
+                "~~~++......+++........++++..............",
+                "~~~++......++...........+..............+",
+                "~~~~~~...........+.......~~~++........++",
+                "~~~~~~..........++++....~~~~++++......++",
+                "~~~~~~...........+++++++~~~~.++++.....++",
+                "~~~~~..............++++++~~...+++.....++",
+                "......................+++......++.....++",
+                ".......................+~~............++",
+                ".......................~~~~...........++",
+                "........................~~++...........+",
+                ".....++++...............+++++...........",
+                ".....++++~..............+++++...........",
+                "......+++~~.............++++...........~",
+                ".......++..++++.......................~~",
+                "...........+++++......................~~",
+                "...........++++++.....................~~",
+                "..........~~+++++......................~",
+                ".........~~~~++++..................~~..~");
+        GameMap abxervyerGameMap = new GameMap(groundFactory, abxervyerMap);
+        world.addGameMap(abxervyerGameMap);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -92,29 +117,29 @@ public class  Application {
                 exception.printStackTrace();
             }
         }
-        gameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
-        gameMap2.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
-        gameMap.at(20, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
+        abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
+        burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
+        abandonedVillageGameMap.at(20, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         Gate gate1 = new Gate();
-        gate1.addAllowableAction(new MoveActorAction(gameMap2.at(1,1),"to the next level!"));
+        gate1.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1),"to the next level!"));
         Gate gate2 = new Gate();
-        gate2.addAllowableAction(new MoveActorAction(gameMap.at(1,1), "Back to level 1"));
+        gate2.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to level 1"));
         Gate gate3 = new Gate();
-        gate3.addAllowableAction(new MoveActorAction(gameMap3.at(1,1), "to the next level!"));
-        gameMap.at(28, 6).addItem(gate1);
-        gameMap2.at(1,1).addItem(gate3);
-        gameMap.at(10, 10).addItem(new BloodBerry());
-        gameMap.at(27,6).addItem(new Broadsword());
+        gate3.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the next level!"));
+        abandonedVillageGameMap.at(28, 6).addItem(gate1);
+        burialGroundGameMap.at(1,1).addItem(gate3);
+        abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
+        abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
         Player player = new Player("The Abstracted One", '@', 150);
         player.addItemToInventory(new Broadsword());
         player.addItemToInventory(new BloodBerry());
         player.addItemToInventory(new RefreshingFlask());
 //        player.addItemToInventory(new HealingVial());
-        gameMap3.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
-        gameMap3.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
+        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
+        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
         Traveller traveller = new Traveller();
-        world.addPlayer(player, gameMap3.at(20, 5));
-        world.addPlayer(traveller, gameMap3.at(20, 3));
+        world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
+        world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
         world.run();
     }
 }
