@@ -20,7 +20,7 @@ public class WanderingUndead extends EnemyActor {
 
     /**
      * sets its intrinsic weapon
-     * @return
+     * @return returns the enemies intrinsic weapon
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {

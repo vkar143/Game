@@ -9,23 +9,16 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.behaviours.FollowBehavior;
 import game.general.Ability;
-import game.general.FancyMessage;
 import game.general.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
-import game.items.HealingVial;
-import game.items.Key;
 import game.items.Runes;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * abstract class that enemy actors inherit from
@@ -33,13 +26,14 @@ import java.util.stream.Collectors;
 public abstract class EnemyActor extends Actor {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
     protected Actor target;
-    private int runeAmount;
+    private final int runeAmount;
 
     /**
-     * sets the attributes as well as the behaviours and capabilities on an enemy actor
-     * @param name
-     * @param displayChar
-     * @param hitPoints
+     * construct for the enemyActor abstract class.
+     * @param name sets name
+     * @param displayChar sets display char
+     * @param hitPoints sets hitPoints
+     * @param _runeAmount sets runeAmount
      */
     public EnemyActor(String name, char displayChar, int hitPoints, int _runeAmount) {
         super(name, displayChar, hitPoints);
@@ -50,7 +44,12 @@ public abstract class EnemyActor extends Actor {
         this.runeAmount = _runeAmount;
         this.target = null;
     }
-    public void addTarget(Actor target){
+
+    /**
+     * gives the enemy actor a target to follow
+     * @param target sets the target
+     */
+    public void setTarget(Actor target){
         this.target = target;
     }
     public void addBehavior(Behaviour behaviour, int priority){
@@ -87,20 +86,13 @@ public abstract class EnemyActor extends Actor {
         return runeAmount;
     }
 
-    /**
-     * The wandering undead can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
-     */
+
     /**
      * checks for weapons in the other actors inventory and if there are any weapons it returns an attack action for those weapons
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return
+     * @return ActionList actions.
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

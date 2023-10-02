@@ -9,9 +9,9 @@ import game.general.Ability;
 import game.items.SellableItem;
 
 public class SellAction extends Action {
-    private String description;
-    private SellableItem sellItem;
-    private int sellingAmount;
+    private final String description;
+    private final SellableItem sellItem;
+    private final int sellingAmount;
 
     public SellAction(String description, SellableItem sellItem, int sellingAmount) {
         this.description = description;

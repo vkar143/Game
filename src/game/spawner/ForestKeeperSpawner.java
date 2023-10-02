@@ -23,7 +23,7 @@ public class ForestKeeperSpawner implements Spawner{
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
             EnemyActor newEnemy = new ForestKeeper();
-            newEnemy.addTarget(target);
+            newEnemy.setTarget(target);
             location.map().addActor(newEnemy,location);
         }
     }

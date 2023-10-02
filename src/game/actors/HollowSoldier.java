@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
-import game.items.Key;
 import game.items.RefreshingFlask;
 import game.items.Runes;
 
@@ -24,7 +23,7 @@ public class HollowSoldier extends EnemyActor {
 
     /**
      * sets intrinsic weapon
-     * @return
+     * @return returns an Intrinsic weapon item for the class
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
@@ -35,7 +34,7 @@ public class HollowSoldier extends EnemyActor {
      * drops any necessary items removes the actor from the map and returns a string of those events
      * @param actor the perpetrator
      * @param map where the actor fell unconscious
-     * @return
+     * @return returns a String describing the death sequence
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
@@ -45,11 +44,13 @@ public class HollowSoldier extends EnemyActor {
         int number = random.nextInt(10);
         if(number < 2){
             map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n" + name + " dropped a healing Vial" + "\n");
+            String tempString = "\n" + name + " dropped a healing Vial" + "\n";
+            builder.append(tempString);
         }
         if(number < 4){
             map.locationOf(this).addItem(new RefreshingFlask());
-            builder.append("\n" + name + " dropped a refreshing flask" + "\n");
+            String tempString = "\n" + name + " dropped a refreshing flask" + "\n";
+            builder.append(tempString);
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();

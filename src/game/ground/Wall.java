@@ -18,7 +18,7 @@ public class Wall extends Ground {
     /**
      * blocks everyone
      * @param actor the Actor to check
-     * @return
+     * @return returns a boolean for if the actor can enter.
      */
     @Override
     public boolean canActorEnter(Actor actor) {

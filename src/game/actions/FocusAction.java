@@ -14,11 +14,11 @@ public class FocusAction extends Action {
     /**
      * the item that is using this action
      */
-    private Broadsword weaponItem;
+    private final Broadsword weaponItem;
 
     /**
      * sets the weapon
-     * @param weapon
+     * @param weapon the weapon using the focus action
      */
     public FocusAction(Broadsword weapon){
         this.weaponItem = weapon;
@@ -28,7 +28,7 @@ public class FocusAction extends Action {
      * increases the stats of the weapon then decreases the actors stamina the sets its focus time to 5
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return
+     * @return returns a string describing the action
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -42,7 +42,7 @@ public class FocusAction extends Action {
     /**
      * returns a string of the description of the action
      * @param actor The actor performing the action.
-     * @return
+     * @return returns a string describing the action.
      */
     @Override
     public String menuDescription(Actor actor) {

@@ -21,7 +21,7 @@ public class Gate extends Item{
 
     /**
      * allows you to add a movement action
-     * @param action
+     * @param action action added.
      */
     public void addAllowableAction(Action action){
         this.action = action;
@@ -30,7 +30,7 @@ public class Gate extends Item{
     /**
      * checks to see if the actor has a key with the unlock ability if so it returns a Move action
      * @param location the location of the ground on which the item lies
-     * @return
+     * @return returns a list of allowable actions
      */
     @Override
     public ActionList allowableActions(Location location) {

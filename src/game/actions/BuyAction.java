@@ -9,9 +9,9 @@ import game.general.Ability;
 import game.items.BuyableItem;
 
 public class BuyAction extends Action {
-    private String description;
-    private BuyableItem buyItem;
-    private int buyingAmount;
+    private final String description;
+    private final BuyableItem buyItem;
+    private final int buyingAmount;
 
     public BuyAction(String description, BuyableItem buyItem, int sellingAmount) {
         this.description = description;

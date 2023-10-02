@@ -17,7 +17,7 @@ public class AttackBehavior implements Behaviour {
      * checks to see if there is a enemy within its surroundings if there is it returns an attack action towards that enemy
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return
+     * @return returns the AttackAction or null
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

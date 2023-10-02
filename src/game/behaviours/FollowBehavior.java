@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 public class FollowBehavior implements Behaviour {
-    private Actor target;
+    private final Actor target;
 
     public FollowBehavior(Actor actor) {
         this.target = actor;

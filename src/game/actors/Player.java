@@ -6,17 +6,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.SellAction;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.Base;
-import game.items.Broadsword;
-import game.items.SellableItem;
 
 /**
  * Class representing the Player.
@@ -32,7 +28,7 @@ public class Player extends Actor {
      *
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
-     * @param hitPoints   Player's starting number of hitpoints
+     * @param hitPoints   Player's starting number of hit points
      */
     public Player(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
@@ -49,7 +45,7 @@ public class Player extends Actor {
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
-     * @return
+     * @return returns an action taken by the player
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -79,15 +75,15 @@ public class Player extends Actor {
 
     /**
      * returns a string of actor name
-     * @return
+     * @return returns a String of the name of the player
      */
     public String getName(){
         return name;
     }
 
     /**
-     * sets the actors intrisic weapon
-     * @return
+     * sets the actors intrinsic weapon
+     * @return returns the players intrinsic weapon
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
@@ -98,34 +94,30 @@ public class Player extends Actor {
      * when the player dies it removes them from the map and returns the death message
      * @param actor the perpetrator
      * @param map where the actor fell unconscious
-     * @return
+     * @return returns a string descibring the death of the player
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         map.removeActor(this);
-        StringBuilder builder = new StringBuilder(this + " met their demise at the hands of " + actor + "\n\n");
-        builder.append(FancyMessage.YOU_DIED);
-        return builder.toString();
+        return this + " met their demise at the hands of " + actor + "\n\n" + FancyMessage.YOU_DIED;
     }
 
     /**
      * when the player dies it removes them from the map and returns the death message
      * @param map where the actor fell unconscious
-     * @return
+     * @return returns a string describing the death of the player
      */
 //  Currently not in use
     @Override
     public String unconscious(GameMap map) {
         map.removeActor(this);
-        StringBuilder builder = new StringBuilder(this + " ceased to exist.\n\n");
-        builder.append(FancyMessage.YOU_DIED);
-        return builder.toString();
+        return this + " ceased to exist.\n\n" + FancyMessage.YOU_DIED;
     }
 
 
     /**
      * returns the string for the player
-     * @return
+     * @return returns a string describing the player
      */
     @Override
     public String toString() {

@@ -29,7 +29,8 @@ public class ForestKeeper extends EnemyActor {
         int number = random.nextInt(10);
         if(number < 2){
             map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n" + name + " dropped a healing Vial" + "\n");
+            String tempString = "\n" + name + " dropped a healing Vial" + "\n";
+            builder.append(tempString);
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();

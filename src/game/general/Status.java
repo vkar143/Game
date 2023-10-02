@@ -7,5 +7,5 @@ package game.general;
  * @author Riordan D. Alfredo
  */
 public enum Status {
-    HOSTILE_TO_ENEMY, REUSABLE, ENEMY
+    HOSTILE_TO_ENEMY, ENEMY
 }
