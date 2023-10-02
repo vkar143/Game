@@ -10,48 +10,37 @@ import edu.monash.fit2099.engine.positions.Location;
 
 public class FollowBehavior implements Behaviour {
     private Actor target;
-    public FollowBehavior(Actor actor){
+
+    public FollowBehavior(Actor actor) {
         this.target = actor;
     }
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if(map.contains(target) && map.contains(actor)){
-            Location targetLocation = map.locationOf(target);
-            Location enemyLocation = map.locationOf(actor);
-            int x = targetLocation.x() - enemyLocation.x();
-            int y = targetLocation.y() - enemyLocation.y();
-            int xDir = Integer.compare(x, 0);
-            int yDir = Integer.compare(y, 0);
-
-            Location bestMoveLocation = null;
-            int bestMoveScore = Integer.MAX_VALUE;
-
-            for (Exit exit : enemyLocation.getExits()) {
-                Location dest = exit.getDestination();
-                if (dest.x() == enemyLocation.x() + xDir && dest.y() == enemyLocation.y() + yDir) {
-                    int moveScore = calculateMoveScore(dest, actor);
-                    if (moveScore < bestMoveScore) {
-                        bestMoveLocation = dest;
-                        bestMoveScore = moveScore;
-                    }
-                }
-            }
-
-            if (bestMoveLocation != null) {
-                return new MoveActorAction(bestMoveLocation, "towards player");
+        if (!map.contains(target) || !map.contains(actor)) {
+            return null;
+        }
+        Location targetLocation = map.locationOf(target);
+        Location enemyLocation = map.locationOf(actor);
+        int storedScore = Integer.MAX_VALUE;
+        Location storedLocation = null;
+        for (Exit exit : enemyLocation.getExits()) {
+            Location dest = exit.getDestination();
+            int moveScore = moveScore(targetLocation, dest);
+            if (moveScore < storedScore && dest.canActorEnter(actor)) {
+                storedScore = moveScore;
+                storedLocation = dest;
             }
         }
-
-        return null;
-    }
-
-    private int calculateMoveScore(Location location, Actor actor) {
-        if (location.canActorEnter(actor)) {
-            return 0;
-        } else {
-            return Integer.MAX_VALUE;
+        if(storedLocation != null){
+            return new MoveActorAction(storedLocation, "towards player");
+        }else {
+            return null;
         }
+
     }
 
+    private int moveScore(Location dest1, Location dest2) {
+        return Math.abs(dest1.x() - dest2.x()) + Math.abs(dest1.y() - dest2.y());
+    }
 }

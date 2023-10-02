@@ -8,13 +8,13 @@ import game.items.Runes;
 
 import java.util.Random;
 
-public class ForestKeeper extends FollowingEnemies {
+public class ForestKeeper extends EnemyActor {
 
     /**
      * sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
-    public ForestKeeper(Actor target) {
-        super("Forest Keeper", '8', 125, target, 50);
+    public ForestKeeper() {
+        super("Forest Keeper", '8', 125, 50);
     }
 
     @Override

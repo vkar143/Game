@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 public abstract class EnemyActor extends Actor {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
-
+    protected Actor target;
     private int runeAmount;
 
     /**
@@ -48,6 +48,10 @@ public abstract class EnemyActor extends Actor {
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = _runeAmount;
+        this.target = null;
+    }
+    public void addTarget(Actor target){
+        this.target = target;
     }
     public void addBehavior(Behaviour behaviour, int priority){
         this.behaviours.put(priority, behaviour);
@@ -63,6 +67,14 @@ public abstract class EnemyActor extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(target != null) {
+            Location myLocate = map.locationOf(this);
+            for (Exit exit : myLocate.getExits()) {
+                if (exit.getDestination().getActor() == target) {
+                    addBehavior(new FollowBehavior(target), 998);
+                }
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
