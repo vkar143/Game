@@ -140,6 +140,11 @@ public class  Application {
         Traveller traveller = new Traveller();
         world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
         world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
+        Gate gate4 = new Gate();
+        ancientWoodsGameMap.at(10,7).addItem(gate4);
+        gate4.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,11), "to the next level!"));
+        abxervyerGameMap.at(1,12).addItem(new GiantHammer());
         world.run();
+
     }
 }
