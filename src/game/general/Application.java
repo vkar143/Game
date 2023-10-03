@@ -120,14 +120,14 @@ public class  Application {
         abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
         abandonedVillageGameMap.at(20, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
-        Gate gate1 = new Gate();
-        gate1.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1),"to the next level!"));
-        Gate gate2 = new Gate();
-        gate2.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to level 1"));
-        Gate gate3 = new Gate();
-        gate3.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the next level!"));
-        abandonedVillageGameMap.at(28, 6).addItem(gate1);
-        burialGroundGameMap.at(1,1).addItem(gate3);
+        Gate gateToBurialGround = new Gate();
+        gateToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1),"to the next level!"));
+        Gate gateToAbandonedVillage = new Gate();
+        gateToAbandonedVillage.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to level 1"));
+        Gate gateToAncientWoods = new Gate();
+        gateToAncientWoods.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the next level!"));
+        abandonedVillageGameMap.at(28, 6).addItem(gateToBurialGround);
+        burialGroundGameMap.at(1,1).addItem(gateToAncientWoods);
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
         Player player = new Player("The Abstracted One", '@', 150);
@@ -140,9 +140,9 @@ public class  Application {
         Traveller traveller = new Traveller();
         world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
         world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
-        Gate gate4 = new Gate();
-        ancientWoodsGameMap.at(10,7).addItem(gate4);
-        gate4.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,11), "to the next level!"));
+        Gate gateToAbxervyer = new Gate();
+        ancientWoodsGameMap.at(10,7).addItem(gateToAbxervyer);
+        gateToAbxervyer.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,11), "to the next level!"));
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
         world.run();
 
