@@ -3,6 +3,7 @@ package game.actors;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
@@ -12,7 +13,6 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
-import game.items.Base;
 
 /**
  * Class representing the Player.
@@ -35,7 +35,6 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(200));
-        addItemToInventory(new Base());
     }
 
 
@@ -49,6 +48,7 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, getAttributeMaximum(BaseActorAttributes.STAMINA)/100);
         display.print(getName()+ "\n");
         display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
         display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
@@ -56,7 +56,6 @@ public class Player extends Actor {
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
-
         if(!this.isConscious()){
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 new Display().println(line);

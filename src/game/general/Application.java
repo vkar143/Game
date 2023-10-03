@@ -117,6 +117,7 @@ public class  Application {
                 exception.printStackTrace();
             }
         }
+
         abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
         abandonedVillageGameMap.at(20, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
@@ -126,20 +127,17 @@ public class  Application {
         gate2.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to level 1"));
         Gate gate3 = new Gate();
         gate3.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the next level!"));
-        abandonedVillageGameMap.at(28, 6).addItem(gate1);
-        burialGroundGameMap.at(1,1).addItem(gate3);
+        abandonedVillageGameMap.at(28, 6).setGround(gate1);
+        burialGroundGameMap.at(1,1).setGround(gate3);
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
         Player player = new Player("The Abstracted One", '@', 150);
-        player.addItemToInventory(new Broadsword());
-        player.addItemToInventory(new BloodBerry());
-        player.addItemToInventory(new RefreshingFlask());
-//        player.addItemToInventory(new HealingVial());
         ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
         Traveller traveller = new Traveller();
-        world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
-        world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
+        player.addItemToInventory(new Key());
+        world.addPlayer(player, abandonedVillageGameMap.at(27, 5));
+        ancientWoodsGameMap.at(20, 3).addActor(traveller);
         world.run();
     }
 }

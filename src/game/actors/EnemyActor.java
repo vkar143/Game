@@ -25,7 +25,6 @@ import java.util.Map;
  */
 public abstract class EnemyActor extends Actor {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
-    protected Actor target;
     private final int runeAmount;
 
     /**
@@ -42,38 +41,9 @@ public abstract class EnemyActor extends Actor {
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = _runeAmount;
-        this.target = null;
     }
-
-    /**
-     * gives the enemy actor a target to follow
-     * @param target sets the target
-     */
-    public void setTarget(Actor target){
-        this.target = target;
-    }
-    public void addBehavior(Behaviour behaviour, int priority){
-        this.behaviours.put(priority, behaviour);
-    }
-    /**
-     * At each turn, select a valid action to perform.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return the valid action that can be performed in that iteration or null if no valid action is found
-     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(target != null) {
-            Location myLocate = map.locationOf(this);
-            for (Exit exit : myLocate.getExits()) {
-                if (exit.getDestination().getActor() == target) {
-                    addBehavior(new FollowBehavior(target), 998);
-                }
-            }
-        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -81,19 +51,12 @@ public abstract class EnemyActor extends Actor {
         }
         return new DoNothingAction();
     }
-
     public int getRuneAmount() {
         return runeAmount;
     }
-
-
-    /**
-     * checks for weapons in the other actors inventory and if there are any weapons it returns an attack action for those weapons
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList actions.
-     */
+    public void addBehavior(int priority,Behaviour behaviour){
+        this.behaviours.put(priority,behaviour);
+    }
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();

@@ -3,18 +3,19 @@ package game.actors;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.behaviours.FollowBehavior;
 import game.items.HealingVial;
 import game.items.Runes;
 
 import java.util.Random;
 
 public class ForestKeeper extends EnemyActor {
-
     /**
      * sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
-    public ForestKeeper() {
+    public ForestKeeper(Actor target) {
         super("Forest Keeper", '8', 125, 50);
+        this.behaviours.put(998,new FollowBehavior(target));
     }
 
     @Override
@@ -29,11 +30,9 @@ public class ForestKeeper extends EnemyActor {
         int number = random.nextInt(10);
         if(number < 2){
             map.locationOf(this).addItem(new HealingVial());
-            String tempString = "\n" + name + " dropped a healing Vial" + "\n";
-            builder.append(tempString);
+            builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();
     }
-
 }

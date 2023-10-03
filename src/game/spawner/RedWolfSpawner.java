@@ -8,10 +8,10 @@ import game.actors.RedWolf;
 import java.util.Random;
 
 public class RedWolfSpawner implements Spawner{
-    private Actor target;
-    private int odds;
-    private int bound;
-    private Random random;
+    private final Actor target;
+    private final int odds;
+    private final int bound;
+    private final Random random;
 
     public RedWolfSpawner(Actor target, int odds, int bound) {
         this.target = target;
@@ -23,8 +23,7 @@ public class RedWolfSpawner implements Spawner{
     @Override
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
-            EnemyActor newEnemy = new RedWolf();
-            newEnemy.setTarget(target);
+            EnemyActor newEnemy = new RedWolf(target);
             location.map().addActor(newEnemy,location);
         }
     }

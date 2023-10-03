@@ -6,9 +6,9 @@ import game.actors.HollowSoldier;
 import java.util.Random;
 
 public class HollowSoldierSpawner implements Spawner {
-    private int odds;
-    private int bound;
-    private Random random;
+    private final int odds;
+    private final int bound;
+    private final Random random;
 
     public HollowSoldierSpawner(int odds, int bound) {
         this.odds = odds;

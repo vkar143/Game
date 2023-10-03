@@ -33,11 +33,11 @@ public class WanderingUndead extends EnemyActor {
         int number = random.nextInt(10);
         if(number < 2){
             map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n" + name + " dropped a healing Vial" + "\n");
+            builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
         if(random.nextInt(4) == 1){
             map.locationOf(this).addItem(new Key());
-            builder.append("\n" + name + " dropped a key");
+            builder.append("\n").append(name).append(" dropped a key");
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         builder.insert(0,super.unconscious(actor, map));

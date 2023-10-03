@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.spawner.Spawner;
 
 public abstract class SpawningGround extends Ground {
+
     protected Spawner spawner;
 
     public SpawningGround(char displayChar, Spawner _spawner) {
@@ -24,7 +25,6 @@ public abstract class SpawningGround extends Ground {
                     return;
                 }
             }
-
         }
     }
     @Override

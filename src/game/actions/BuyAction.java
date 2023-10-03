@@ -23,7 +23,7 @@ public class BuyAction extends Action {
     public String execute(Actor actor, GameMap map) {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
-            if (map.isAnActorAt(destination) && map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
+            if (map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
                 return actor + " " + buyItem.buyItem(actor, buyingAmount);
             }
         }

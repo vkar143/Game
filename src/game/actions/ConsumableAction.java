@@ -8,7 +8,7 @@ import game.items.Consumable;
 /**
  * an action that can be used by any class that uses an item
  */
-public class ConsumableAction extends Action {
+public class  ConsumableAction extends Action {
     private final String description;
     private final Consumable consumable;
 

@@ -6,9 +6,9 @@ import game.actors.WanderingUndead;
 import java.util.Random;
 
 public class WanderingUndeadSpawner implements Spawner {
-    private int bound;
-    private int odds;
-    private Random random;
+    private final int bound;
+    private final int odds;
+    private final Random random;
 
     public WanderingUndeadSpawner(int bound, int odds) {
         this.bound = bound;
