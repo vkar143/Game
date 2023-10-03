@@ -8,7 +8,6 @@ import game.behaviours.FollowBehavior;
 import game.general.Status;
 import game.items.HealingVial;
 import game.items.Runes;
-
 import java.util.Random;
 
 public class RedWolf extends EnemyActor {
