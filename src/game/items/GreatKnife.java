@@ -45,7 +45,7 @@ public class GreatKnife extends WeaponItem implements SellableItem, BuyableItem{
         if (chance > 1) {
             buyingAmount *= 3;
             if (actor.getBalance() < buyingAmount) {
-                return "Price was tripled! Cannot afford " + this;
+                return "cannot afford " + this + ", price was tripled!";
             } else {
                 actor.addItemToInventory(this);
                 actor.deductBalance(buyingAmount);
