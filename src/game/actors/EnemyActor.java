@@ -65,7 +65,6 @@ public abstract class EnemyActor extends Actor {
         }
         return actions;
     }
-
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();

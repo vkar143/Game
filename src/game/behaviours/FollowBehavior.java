@@ -13,16 +13,13 @@ import edu.monash.fit2099.engine.positions.Location;
 
 public class FollowBehavior extends Item implements Behaviour {
     private final Actor target;
-    private boolean FOLLOW_ENEMY_STATUS = false;
     public FollowBehavior(Actor actor) {
         super("temp",'l', false);
         this.target = actor;
     }
+
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if(!FOLLOW_ENEMY_STATUS){
-            return null;
-        }
         Location targetLocation = map.locationOf(target);
         Location enemyLocation = map.locationOf(actor);
         int storedScore = Integer.MAX_VALUE;

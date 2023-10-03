@@ -132,8 +132,8 @@ public class  Application {
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
         Player player = new Player("The Abstracted One", '@', 150);
-        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
-        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
+        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
+        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
         Traveller traveller = new Traveller();
         player.addItemToInventory(new Key());
         world.addPlayer(player, abandonedVillageGameMap.at(27, 5));

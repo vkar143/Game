@@ -35,7 +35,6 @@ public class Gate extends Ground {
 
     /**
      * checks to see if the actor has a key with the unlock ability if so it returns a Move action
-     *
      * @param location the location of the ground on which the item lies
      * @return returns a list of allowable actions
      */

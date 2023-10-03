@@ -7,12 +7,10 @@ import game.actors.ForestKeeper;
 import java.util.Random;
 
 public class ForestKeeperSpawner implements Spawner{
-    private final Actor target;
     private final int odds;
     private final int bound;
     private final Random random;
-    public ForestKeeperSpawner(Actor target, int odds, int bound) {
-        this.target = target;
+    public ForestKeeperSpawner(int odds, int bound) {
         this.odds = odds;
         this.bound = bound;
         this.random = new Random();
@@ -20,7 +18,7 @@ public class ForestKeeperSpawner implements Spawner{
     @Override
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
-            EnemyActor newEnemy = new ForestKeeper(target);
+            EnemyActor newEnemy = new ForestKeeper();
             location.map().addActor(newEnemy,location);
         }
     }
