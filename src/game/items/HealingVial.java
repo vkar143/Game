@@ -17,6 +17,11 @@ import java.util.Random;
  */
 public class HealingVial extends Item implements Consumable, SellableItem, BuyableItem {
     private Random random;
+    private final int SELLING_AMOUNT = 35;
+    private final int BOUND_SELL_ITEM = 10;
+    private final int BOUND_BUY_ITEM = 4;
+    private final int CHANCE_SELL_ITEM = 1;
+    private final int CHANCE_BUY_ITEM = 1;
     /***
      * Constructor.
      */
@@ -48,7 +53,7 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = super.allowableActions(target, location);
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actionList.add(new SellAction("sells the Healing Vial ", this, 35));
+            actionList.add(new SellAction("sells the Healing Vial ", this, SELLING_AMOUNT));
         }
         return actionList;
     }
@@ -56,8 +61,8 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     @Override
     public String sellItem(Actor actor, int sellingAmount) {
         Random random = new Random();
-        int chance = random.nextInt(10);
-        if (chance < 1) {
+        int chance = random.nextInt(BOUND_SELL_ITEM);
+        if (chance < CHANCE_SELL_ITEM) {
             sellingAmount = sellingAmount * 2;
         }
         actor.addBalance(sellingAmount);
@@ -67,9 +72,9 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
-        int chance = random.nextInt(4);
+        int chance = random.nextInt(BOUND_BUY_ITEM);
         double increasedAmount = 1.50;
-        if (chance < 1) {
+        if (chance < CHANCE_BUY_ITEM) {
             buyingAmount = (int) (buyingAmount * increasedAmount);
         }
         if(actor.getBalance() > buyingAmount){

@@ -16,13 +16,20 @@ import java.util.Random;
  * weapon item
  */
 public class Broadsword extends WeaponItem implements SellableItem, BuyableItem {
+    private static final int DAMAGE = 110;
+    private static final int HIT_RATE = 80;
+    private final int FOCUS_DURATION = 0;
+    private final int NEW_DAMAGE_MULTIPLIER = 1;
+    private final int SELLING_AMOUNT = 100;
+    private final int BOUND_BUY_ITEM = 20;
+    private final int CHANCE_BUY_ITEM = 1;
     /**
      * Constructor.
      */
     private int focusDuration;
     public Broadsword() {
-        super("BroadSword", '1', 110, "Swings at", 80);
-        this.focusDuration = 0;
+        super("BroadSword", '1', DAMAGE, "Swings at", HIT_RATE);
+        this.focusDuration = FOCUS_DURATION;
         this.capabilitySet.addCapability(Ability.ATTACK);
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
@@ -43,9 +50,9 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
         this.setFocusDuration(getFocusDuration()-1);
-        if(getFocusDuration() == 0){
-            updateDamageMultiplier(1);
-            updateHitRate(80);
+        if(getFocusDuration() == FOCUS_DURATION){
+            updateDamageMultiplier(NEW_DAMAGE_MULTIPLIER);
+            updateHitRate(HIT_RATE);
         }
     }
 
@@ -70,7 +77,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
             actions.add(new AttackAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("sells the Broadsword", this, 100));
+            actions.add(new SellAction("sells the Broadsword", this, SELLING_AMOUNT));
         }
         return actions;
     }
@@ -92,11 +99,11 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
-        int chance = random.nextInt(20);
+        int chance = random.nextInt(BOUND_BUY_ITEM);
         if (actor.getBalance() < buyingAmount) {
             return "cannot afford " + this;
         }
-        if (chance > 1) {
+        if (chance > CHANCE_BUY_ITEM) {
             actor.addItemToInventory(this);
             actor.deductBalance(buyingAmount);
             return "buys the Broadsword for " + buyingAmount + " runes";

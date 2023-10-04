@@ -16,10 +16,10 @@ import java.util.List;
  * a cosmetic piece of ground
  */
 public class Puddle extends Ground implements Consumable {
-
+    private final int HEALTH_INCREASE_VALUE = 1;
     @Override
     public void consume(Actor actor) {
-        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, 1);
+        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HEALTH_INCREASE_VALUE);
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, actor.getAttributeMaximum(BaseActorAttributes.STAMINA)/100);
     }
 

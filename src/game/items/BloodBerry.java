@@ -11,7 +11,8 @@ import game.actions.SellAction;
 import game.general.Ability;
 
 public class BloodBerry extends Item implements Consumable, SellableItem {
-
+    private final int HEALTH_INCREASE_VALUE = 5;
+    private final int SELLING_AMOUNT = 10;
     /***
      * Constructor.
      */
@@ -29,7 +30,7 @@ public class BloodBerry extends Item implements Consumable, SellableItem {
 
     @Override
     public void consume(Actor actor) {
-        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE,5);
+        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE,HEALTH_INCREASE_VALUE);
         actor.removeItemFromInventory(this);
     }
 
@@ -37,7 +38,7 @@ public class BloodBerry extends Item implements Consumable, SellableItem {
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList =  super.allowableActions(target, location);
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actionList.add(new SellAction("sells the BloodBerry", this, 10));
+            actionList.add(new SellAction("sells the BloodBerry", this, SELLING_AMOUNT));
         }
         return actionList;
     }

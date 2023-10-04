@@ -10,12 +10,15 @@ import game.actions.SellAction;
 import game.general.Ability;
 import game.general.Status;
 
-public class GiantHammer extends WeaponItem implements SellableItem{
+public class GiantHammer extends WeaponItem implements SellableItem {
+    private final int SELLING_AMOUNT = 250;
+    private static final int DAMAGE = 160;
+    private static final int HIT_RATE = 90;
     /**
      * Constructor.
      */
     public GiantHammer() {
-        super("Giant Hammer", 'P', 160, "slams", 90);
+        super("Giant Hammer", 'P', DAMAGE, "slams", HIT_RATE);
         this.capabilitySet.addCapability(Ability.ATTACK);
         this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
@@ -28,7 +31,7 @@ public class GiantHammer extends WeaponItem implements SellableItem{
             actions.add(new GreatSlamAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("sells the Giant Hammer", this, 250));
+            actions.add(new SellAction("sells the Giant Hammer", this, SELLING_AMOUNT));
         }
         return actions;
     }

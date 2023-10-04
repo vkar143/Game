@@ -17,6 +17,12 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, SellableItem, BuyableItem {
     private Random random;
+    private final int STAMINA_INCREASE_VALUE = 40;
+    private final int SELLING_AMOUNT = 25;
+    private final int BOUND_SELL_ITEM = 10;
+    private final int BOUND_BUY_ITEM = 10;
+    private final int CHANCE_SELL_ITEM = 5;
+    private final int CHANCE_BUY_ITEM = 1;
     /***
      * Constructor.
      */
@@ -41,7 +47,7 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
 
     @Override
     public void consume(Actor actor) {
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 40);
+        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, STAMINA_INCREASE_VALUE);
         actor.removeItemFromInventory(this);
     }
 
@@ -49,15 +55,15 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = super.allowableActions(target, location);
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actionList.add(new SellAction("sells the Refreshing Flask", this, 25));
+            actionList.add(new SellAction("sells the Refreshing Flask", this, SELLING_AMOUNT));
         }
         return actionList;
     }
 
     @Override
     public String sellItem(Actor actor, int sellingAmount) {
-        int chance = random.nextInt(10);
-        if (chance < 5){
+        int chance = random.nextInt(BOUND_SELL_ITEM);
+        if (chance < CHANCE_SELL_ITEM){
             actor.removeItemFromInventory(this);
         } else {
             actor.addBalance(sellingAmount);
@@ -68,9 +74,9 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
 
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
-        int chance = random.nextInt(10);
+        int chance = random.nextInt(BOUND_BUY_ITEM);
         double discountedAmount = 0.8;
-        if (chance < 1 ){
+        if (chance < CHANCE_BUY_ITEM){
             buyingAmount = (int) (buyingAmount * discountedAmount);
         }
         if (actor.getBalance() > buyingAmount){
