@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BuyAction;
 import game.items.Broadsword;
+import game.items.GreatKnife;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
 
@@ -31,6 +32,7 @@ public class Traveller extends Trader {
         actionList.add(new BuyAction("buys Broadsword", new Broadsword(), 250));
         actionList.add(new BuyAction("buys Refreshing Flask", new RefreshingFlask(), 75));
         actionList.add(new BuyAction("buys Healing Vial", new HealingVial(), 100));
+        actionList.add(new BuyAction("buys Great Knife", new GreatKnife(), 300));
         return actionList;
     }
 
