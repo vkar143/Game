@@ -21,6 +21,7 @@ public class StabAndStepAction extends Action {
     private GreatKnife weaponItem;
     private Actor target;
     private String direction;
+    private final int STAMINA_DECREASE = 50;
 
     /**
      * sets the weapon
@@ -33,7 +34,7 @@ public class StabAndStepAction extends Action {
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
+        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
         AttackAction stab = new AttackAction(target, direction, weaponItem);
         stab.execute(actor, map);
 
@@ -46,7 +47,7 @@ public class StabAndStepAction extends Action {
         }
 
         Random random = new Random();
-        Exit chosenExit = exitList.get(random.nextInt(exitList.size()) - 1);
+        Exit chosenExit = exitList.get(random.nextInt(exitList.size()));
         MoveActorAction step = new MoveActorAction(chosenExit.getDestination(), "safety");
         step.execute(actor, map);
 

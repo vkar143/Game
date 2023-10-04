@@ -150,11 +150,8 @@ public class  Application {
         ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
 
-        Traveller traveller = new Traveller();
         world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
-        world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
-
-
+        ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
 
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
 

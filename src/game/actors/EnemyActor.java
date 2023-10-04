@@ -25,7 +25,11 @@ import java.util.Map;
  */
 public abstract class EnemyActor extends Actor {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
+    protected Actor target;
     private final int runeAmount;
+    private final int WANDER_BEHAVIOUR_PRIORITY = 999;
+    private final int ATTACK_BEHAVIOUR_PRIORITY = 997;
+    private final int OFFSET_VALUE = 0;
 
     /**
      * construct for the enemyActor abstract class.
@@ -36,14 +40,28 @@ public abstract class EnemyActor extends Actor {
      */
     public EnemyActor(String name, char displayChar, int hitPoints, int _runeAmount) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(999, new WanderBehaviour());
-        this.behaviours.put(997, new AttackBehavior());
+        this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
+        this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = _runeAmount;
     }
+
+    public void addBehavior(int priority, Behaviour behaviour){
+        this.behaviours.put(priority, behaviour);
+    }
+    /**
+     * At each turn, select a valid action to perform.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the valid action that can be performed in that iteration or null if no valid action is found
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -51,12 +69,19 @@ public abstract class EnemyActor extends Actor {
         }
         return new DoNothingAction();
     }
+
     public int getRuneAmount() {
         return runeAmount;
     }
-    public void addBehavior(int priority,Behaviour behaviour){
-        this.behaviours.put(priority,behaviour);
-    }
+
+
+    /**
+     * checks for weapons in the other actors inventory and if there are any weapons it returns an attack action for those weapons
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return ActionList actions.
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
@@ -65,11 +90,12 @@ public abstract class EnemyActor extends Actor {
         }
         return actions;
     }
+
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();
         map.locationOf(this).addItem(new Runes(runeAmount));
-        builder.insert(0,super.unconscious(actor, map));
+        builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
         return builder.toString();
     }
 

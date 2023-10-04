@@ -11,30 +11,38 @@ import game.items.Runes;
 import java.util.Random;
 
 public class RedWolf extends EnemyActor {
+    private static final int HIT_POINTS = 25;
+    private static final int COST = 25;
+    private final int INTRINSIC_DAMAGE = 15;
+    private final int INTRINSIC_HIT_RATE = 80;
+    private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
+    private final int BOUND = 10;
+    private final int CHANCE = 1;
+    private final int OFFSET = 1;
     public RedWolf() {
-        super("Red Wolf", 'r',25, 25);
+        super("Red Wolf", 'r',HIT_POINTS, COST);
     }
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(15,"bites" , 80);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE,"bites" , INTRINSIC_HIT_RATE);
     }
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
-        int number = random.nextInt(10);
-        if(number < 1){
+        int number = random.nextInt(BOUND);
+        if(number < CHANCE){
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
-        builder.insert(0,super.unconscious(actor, map));
+        builder.insert(OFFSET,super.unconscious(actor, map));
         return builder.toString();
     }
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(998,new FollowBehavior(otherActor));
+            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY,new FollowBehavior(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
     }

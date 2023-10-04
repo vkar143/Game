@@ -12,22 +12,31 @@ import game.items.Runes;
 import java.util.Random;
 
 public class ForestKeeper extends EnemyActor {
+
+    private static final int HIT_POINTS = 125;
+    private static final int COST = 50;
+    private final int INTRINSIC_DAMAGE = 25;
+    private final int INTRINSIC_HIT_RATE = 75;
+    private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
+    private final int BOUND = 10;
+    private final int CHANCE = 2;
+
     /**
      * sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
     public ForestKeeper() {
-        super("Forest Keeper", '8', 125, 50);
+        super("Forest Keeper", '8', HIT_POINTS, COST);
     }
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(25, "swings at", 75);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "swings at", INTRINSIC_HIT_RATE);
     }
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
-        int number = random.nextInt(10);
-        if(number < 2){
+        int number = random.nextInt(BOUND);
+        if(number < CHANCE){
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
@@ -38,7 +47,7 @@ public class ForestKeeper extends EnemyActor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(998,new FollowBehavior(otherActor));
+            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY,new FollowBehavior(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
     }

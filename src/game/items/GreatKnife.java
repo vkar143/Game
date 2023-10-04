@@ -42,7 +42,7 @@ public class GreatKnife extends WeaponItem implements SellableItem, BuyableItem{
         if (actor.getBalance() < buyingAmount) {
             return "cannot afford " + this;
         }
-        if (chance > 1) {
+        if (chance < 1) {
             buyingAmount *= 3;
             if (actor.getBalance() < buyingAmount) {
                 return "cannot afford " + this + ", price was tripled!";
@@ -63,7 +63,7 @@ public class GreatKnife extends WeaponItem implements SellableItem, BuyableItem{
         Random random = new Random();
         int chance = random.nextInt(10);
 
-        if (chance > 1) {
+        if (chance < 1) {
             int stolenAmount = Math.min(sellingAmount, actor.getBalance());
             actor.deductBalance(stolenAmount);
             return stolenAmount + " runes were stolen!";

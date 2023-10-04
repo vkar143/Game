@@ -22,6 +22,12 @@ import game.general.Status;
  *
  */
 public class Player extends Actor {
+    private final int MAX_HEALTH = 200;
+    private final int MILLIS = 200;
+    private final int EXIT_STATUS = 0;
+    private final int INTRINSIC_DAMAGE = 15;
+    private final int INTRINSIC_HIT_RATE = 80;
+
 
     /**
      * Constructor.
@@ -34,7 +40,7 @@ public class Player extends Actor {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
-        this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(200));
+        this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
     }
 
 
@@ -60,12 +66,12 @@ public class Player extends Actor {
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 new Display().println(line);
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(MILLIS);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
-            System.exit(0);
+            System.exit(EXIT_STATUS);
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
@@ -86,7 +92,7 @@ public class Player extends Actor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(15, "Punches",80);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Punches",INTRINSIC_HIT_RATE);
     }
 
     /**

@@ -14,8 +14,18 @@ import java.util.Random;
  */
 public class WanderingUndead extends EnemyActor {
 
+    private static final int HIT_POINTS = 100;
+    private static final int COST = 50;
+    private final int DAMAGE = 30;
+    private final int HIT_RATE = 50;
+    private final int HEALING_VIAL_BOUND = 10;
+    private final int OLD_KEY_BOUND = 4;
+    private final int HEALING_VIAL_CHANCE = 2;
+    private final int OLD_KEY_CHANCE = 1;
+    private final int OFFSET = 0;
+
     public WanderingUndead() {
-        super("Wandering Undead", 't', 100, 50);
+        super("Wandering Undead", 't', HIT_POINTS, COST);
     }
 
     /**
@@ -24,23 +34,25 @@ public class WanderingUndead extends EnemyActor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(30, "Swings at",50);
+        return new IntrinsicWeapon(DAMAGE, "Swings at",HIT_RATE);
     }
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();
-        Random random = new Random();
-        int number = random.nextInt(10);
-        if(number < 2){
+        Random healingVialRandom = new Random();
+        int healingVialNumber = healingVialRandom.nextInt(HEALING_VIAL_BOUND);
+        if(healingVialNumber < HEALING_VIAL_CHANCE){
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
-        if(random.nextInt(4) == 1){
+        Random oldKeyRandom = new Random();
+        int oldKeyNumber = oldKeyRandom.nextInt(OLD_KEY_BOUND);
+        if(oldKeyNumber < OLD_KEY_CHANCE){
             map.locationOf(this).addItem(new Key());
             builder.append("\n").append(name).append(" dropped a key");
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
-        builder.insert(0,super.unconscious(actor, map));
+        builder.insert(OFFSET,super.unconscious(actor, map));
         return builder.toString();
     }
 }

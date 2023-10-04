@@ -16,6 +16,8 @@ public class GreatSlamAction extends Action {
     private GiantHammer weaponItem;
     private Actor target;
     private String direction;
+    private final int DAMAGE_MULTIPLIER = 160;
+    private final int STAMINA_DECREASE = 10;
 
     /**
      * sets the weapon
@@ -28,11 +30,11 @@ public class GreatSlamAction extends Action {
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 10);
+        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
         AttackAction targetAttack = new AttackAction(target, direction, weaponItem);
         targetAttack.execute(actor, map);
 
-        this.weaponItem.updateDamageMultiplier(80);
+        this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER * 0.5f);
 
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location surroundingLocation = exit.getDestination();
@@ -43,7 +45,7 @@ public class GreatSlamAction extends Action {
             }
         }
 
-        this.weaponItem.updateDamageMultiplier(160);
+        this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER);
         return "SLAMMING";
     }
 

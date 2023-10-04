@@ -16,8 +16,17 @@ public class HollowSoldier extends EnemyActor {
     /**
      * init sets name and hit points and display char
      */
+    private static final int HIT_POINTS = 200;
+    private static final int COST = 100;
+    private final int INTRINSIC_DAMAGE = 50;
+    private final int INTRINSIC_HIT_RATE = 50;
+    private final int HEALING_VIAL_BOUND = 10;
+    private final int REFRESHING_FLASK_BOUND = 10;
+    private final int HEALING_VIAL_CHANCE = 2;
+    private final int REFRESHING_FLASK_CHANCE = 4;
+
     public HollowSoldier() {
-        super("Hollow soldier", '&', 200, 100);
+        super("Hollow soldier", '&', HIT_POINTS, COST);
     }
     /**
      * sets intrinsic weapon
@@ -25,7 +34,7 @@ public class HollowSoldier extends EnemyActor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(50, "Swings at",50);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Swings at",INTRINSIC_HIT_RATE);
     }
     /**
      * drops any necessary items removes the actor from the map and returns a string of those events
@@ -37,13 +46,15 @@ public class HollowSoldier extends EnemyActor {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();
-        Random random = new Random();
-        int number = random.nextInt(10);
-        if(number < 2){
+        Random healing_vial_random = new Random();
+        int healing_number = healing_vial_random.nextInt(HEALING_VIAL_BOUND);
+        if(healing_number < HEALING_VIAL_CHANCE){
             map.locationOf(this).addItem(new HealingVial());
             builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
         }
-        if(number < 4){
+        Random refreshing_flask_random = new Random();
+        int refreshing_number = refreshing_flask_random.nextInt(REFRESHING_FLASK_BOUND);
+        if(refreshing_number < REFRESHING_FLASK_CHANCE){
             map.locationOf(this).addItem(new RefreshingFlask());
             builder.append("\n").append(name).append(" dropped a refreshing flask").append("\n");
         }

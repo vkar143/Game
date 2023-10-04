@@ -28,6 +28,7 @@ public class AttackAction extends Action {
      * Weapon used for the attack
      */
     private Weapon weapon;
+    private final int TOTAL_POSSIBILITY_TO_HIT = 100;
 
     /**
      * Constructor.
@@ -64,7 +65,7 @@ public class AttackAction extends Action {
             weapon = actor.getIntrinsicWeapon();
         }
 
-        if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+        if (!(rand.nextInt(TOTAL_POSSIBILITY_TO_HIT) <= weapon.chanceToHit())) {
             return actor + " misses " + target + ".";
         }
 

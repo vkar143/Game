@@ -13,12 +13,17 @@ import game.items.HealingVial;
 import game.items.RefreshingFlask;
 
 public class Traveller extends Trader {
+    private static final int HIT_POINTS = 10;
+    private final int BROADSWORD_COST = 250;
+    private final int REFRESHING_FLASK_COST = 75;
+    private final int HEALING_VIAL_COST = 100;
+    private final int GREAT_KNIFE_COST = 300;
 
     /**
      * The constructor of the Actor class.
      */
     public Traveller() {
-        super("Traveller", 'ඞ', 10);
+        super("Traveller", 'ඞ', HIT_POINTS);
     }
 
     @Override
@@ -29,10 +34,10 @@ public class Traveller extends Trader {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionList = super.allowableActions(otherActor, direction, map);
-        actionList.add(new BuyAction("buys Broadsword", new Broadsword(), 250));
-        actionList.add(new BuyAction("buys Refreshing Flask", new RefreshingFlask(), 75));
-        actionList.add(new BuyAction("buys Healing Vial", new HealingVial(), 100));
-        actionList.add(new BuyAction("buys Great Knife", new GreatKnife(), 300));
+        actionList.add(new BuyAction("buys Broadsword", new Broadsword(), BROADSWORD_COST));
+        actionList.add(new BuyAction("buys Refreshing Flask", new RefreshingFlask(), REFRESHING_FLASK_COST));
+        actionList.add(new BuyAction("buys Healing Vial", new HealingVial(), HEALING_VIAL_COST));
+        actionList.add(new BuyAction("buys Great Knife", new GreatKnife(), GREAT_KNIFE_COST));
         return actionList;
     }
 

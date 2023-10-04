@@ -10,11 +10,16 @@ import game.items.Broadsword;
 /**
  * focus action is used by the BroadSword Item
  */
+
 public class FocusAction extends Action {
     /**
      * the item that is using this action
      */
     private final Broadsword weaponItem;
+    private final float MULTIPLIER_INCREASE_PERCENTAGE = 0.10f;
+    private final int FOCUS_HIT_RATE = 90;
+    private final int STAMINA_DECREASE = 40;
+    private final int FOCUS_DURATION = 5;
 
     /**
      * sets the weapon
@@ -32,10 +37,10 @@ public class FocusAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        weaponItem.increaseDamageMultiplier(0.10f);
-        weaponItem.updateHitRate(90);
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 40);
-        weaponItem.setFocusDuration(5);
+        weaponItem.increaseDamageMultiplier(MULTIPLIER_INCREASE_PERCENTAGE);
+        weaponItem.updateHitRate(FOCUS_HIT_RATE);
+        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
+        weaponItem.setFocusDuration(FOCUS_DURATION);
         return "FOCUSING!";
     }
 
