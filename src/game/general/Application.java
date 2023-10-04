@@ -125,21 +125,21 @@ public class  Application {
 
         Gate gateToBurialGround = new Gate();
         gateToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1),"to the Burial Grounds!"));
-        abandonedVillageGameMap.at(28, 6).addItem(gateToBurialGround);
+        abandonedVillageGameMap.at(28, 6).setGround(gateToBurialGround);
 
         Gate gateBackToAbandonedVillage = new Gate();
         gateBackToAbandonedVillage.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to Abandoned Village"));
-        burialGroundGameMap.at(5,7).addItem(gateBackToAbandonedVillage);
+        burialGroundGameMap.at(5,7).setGround(gateBackToAbandonedVillage);
 
         burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
 
         Gate gateToAncientWoods = new Gate();
         gateToAncientWoods.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the Ancient Woods!"));
-        burialGroundGameMap.at(1,1).addItem(gateToAncientWoods);
+        burialGroundGameMap.at(1,1).setGround(gateToAncientWoods);
 
         Gate gateBackToBurialGround = new Gate();
         gateBackToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1), "Back to Burial Grounds"));
-        ancientWoodsGameMap.at(10,5).addItem(gateBackToBurialGround);
+        ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
         Player player = new Player("The Abstracted One", '@', 150);
         player.addItemToInventory(new Broadsword());
@@ -147,16 +147,14 @@ public class  Application {
         player.addItemToInventory(new RefreshingFlask());
 //        player.addItemToInventory(new HealingVial());
 
-        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(player,3,10)));
-        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(player,15,100)));
+        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
+        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
 
         Traveller traveller = new Traveller();
         world.addPlayer(player, ancientWoodsGameMap.at(20, 5));
         world.addPlayer(traveller, ancientWoodsGameMap.at(20, 3));
 
-        Gate gateToAbxervyer = new Gate();
-        ancientWoodsGameMap.at(10,7).addItem(gateToAbxervyer);
-        gateToAbxervyer.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,11), "to Abxeryver!"));
+
 
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
 

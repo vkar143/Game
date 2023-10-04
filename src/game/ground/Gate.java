@@ -1,4 +1,4 @@
-package game.items;
+package game.ground;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -35,7 +35,6 @@ public class Gate extends Ground {
 
     /**
      * checks to see if the actor has a key with the unlock ability if so it returns a Move action
-     * @param location the location of the ground on which the item lies
      * @return returns a list of allowable actions
      */
 
@@ -56,7 +55,7 @@ public class Gate extends Ground {
                 return actionList;
             }
         }
-        return null;
+        return actionList;
     }
 }
 
