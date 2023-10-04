@@ -9,18 +9,40 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.GiantHammer;
 
+/**
+ * Action for the player to use the "Great Slam" skill with the Giant Hammer.
+ *
+ * Created by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Action
+ */
 public class GreatSlamAction extends Action {
     /**
-     * the item that is using this action
+     * The item that is using this action
      */
     private GiantHammer weaponItem;
+    /**
+     * The target of this action
+     */
     private Actor target;
+    /**
+     * The direction of the incoming attack.
+     */
     private String direction;
+    /**
+     * Constant representing the damage multiplier of the Giant Hammer.
+     */
     private final int DAMAGE_MULTIPLIER = 160;
+    /**
+     * Constant representing the stamina decrease from using the Great Slam.
+     */
     private final int STAMINA_DECREASE = 10;
 
     /**
-     * sets the weapon
+     * Constructor for the Great Slam Action.
+     * @param target
+     * @param direction
      * @param weapon
      */
     public GreatSlamAction(Actor target, String direction, GiantHammer weapon){
@@ -28,6 +50,13 @@ public class GreatSlamAction extends Action {
         this.direction = direction;
         this.weaponItem = weapon;
     }
+    /**
+     * Executes the Great Slam Action by first attacking the target actor with the full damage of the Giant Hammer
+     * then the actors around the target with half the damage of the Giant Hammer
+     * @param actor
+     * @param map
+     * @return returns a string describing the action
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
@@ -49,7 +78,11 @@ public class GreatSlamAction extends Action {
         return "SLAMMING";
     }
 
-
+    /**
+     * Returns a string of the description of the action
+     * @param actor The actor performing the action.
+     * @return returns a string describing the action.
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " uses great slam with " + weaponItem ;

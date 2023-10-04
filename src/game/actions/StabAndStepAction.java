@@ -14,17 +14,36 @@ import game.items.GreatKnife;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Action for the player to use the "Stab and step" skill with the Great Knife.
+ *
+ * Created by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Action
+ */
 public class StabAndStepAction extends Action {
     /**
-     * the item that is using this action
+     * The item that is using this action
      */
     private GreatKnife weaponItem;
+    /**
+     * The target of this action
+     */
     private Actor target;
+    /**
+     * The direction of the incoming attack.
+     */
     private String direction;
+    /**
+     * Constant representing the stamina decrease from using the stab and step action.
+     */
     private final int STAMINA_DECREASE = 50;
 
     /**
-     * sets the weapon
+     * Constructor for the Stab and Step Action.
+     * @param target
+     * @param direction
      * @param weapon
      */
     public StabAndStepAction(Actor target, String direction, GreatKnife weapon){
@@ -32,6 +51,14 @@ public class StabAndStepAction extends Action {
         this.target = target;
         this.direction = direction;
     }
+
+    /**
+     * Executes the Great Slam Action by first attacking the target actor with the Great Knife
+     * then stepping away.
+     * @param actor
+     * @param map
+     * @return returns a string describing the action
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
@@ -54,6 +81,11 @@ public class StabAndStepAction extends Action {
         return "STABBING AND STEPPING";
     }
 
+    /**
+     * Returns a string of the description of the action
+     * @param actor The actor performing the action.
+     * @return returns a string describing the action.
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " stabs and steps with " + weaponItem ;
