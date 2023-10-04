@@ -60,13 +60,8 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         if (chance < 1) {
             sellingAmount = sellingAmount * 2;
         }
-        if(actor.getBalance() > sellingAmount){
-            actor.addBalance(sellingAmount);
-            actor.removeItemFromInventory(this);
-        } else {
-            actor.addBalance(sellingAmount);
-            actor.removeItemFromInventory(this);
-        }
+        actor.addBalance(sellingAmount);
+        actor.removeItemFromInventory(this);
         return "sells the Healing Vial for " + sellingAmount + " runes";
     }
 
