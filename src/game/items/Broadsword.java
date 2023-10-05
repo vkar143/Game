@@ -31,7 +31,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         super("BroadSword", '1', DAMAGE, "Swings at", HIT_RATE);
         this.focusDuration = FOCUS_DURATION;
         this.capabilitySet.addCapability(Ability.ATTACK);
-        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
     /**

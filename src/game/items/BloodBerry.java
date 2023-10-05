@@ -18,7 +18,7 @@ public class BloodBerry extends Item implements Consumable, SellableItem {
      */
     public BloodBerry() {
         super("BloodyBerry", '*', true);
-        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
     @Override

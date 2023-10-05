@@ -27,7 +27,7 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
      */
     public HealingVial() {
         super("Healing Vial", 'a', true);
-        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
         this.random = new Random();
     }
 
