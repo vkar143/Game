@@ -11,9 +11,4 @@ public class Graveyard extends SpawningGround {
     public Graveyard(Spawner _spawner) {
         super('n', _spawner);
     }
-
-    @Override
-    public void tick(Location location) {
-        ;
-    }
 }

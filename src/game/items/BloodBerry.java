@@ -14,15 +14,20 @@ import game.general.Ability;
  * A class that represents the BloodBerry Item
  */
 public class BloodBerry extends Item implements Consumable, SellableItem {
+    /**
+     * Constant for the max health increase given
+     */
     private final int HEALTH_INCREASE_VALUE = 5;
+    /**
+     * Constant for the selling price
+     */
     private final int SELLING_AMOUNT = 10;
 
     /**
      * A constructor that creates an instance for BloodBerry
      */
     public BloodBerry() {
-        super("BloodyBerry", '*', true);
-//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
+        super("BloodBerry", '*', true);
     }
 
     /**

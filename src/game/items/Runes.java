@@ -5,8 +5,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumableAction;
 
+/**
+ * Runes are dropped by enemies and used to trade with
+ */
 public class Runes extends Item implements Consumable{
-    private int amount;
+    /**
+     * The Amount of runes for the object
+     */
+    private final int amount;
     /***
      * Constructor.
      */
@@ -15,6 +21,11 @@ public class Runes extends Item implements Consumable{
         this.amount = amount;
     }
 
+    /**
+     * returns the list of allowable actions when the Runes are being held by the player
+     * @param owner the actor that owns the item
+     * @return returns a ConsumableAction to add the Runes to wallet
+     */
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = super.allowableActions(owner);
@@ -22,6 +33,10 @@ public class Runes extends Item implements Consumable{
         return actionList;
     }
 
+    /**
+     * Consume interface used to add the runes to wallet
+     * @param actor The actor which can consume the item
+     */
     @Override
     public void consume(Actor actor) {
         actor.addBalance(amount);

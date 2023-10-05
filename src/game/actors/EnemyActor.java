@@ -94,7 +94,7 @@ public abstract class EnemyActor extends Actor {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();
-        map.locationOf(this).addItem(new Runes(runeAmount));
+        map.locationOf(this).addItem(new Runes(getRuneAmount()));
         builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
         return builder.toString();
     }

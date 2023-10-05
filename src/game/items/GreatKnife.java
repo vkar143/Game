@@ -59,7 +59,6 @@ public class GreatKnife extends WeaponItem implements SellableItem, BuyableItem{
     public GreatKnife() {
         super("Great Knife", '>', DAMAGE, "stabs", HIT_RATE);
         this.capabilitySet.addCapability(Ability.ATTACK);
-        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
     /**

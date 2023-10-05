@@ -29,7 +29,6 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
      */
     public RefreshingFlask() {
         super("Refreshing Flask", 'u', true);
-//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
         this.random = new Random();
     }
 

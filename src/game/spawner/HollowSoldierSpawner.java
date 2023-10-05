@@ -9,7 +9,6 @@ public class HollowSoldierSpawner implements Spawner {
     private final int odds;
     private final int bound;
     private final Random random;
-
     public HollowSoldierSpawner(int odds, int bound) {
         this.odds = odds;
         this.bound = bound;

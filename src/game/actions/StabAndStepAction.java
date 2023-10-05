@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.GreatKnife;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class StabAndStepAction extends Action {
         ArrayList<Exit> exitList = new ArrayList<>(map.locationOf(actor).getExits());
         for (Exit exit : exitList) {
             Location surroundingLocation = exit.getDestination();
-            if (surroundingLocation.containsAnActor()){
+            if (surroundingLocation.canActorEnter(actor)){
                 exitList.remove(exit);
             }
         }

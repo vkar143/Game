@@ -19,7 +19,7 @@ public abstract class SpawningGround extends Ground {
             Location _location = exit.getDestination();
             if (!(_location.containsAnActor())) {
                 try{
-                    spawner.spawnEnemy(location);
+                    spawner.spawnEnemy(_location);
                     return;
                 } catch (Exception e){
                     return;

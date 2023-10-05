@@ -40,7 +40,6 @@ public class GiantHammer extends WeaponItem implements SellableItem {
     public GiantHammer() {
         super("Giant Hammer", 'P', DAMAGE, "slams", HIT_RATE);
         this.capabilitySet.addCapability(Ability.ATTACK);
-        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
     /**
      * Gives the actions that can be performed using the Giant Hammer.

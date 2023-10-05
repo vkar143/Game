@@ -37,13 +37,7 @@ public class BuyAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-            if (map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
-                return actor + " " + buyItem.buyItem(actor, buyingAmount);
-            }
-        }
-        return "Trade failed!";
+        return actor + " " + buyItem.buyItem(actor, buyingAmount);
     }
 
     /**

@@ -51,7 +51,6 @@ public class WanderingUndead extends EnemyActor {
             map.locationOf(this).addItem(new Key());
             builder.append("\n").append(name).append(" dropped a key");
         }
-        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         builder.insert(OFFSET,super.unconscious(actor, map));
         return builder.toString();
     }

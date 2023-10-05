@@ -2,16 +2,14 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.general.Ability;
 import game.items.SellableItem;
 
 /**
  * A class that represents an action that can be used to sell an item
  */
 public class SellAction extends Action {
+
     private final String description;
     private final SellableItem sellItem;
     private final int sellingAmount;
@@ -37,13 +35,7 @@ public class SellAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-            if (map.isAnActorAt(destination) && map.getActorAt(destination).hasCapability(Ability.CAN_TRADE)) {
-                return actor + " " + sellItem.sellItem(actor, sellingAmount);
-            }
-        }
-        return "Trade failed";
+        return actor + " " + sellItem.sellItem(actor, sellingAmount);
     }
 
     /**
