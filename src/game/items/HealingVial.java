@@ -13,7 +13,7 @@ import game.general.Ability;
 import java.util.Random;
 
 /**
- * healing vial gives the replinish action for HP
+ * A class that represents the Healing Vial
  */
 public class HealingVial extends Item implements Consumable, SellableItem, BuyableItem {
     private Random random;
@@ -22,8 +22,9 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     private final int BOUND_BUY_ITEM = 4;
     private final int CHANCE_SELL_ITEM = 1;
     private final int CHANCE_BUY_ITEM = 1;
-    /***
-     * Constructor.
+
+    /**
+     * A constructor that creates an instance for Healing Vial
      */
     public HealingVial() {
         super("Healing Vial", 'a', true);
@@ -32,7 +33,7 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     }
 
     /**
-     * returns a replenish action object
+     * Returns a replenish action object
      * @param owner the actor that owns the item
      * @return
      */
@@ -44,11 +45,22 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         return actionlist;
     }
 
+    /**
+     * By consuming the Healing Vial the actor's health will increase by a specific amount
+     * @param actor The actor that consumes the item
+     */
     @Override
     public void consume(Actor actor) {
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH)/5);
         actor.removeItemFromInventory(this);
     }
+
+    /**
+     * List of allowable actions that the Healing Vial allows its owner do to another actor.
+     * @param target the other actor
+     * @param location the location of the other actor
+     * @return an unmodifiable list of actions for Healing Vial
+     */
     @Override
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = super.allowableActions(target, location);
@@ -58,6 +70,12 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         return actionList;
     }
 
+    /**
+     * The specific actions that occur when Healing Vial is sold
+     * @param actor The actor which can sell the item
+     * @param sellingAmount The amount the item will be sold for
+     * @return A string that describes the result of executing the sell Healing Vial method
+     */
     @Override
     public String sellItem(Actor actor, int sellingAmount) {
         Random random = new Random();
@@ -70,6 +88,12 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
         return "sells the Healing Vial for " + sellingAmount + " runes";
     }
 
+    /**
+     * The specific actions that occur when Healing Vial is bought
+     * @param actor The actor which can buy the item
+     * @param buyingAmount The amount the item will be bought for
+     * @return A string that describes the result of executing the buy Healing Vial method
+     */
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         int chance = random.nextInt(BOUND_BUY_ITEM);

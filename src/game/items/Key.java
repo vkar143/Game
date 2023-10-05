@@ -8,7 +8,7 @@ import game.general.Ability;
  */
 public class Key extends Item {
     /***
-     * Constructor. sets it to have the unlock capability
+     * Constructor which creates an instance of Key with an unlock capability
      */
     public Key() {
         super("Gate Key", '-', true);

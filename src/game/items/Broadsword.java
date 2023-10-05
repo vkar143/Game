@@ -13,7 +13,7 @@ import game.general.Status;
 import java.util.Random;
 
 /**
- * weapon item
+ * A class that represents the weapon item Broadsword
  */
 public class Broadsword extends WeaponItem implements SellableItem, BuyableItem {
     private static final int DAMAGE = 110;
@@ -23,10 +23,11 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     private final int SELLING_AMOUNT = 100;
     private final int BOUND_BUY_ITEM = 20;
     private final int CHANCE_BUY_ITEM = 1;
-    /**
-     * Constructor.
-     */
     private int focusDuration;
+
+    /**
+     * A constructor that creates an instance for Broadsword
+     */
     public Broadsword() {
         super("BroadSword", '1', DAMAGE, "Swings at", HIT_RATE);
         this.focusDuration = FOCUS_DURATION;
@@ -35,14 +36,14 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     }
 
     /**
-     * returns focus duration
+     * Returns focus duration
      */
     public int getFocusDuration() {
         return focusDuration;
     }
 
     /**
-     * decreases focus duration each turn and when focus duration runs out it sets the weapon stats back to normal
+     * Decreases focus duration each turn and when focus duration runs out it sets the weapon stats back to normal
      * @param currentLocation The location of the actor carrying this Item.
      * @param actor The actor carrying this Item.
      */
@@ -57,7 +58,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
     }
 
     /**
-     * sets focus duration
+     * Sets focus duration
      */
     public void setFocusDuration(int focusDuration) {
         this.focusDuration = focusDuration;
@@ -65,7 +66,6 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
 
     /**
      * Gives the actions that can be performed using the broadsword.
-     *
      * @param target The target actor to attack.
      * @param location The location where the attack action occurs.
      * @return An ActionList containing allowable actions.
@@ -82,6 +82,11 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         return actions;
     }
 
+    /**
+     * A list of actions that can be executed by the Broadsword
+     * @param owner the actor that owns the item
+     * @return A collection of actions specific to the Broadsword
+     */
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = super.allowableActions(owner);
@@ -89,6 +94,12 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         return actionList;
     }
 
+    /**
+     * The specific actions that occur when Broadsword is sold
+     * @param actor The actor which can sell the item
+     * @param sellingAmount The amount the item will be sold for
+     * @return A string that describes the result of executing the sell BloodBerry method
+     */
     @Override
     public String sellItem(Actor actor, int sellingAmount) {
         actor.addBalance(sellingAmount);
@@ -96,6 +107,12 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
         return "sells the Broadsword for " + sellingAmount + " runes";
     }
 
+    /**
+     * The specific actions that occur when Broadsword is bought
+     * @param actor The actor which can buy the item
+     * @param buyingAmount The amount the item will be bought for
+     * @return A string that describes the result of executing the buy Broadsword method
+     */
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         Random random = new Random();
