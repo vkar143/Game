@@ -8,7 +8,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Broadsword;
 
 /**
- * focus action is used by the BroadSword Item
+ * Focus action is used by the BroadSword Item
+ *
+ * Created by:
+ * @author Phoebe Jiang & Ewan Lumsden-Smith
+ * @version 1.0.0
+ * @see Action
  */
 
 public class FocusAction extends Action {
@@ -16,9 +21,21 @@ public class FocusAction extends Action {
      * the item that is using this action
      */
     private final Broadsword weaponItem;
+    /**
+     * The amount to increase the damage multiplier
+     */
     private final float MULTIPLIER_INCREASE_PERCENTAGE = 0.10f;
+    /**
+     * The updated focus hit rate amount
+     */
     private final int FOCUS_HIT_RATE = 90;
+    /**
+     * the modified amount for stamina decrease
+     */
     private final int STAMINA_DECREASE = 40;
+    /**
+     * the focus duration of a weapon
+     */
     private final int FOCUS_DURATION = 5;
 
     /**

@@ -7,6 +7,14 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
+/**
+ * Action for the player to use the "AttackAction"
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * @version 1.0.0
+ * @see Action
+ */
 public class AttackAction extends Action {
 
     /**
@@ -54,10 +62,10 @@ public class AttackAction extends Action {
     }
 
     /**
-     * checks if the
+     * Checks if the actor has a weapon, is conscious and their ability to attack
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return
+     * @return A string describing the action that was chosen to be executed
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -80,9 +88,9 @@ public class AttackAction extends Action {
     }
 
     /**
-     * returns description of action
+     * A description to be displayed to the user to attack an enemy
      * @param actor The actor performing the action.
-     * @return
+     * @return A string description of the ability to attack
      */
     @Override
     public String menuDescription(Actor actor) {

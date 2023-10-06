@@ -42,9 +42,9 @@ public class GreatSlamAction extends Action {
 
     /**
      * Constructor for the Great Slam Action.
-     * @param target
-     * @param direction
-     * @param weapon
+     * @param target the target for the GreatSlamAction
+     * @param direction the direction to execute the action
+     * @param weapon the weapon to execute the weapon
      */
     public GreatSlamAction(Actor target, String direction, GiantHammer weapon){
         this.target = target;
@@ -54,8 +54,8 @@ public class GreatSlamAction extends Action {
     /**
      * Executes the Great Slam Action by first attacking the target actor with the full damage of the Giant Hammer
      * then the actors around the target with half the damage of the Giant Hammer
-     * @param actor
-     * @param map
+     * @param actor the actor who will be executing the action
+     * @param map the place in the game the action will be executed
      * @return returns a string describing the action
      */
     @Override

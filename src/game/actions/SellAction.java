@@ -7,11 +7,24 @@ import game.items.SellableItem;
 
 /**
  * A class that represents an action that can be used to sell an item
+ *
+ * Created by:
+ * @author Vasi Karabourniotis
+ * @version 1.0.0
+ * @see Action
  */
 public class SellAction extends Action {
-
+    /**
+     * A string description to be used for the menu display
+     */
     private final String description;
+    /**
+     * Sellable interface
+     */
     private final SellableItem sellItem;
+    /**
+     * The amount the item is sold for
+     */
     private final int sellingAmount;
 
     /**

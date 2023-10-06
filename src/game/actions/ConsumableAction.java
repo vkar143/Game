@@ -6,10 +6,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Consumable;
 
 /**
- * an action that can be used by any class that uses an item
+ * An action that can be used by any class that uses an item
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * @version 1.0.0
+ * @see Action
  */
 public class  ConsumableAction extends Action {
+    /**
+     * A string description to be used for the menu display
+     */
     private final String description;
+    /**
+     * Consumable interface
+     */
     private final Consumable consumable;
 
 

@@ -10,10 +10,24 @@ import game.items.BuyableItem;
 
 /**
  * A class that represents an action that can be used to buy an item
+ *
+ * Created by:
+ * @author Vasi
+ * @version 1.0.0
+ * @see Action
  */
 public class BuyAction extends Action {
+    /**
+     * A string description to be used for the menu display
+     */
     private final String description;
+    /**
+     * BuyableItem interface
+     */
     private final BuyableItem buyItem;
+    /**
+     * The amount an item is bought for
+     */
     private final int buyingAmount;
 
     /**
@@ -21,12 +35,12 @@ public class BuyAction extends Action {
      * a description, a buyable item & its cost
      * @param description A String describing the action of buying
      * @param buyItem An item that can be bought by an Actor
-     * @param sellingAmount The amount of money an item costs
+     * @param buyingAmount The amount of money an item costs
      */
-    public BuyAction(String description, BuyableItem buyItem, int sellingAmount) {
+    public BuyAction(String description, BuyableItem buyItem, int buyingAmount) {
         this.description = description;
         this.buyItem = buyItem;
-        this.buyingAmount = sellingAmount;
+        this.buyingAmount = buyingAmount;
     }
 
     /**

@@ -43,9 +43,9 @@ public class StabAndStepAction extends Action {
 
     /**
      * Constructor for the Stab and Step Action.
-     * @param target
-     * @param direction
-     * @param weapon
+     * @param target the target who will receive the action
+     * @param direction the direction the action will be executed
+     * @param weapon the weapon to be used to execute the action
      */
     public StabAndStepAction(Actor target, String direction, GreatKnife weapon){
         this.weaponItem = weapon;
@@ -56,8 +56,8 @@ public class StabAndStepAction extends Action {
     /**
      * Executes the Great Slam Action by first attacking the target actor with the Great Knife
      * then stepping away.
-     * @param actor
-     * @param map
+     * @param actor the actor that will execute the action
+     * @param map the map the action will be executed
      * @return returns a string describing the action
      */
     @Override
