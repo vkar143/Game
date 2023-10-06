@@ -30,6 +30,12 @@ import game.spawner.WanderingUndeadSpawner;
  * @version 2.0.0
  */
 public class  Application {
+    /**
+     * The main entry point for the game as well as starting its execution.
+     * This method sets up the game world, including game maps, actors, items, and various game elements.
+     *
+     * @param args Command-line arguments.
+     */
 
     public static void main(String[] args) {
         World world = new World(new Display());
@@ -144,7 +150,6 @@ public class  Application {
         ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
         Player player = new Player("The Abstracted One", '@', 150);
-//        player.addItemToInventory(new HealingVial());
 
         ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
