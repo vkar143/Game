@@ -14,15 +14,50 @@ import java.util.Random;
 
 /**
  * A class that represents the weapon item Broadsword
+ *
+ * Created by:
+ * @author Vasi Karabourniotis
+ * Modified by:
+ * @author Ewan Lumsden Smith
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see WeaponItem
+ * @see BuyableItem
+ * @see SellableItem
  */
 public class Broadsword extends WeaponItem implements SellableItem, BuyableItem {
+
+    /**
+     * Constant representing the damage dealt by the Broadsword.
+     */
     private static final int DAMAGE = 110;
+    /**
+     * Constant representing the hit rate of the Broadsword.
+     */
     private static final int HIT_RATE = 80;
+    /**
+     * Constant representing the focus duration of the Broadsword.
+     */
     private final int FOCUS_DURATION = 0;
+    /**
+     * Constant representing the increased damage multiplier of the Focus Action.
+     */
     private final int NEW_DAMAGE_MULTIPLIER = 1;
+    /**
+     * Constant representing the selling amount of the Broadsword.
+     */
     private final int SELLING_AMOUNT = 100;
+    /**
+     * Constant representing the bound of the buyItem.
+     */
     private final int BOUND_BUY_ITEM = 20;
+    /**
+     * Constant representing the chance that the Broadsword is successfully bought by a Trader.
+     */
     private final int CHANCE_BUY_ITEM = 1;
+    /**
+     * The focus duration of the Broadsword.
+     */
     private int focusDuration;
 
     /**
@@ -37,6 +72,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
 
     /**
      * Returns focus duration
+     * @return The current focus duration
      */
     public int getFocusDuration() {
         return focusDuration;
@@ -59,6 +95,7 @@ public class Broadsword extends WeaponItem implements SellableItem, BuyableItem 
 
     /**
      * Sets focus duration
+     * @param focusDuration What the updated focus duration will be
      */
     public void setFocusDuration(int focusDuration) {
         this.focusDuration = focusDuration;

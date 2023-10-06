@@ -7,6 +7,14 @@ import game.actions.ConsumableAction;
 
 /**
  * Runes are dropped by enemies and used to trade with
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Item
+ * @see Consumable
  */
 public class Runes extends Item implements Consumable{
     /**
@@ -15,6 +23,7 @@ public class Runes extends Item implements Consumable{
     private final int amount;
     /***
      * Constructor.
+     * @param amount The amount of runes the object is worth.
      */
     public Runes(int amount) {
         super("Runes", '$', true);

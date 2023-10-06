@@ -12,6 +12,16 @@ import game.general.Ability;
 
 /**
  * A class that represents the BloodBerry Item
+ *
+ * Created by:
+ * @author Vasi Karabourniotis
+ * Modified by:
+ * @author Ewan Lumsden Smith
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Item
+ * @see Consumable
+ * @see SellableItem
  */
 public class BloodBerry extends Item implements Consumable, SellableItem {
     /**
