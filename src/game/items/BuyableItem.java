@@ -1,7 +1,6 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
  * A class that represents an interface for buying items
