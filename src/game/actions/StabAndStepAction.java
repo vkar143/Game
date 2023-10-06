@@ -67,9 +67,10 @@ public class StabAndStepAction extends Action {
         stab.execute(actor, map);
 
         ArrayList<Exit> exitList = new ArrayList<>(map.locationOf(actor).getExits());
+
         for (Exit exit : exitList) {
             Location surroundingLocation = exit.getDestination();
-            if (surroundingLocation.canActorEnter(actor)){
+            if (!surroundingLocation.canActorEnter(actor)){
                 exitList.remove(exit);
             }
         }
