@@ -9,16 +9,23 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
- * Follow Behaviour is implemented in Ancient woods enemies and returns a move action that moves the actor towards its target
+ * Follow Behaviour is implemented in Ancient woods enemies and returns a move action that moves the actor towards its target.
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Behaviour
  */
 public class FollowBehavior implements Behaviour {
     /**
-     * target of the follow behaviour.
+     * Target of the follow behaviour.
      */
     private final Actor target;
 
     /**
-     * set the target in the constructor
+     * Sets the target in the constructor.
      * @param actor the target to follow
      */
     public FollowBehavior(Actor actor) {
@@ -26,8 +33,8 @@ public class FollowBehavior implements Behaviour {
     }
 
     /**
-     * finds the closest position to the target then returns a move action for that square
-     * @param actor the Actor acting
+     * Finds the closest position to the target, then returns a move action for that square.
+     * @param actor The Actor with the behaviour
      * @param map the GameMap containing the Actor
      * @return MoveActorAction for the closest location to the target or null
      */
@@ -53,7 +60,7 @@ public class FollowBehavior implements Behaviour {
     }
 
     /**
-     * returns a score for how close the position is to the target
+     * Returns a score for how close the position is to the target
      * @param dest1 the location of the target
      * @param dest2 the location of this actor
      * @return int of the MoveScore
