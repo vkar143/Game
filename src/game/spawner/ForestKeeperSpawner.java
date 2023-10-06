@@ -1,6 +1,5 @@
 package game.spawner;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.EnemyActor;
 import game.actors.ForestKeeper;
@@ -8,6 +7,12 @@ import java.util.Random;
 
 /**
  * Spawner for the Forest Keeper Enemies
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Spawner
  */
 public class ForestKeeperSpawner implements Spawner{
     /**
@@ -15,7 +20,7 @@ public class ForestKeeperSpawner implements Spawner{
      */
     private final int odds;
     /**
-     * variable that holds the odds of spawning
+     * variable that holds the bound of spawning
      */
     private final int bound;
     /**

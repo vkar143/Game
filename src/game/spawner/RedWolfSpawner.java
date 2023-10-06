@@ -8,6 +8,12 @@ import java.util.Random;
 
 /**
  * Spawner for the Red Wolf enemy
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Spawner
  */
 public class RedWolfSpawner implements Spawner{
     /**
@@ -15,7 +21,7 @@ public class RedWolfSpawner implements Spawner{
      */
     private final int odds;
     /**
-     * variable that holds the odds of spawning
+     * variable that holds the bound of spawning
      */
     private final int bound;
     /**
