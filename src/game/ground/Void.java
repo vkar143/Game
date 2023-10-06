@@ -8,7 +8,11 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.general.Ability;
 
 /**
- * kills any player who steps on it
+ * A class that represents the Void.
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * @version 1.0.0
+ * @see Ground
  */
 public class Void extends Ground {
 
@@ -22,7 +26,7 @@ public class Void extends Ground {
     /**
      * returns true
      * @param actor the Actor to check
-     * @return
+     * @return a boolean if the actor can enter
      */
     @Override
     public boolean canActorEnter(Actor actor) {

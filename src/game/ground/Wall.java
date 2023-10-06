@@ -4,13 +4,18 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 
 /**
+ * A class that represents the Wall ground type.
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- *
+ * @author Ewan Lumsden Smith
+ * *
  */
 public class Wall extends Ground {
 
+    /**
+     * Constructor for the Wall Class takes no parameters and sets the displayChar as '#
+     */
     public Wall() {
         super('#');
     }

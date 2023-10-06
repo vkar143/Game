@@ -1,6 +1,5 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
@@ -10,24 +9,27 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.items.Consumable;
 
-import java.util.List;
 
 /**
- * a cosmetic piece of ground
+ * A class that represents a puddle.
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * @version 1.0.0
+ * @see Ground
  */
 public class Puddle extends Ground implements Consumable {
+
     /**
      * Constant for the value of the health increase
      */
     private final int HEALTH_INCREASE_VALUE = 1;
 
     /**
-     * constructor sets the display char
+     * constructor sets the display char takes no parameters/
      */
     public Puddle() {
         super('~');
     }
-
 
     /**
      * the consume action used to heal and refresh the player
@@ -46,7 +48,7 @@ public class Puddle extends Ground implements Consumable {
      * @param actor     the Actor acting
      * @param location  the current Location
      * @param direction the direction of the Ground from the Actor
-     * @return
+     * @return returns a list of allowable Actions for this ground given an actors location
      */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {

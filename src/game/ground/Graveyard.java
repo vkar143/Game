@@ -1,13 +1,20 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.positions.Location;
 import game.spawner.Spawner;
 
 /**
- * abstract class that other graveyards inherit from
+ * A type of spawning Ground used to spawn the HollowSoldier and WanderingUndead
+ * Created by:
+ * @author Ewan Lumsden-Smith & Vasi
+ * @version 1.0.0
+ * @see SpawningGround
  */
 public class Graveyard extends SpawningGround {
 
+    /**
+     * Constructor for the Graveyard Class which takes a spawner as a parameter.
+     * @param _spawner the Spawner used by the object
+     */
     public Graveyard(Spawner _spawner) {
         super('n', _spawner);
     }
