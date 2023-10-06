@@ -19,19 +19,34 @@ import game.general.Status;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- *
+ * Ewan Lumsden-Smith & Phoebe Jiang
+ * @see Actor
  */
-public class Player extends Actor {
-    private final int MAX_HEALTH = 200;
-    private final int MILLIS = 200;
-    private final int EXIT_STATUS = 0;
-    private final int INTRINSIC_DAMAGE = 15;
-    private final int INTRINSIC_HIT_RATE = 80;
 
+public class Player extends Actor {
+    /**
+     * The maximum health of the player
+     */
+    private final int MAX_HEALTH = 200;
+    /**
+     * The time the player sleeps/rests for
+     */
+    private final int MILLIS = 200;
+    /**
+     * Whether the game can stop or not
+     */
+    private final int EXIT_STATUS = 0;
+    /**
+     * The damage inflicted by the player's intrinsic weapon
+     */
+    private final int INTRINSIC_DAMAGE = 15;
+    /**
+     * The rate in which the intrinsic weapon is successful in its execution
+     */
+    private final int INTRINSIC_HIT_RATE = 80;
 
     /**
      * Constructor.
-     *
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hit points
@@ -42,7 +57,6 @@ public class Player extends Actor {
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
     }
-
 
     /**
      * simply prints current stats and then returns a menu with all possible actions in it
@@ -99,26 +113,13 @@ public class Player extends Actor {
      * when the player dies it removes them from the map and returns the death message
      * @param actor the perpetrator
      * @param map where the actor fell unconscious
-     * @return returns a string descibring the death of the player
+     * @return returns a string describing the death of the player
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         map.removeActor(this);
         return this + " met their demise at the hands of " + actor + "\n\n" + FancyMessage.YOU_DIED;
     }
-
-    /**
-     * when the player dies it removes them from the map and returns the death message
-     * @param map where the actor fell unconscious
-     * @return returns a string describing the death of the player
-     */
-//  Currently not in use
-    @Override
-    public String unconscious(GameMap map) {
-        map.removeActor(this);
-        return this + " ceased to exist.\n\n" + FancyMessage.YOU_DIED;
-    }
-
 
     /**
      * returns the string for the player

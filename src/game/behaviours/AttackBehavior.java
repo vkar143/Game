@@ -10,12 +10,19 @@ import game.actions.AttackAction;
 import game.general.Status;
 
 /**
- * attack behaviour that implements behaviour and is used by the enemy to attack any other enemies
+ * Attack behaviour that implements behaviour and is used by the enemy to attack any other enemies.
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Behaviour
  */
 public class AttackBehavior implements Behaviour {
     /**
-     * checks to see if there is a enemy within its surroundings if there is it returns an attack action towards that enemy
-     * @param actor the Actor acting
+     * checks to see if there is an enemy within its surroundings, if there is, it returns an attack action towards that enemy.
+     * @param actor the Actor with the behaviour
      * @param map the GameMap containing the Actor
      * @return returns the AttackAction or null
      */

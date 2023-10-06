@@ -14,14 +14,46 @@ import java.util.Random;
 
 /**
  * A class that represents the item Refreshing Flask
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Vasi Karabourniotis
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Item
+ * @see Consumable
+ * @see BuyableItem
+ * @see SellableItem
  */
 public class RefreshingFlask extends Item implements Consumable, SellableItem, BuyableItem {
+    /**
+     * Variable that holds the Random class object.
+     */
     private Random random;
+    /**
+     * Constant representing the stamina increase value of the Refreshing Flask.
+     */
     private final int STAMINA_INCREASE_VALUE = 40;
+    /**
+     * Constant representing the selling amount of the Refreshing Flask.
+     */
     private final int SELLING_AMOUNT = 25;
+    /**
+     * Constant representing the bound of the sellItem.
+     */
     private final int BOUND_SELL_ITEM = 10;
+    /**
+     * Constant representing the bound of the buyItem.
+     */
     private final int BOUND_BUY_ITEM = 10;
+    /**
+     * Constant representing the chance that the Refreshing Flask is stolen while trying to sell.
+     */
     private final int CHANCE_SELL_ITEM = 5;
+    /**
+     * Constant representing the chance that the Refreshing Flask is discounted.
+     */
     private final int CHANCE_BUY_ITEM = 1;
 
     /**
@@ -97,9 +129,9 @@ public class RefreshingFlask extends Item implements Consumable, SellableItem, B
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         int chance = random.nextInt(BOUND_BUY_ITEM);
-        double discountedAmount = 0.8;
+        int discountedAmount = 80;
         if (chance < CHANCE_BUY_ITEM){
-            buyingAmount = (int) (buyingAmount * discountedAmount);
+            buyingAmount = (buyingAmount * discountedAmount)/100;
         }
         if (actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);

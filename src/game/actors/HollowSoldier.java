@@ -12,22 +12,55 @@ import java.util.Random;
 /**
  * hollow soldier extends enemy actor
  */
+/**
+ * abstract class that enemy actors inherit from
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith & Phoebe Jiang
+ * @version 1.0.0
+ * @see EnemyActor
+ */
 public class HollowSoldier extends EnemyActor {
     /**
      * init sets name and hit points and display char
      */
     private static final int HIT_POINTS = 200;
-    private static final int COST = 100;
+    /**
+     * The runes held by the HollowSoldier
+     */
+    private static final int RUNES = 100;
+    /**
+     * The intrinsic damage the weapon of the HollowSoldier can deal
+     */
     private final int INTRINSIC_DAMAGE = 50;
+    /**
+     * The chance the HollowSoldier can hit the actor
+     */
     private final int INTRINSIC_HIT_RATE = 50;
+    /**
+     * The bound for the Healing Vial
+     */
     private final int HEALING_VIAL_BOUND = 10;
+    /**
+     * The bound for the Refreshing Flask
+     */
     private final int REFRESHING_FLASK_BOUND = 10;
+    /**
+     * The chance a healing vial will be dropped
+     */
     private final int HEALING_VIAL_CHANCE = 2;
+    /**
+     * The chance a refreshing flask will be dropped
+     */
     private final int REFRESHING_FLASK_CHANCE = 4;
 
+    /**
+     * Constructor for instantiating a HollowSoldier
+     */
     public HollowSoldier() {
-        super("Hollow soldier", '&', HIT_POINTS, COST);
+        super("Hollow soldier", '&', HIT_POINTS, RUNES);
     }
+
     /**
      * sets intrinsic weapon
      * @return returns an Intrinsic weapon item for the class
@@ -36,13 +69,13 @@ public class HollowSoldier extends EnemyActor {
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Swings at",INTRINSIC_HIT_RATE);
     }
+
     /**
      * drops any necessary items removes the actor from the map and returns a string of those events
      * @param actor the perpetrator
      * @param map where the actor fell unconscious
      * @return returns a String describing the death sequence
      */
-
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();

@@ -12,10 +12,15 @@ import java.util.Random;
 
 /**
  * RedWolf enemy actor class
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith & Phoebe Jiang
+ * @version 1.0.0
+ * @see EnemyActor
  */
 public class RedWolf extends EnemyActor {
     /**
-     * Constant for hitpoints of the actor
+     * Constant for hit points of the actor
      */
     private static final int HIT_POINTS = 25;
     /**
@@ -23,7 +28,7 @@ public class RedWolf extends EnemyActor {
      */
     private static final int COST = 25;
     /**
-     * Constant for the damage the enemyactor deals.
+     * Constant for the damage the enemy actor deals.
      */
     private final int INTRINSIC_DAMAGE = 15;
     /**

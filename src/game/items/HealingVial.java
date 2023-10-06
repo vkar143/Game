@@ -14,13 +14,42 @@ import java.util.Random;
 
 /**
  * A class that represents the Healing Vial
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Vasi Karabourniotis
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Item
+ * @see Consumable
+ * @see BuyableItem
+ * @see SellableItem
  */
 public class HealingVial extends Item implements Consumable, SellableItem, BuyableItem {
+    /**
+     * variable that holds the Random class object
+     */
     private Random random;
+    /**
+     * Constant representing the selling amount of the Healing Vial.
+     */
     private final int SELLING_AMOUNT = 35;
+    /**
+     * Constant representing the bound of the sellItem.
+     */
     private final int BOUND_SELL_ITEM = 10;
+    /**
+     * Constant representing the bound of the buyItem
+     */
     private final int BOUND_BUY_ITEM = 4;
+    /**
+     * Constant representing the chance the selling price of the Healing Vial is doubled.
+     */
     private final int CHANCE_SELL_ITEM = 1;
+    /**
+     * Constant representing the chance the buying price of the Healing Vial is increased.
+     */
     private final int CHANCE_BUY_ITEM = 1;
 
     /**
@@ -96,9 +125,9 @@ public class HealingVial extends Item implements Consumable, SellableItem, Buyab
     @Override
     public String buyItem(Actor actor, int buyingAmount) {
         int chance = random.nextInt(BOUND_BUY_ITEM);
-        double increasedAmount = 1.50;
+        int increasedAmount = 150;
         if (chance < CHANCE_BUY_ITEM) {
-            buyingAmount = (int) (buyingAmount * increasedAmount);
+            buyingAmount = (buyingAmount * increasedAmount)/100;
         }
         if(actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);

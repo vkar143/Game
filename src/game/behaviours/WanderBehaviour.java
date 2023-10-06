@@ -14,10 +14,15 @@ import edu.monash.fit2099.engine.actors.Behaviour;
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- *
+ * @author Ewan Lumsden Smith
+ * @author Phoebe Jiang
+ * @version 2.0.0
+ * @see Behaviour
  */
 public class WanderBehaviour implements Behaviour {
-
+    /**
+     * Variable that holds the Random class object.
+     */
     private final Random random = new Random();
 
     /**

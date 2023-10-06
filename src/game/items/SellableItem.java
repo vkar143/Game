@@ -4,6 +4,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 
 /**
  * A class that represents an interface for selling items
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Vasi Karabourniotis
+ * @author Phoebe Jiang
+ * @version 1.0.0
  */
 public interface SellableItem {
 

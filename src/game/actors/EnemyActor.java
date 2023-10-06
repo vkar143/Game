@@ -22,13 +22,36 @@ import java.util.Map;
 
 /**
  * abstract class that enemy actors inherit from
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith, Phoebe Jiang & Vasi Karabourniotis
+ * @version 1.0.0
+ * @see Actor
  */
 public abstract class EnemyActor extends Actor {
+    /**
+     * A map list of h=behaviours and their corresponding priorities
+     */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
+    /**
+     * The actor who is the target of the enemy actor
+     */
     protected Actor target;
+    /**
+     * The amount of Runes (currency) an actor or item has
+     */
     private final int runeAmount;
+    /**
+     * The priority of wander behaviour
+     */
     private final int WANDER_BEHAVIOUR_PRIORITY = 999;
+    /**
+     * The priority of attack behaviour
+     */
     private final int ATTACK_BEHAVIOUR_PRIORITY = 997;
+    /**
+     * The offset value
+     */
     private final int OFFSET_VALUE = 0;
 
     /**
@@ -47,12 +70,17 @@ public abstract class EnemyActor extends Actor {
         this.runeAmount = _runeAmount;
     }
 
+    /**
+     * Gives the enemy actor the ability to have multiple behaviours
+     * @param priority the order in which behaviours should execute based on their importance
+     * @param behaviour the behaviour to be used
+     */
     public void addBehavior(int priority, Behaviour behaviour){
         this.behaviours.put(priority, behaviour);
     }
+
     /**
      * At each turn, select a valid action to perform.
-     *
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
@@ -70,10 +98,13 @@ public abstract class EnemyActor extends Actor {
         return new DoNothingAction();
     }
 
+    /**
+     * Gets the current amount of Runes (currency in the game)
+     * @return The current amount of runes
+     */
     public int getRuneAmount() {
         return runeAmount;
     }
-
 
     /**
      * checks for weapons in the other actors inventory and if there are any weapons it returns an attack action for those weapons
@@ -91,6 +122,12 @@ public abstract class EnemyActor extends Actor {
         return actions;
     }
 
+    /**
+     * If an enemy actor dies this is what should be executed
+     * @param actor the perpetrator
+     * @param map where the actor fell unconscious
+     * @return A string description of what happened when the enemy actor died
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         StringBuilder builder = new StringBuilder();

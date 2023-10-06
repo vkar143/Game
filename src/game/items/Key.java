@@ -5,6 +5,13 @@ import game.general.Ability;
 
 /**
  * key for the gate
+ *
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * Modified by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Item
  */
 public class Key extends Item {
     /***

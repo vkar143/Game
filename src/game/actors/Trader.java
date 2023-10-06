@@ -5,6 +5,11 @@ import game.general.Ability;
 
 /**
  * An abstract class that trader actors inherit
+ *
+ * Created by:
+ * @author Vasi Karabourniotis
+ * @version 1.0.0
+ * @see Actor
  */
 public abstract class Trader extends Actor {
 
