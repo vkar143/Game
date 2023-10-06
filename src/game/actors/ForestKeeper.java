@@ -13,6 +13,11 @@ import java.util.Random;
 
 /**
  * class for the Forest Keeper which extends EnemyActor
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith & Phoebe Jiang
+ * @version 1.0.0
+ * @see EnemyActor
  */
 public class ForestKeeper extends EnemyActor {
     /**
@@ -39,10 +44,13 @@ public class ForestKeeper extends EnemyActor {
      * Constant for the odds for dropping a healing vial
      */
     private final int BOUND = 10;
+    /**
+     * The chance of the enemy actor dropping a healing vial
+     */
     private final int CHANCE = 2;
 
     /**
-     * sets the attributes as well as the behaviours and capabilities on an enemy actor
+     * Constructor: sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
     public ForestKeeper() {
         super("Forest Keeper", '8', HIT_POINTS, COST);

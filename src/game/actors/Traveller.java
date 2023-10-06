@@ -14,12 +14,32 @@ import game.items.RefreshingFlask;
 
 /**
  * A class that represents a trader actor called Traveller
+ *
+ * Created by:
+ * @author Vasi Karabourniotis
+ * @version 1.0.0
+ * @see Trader
  */
 public class Traveller extends Trader {
+    /**
+     * The amount of hit points the traveller has
+     */
     private static final int HIT_POINTS = 10;
+    /**
+     * The cost of a broadsword
+     */
     private final int BROADSWORD_COST = 250;
+    /**
+     * The cost of a refreshing flask
+     */
     private final int REFRESHING_FLASK_COST = 75;
+    /**
+     * The cost of a healing Vial
+     */
     private final int HEALING_VIAL_COST = 100;
+    /**
+     * The cost of a Great Knife
+     */
     private final int GREAT_KNIFE_COST = 300;
 
     /**
@@ -47,7 +67,7 @@ public class Traveller extends Trader {
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return An collection of actions to be executed by the Traveller
+     * @return A collection of actions to be executed by the Traveller
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
