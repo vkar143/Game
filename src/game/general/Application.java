@@ -149,10 +149,10 @@ public class  Application {
         gateBackToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1), "Back to Burial Grounds"));
         ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
-        Player player = new Player("The Abstracted One", '@', 150);
-
         ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
+
+        Player player = new Player("The Abstracted One", '@', 150);
 
         world.addPlayer(player, abandonedVillageGameMap.at(28, 5));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());

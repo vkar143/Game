@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.SellableItem;
+import game.items.Sellable;
 
 /**
  * A class that represents an action that can be used to sell an item
@@ -21,7 +21,7 @@ public class SellAction extends Action {
     /**
      * Sellable interface
      */
-    private final SellableItem sellItem;
+    private final Sellable sellItem;
     /**
      * The amount the item is sold for
      */
@@ -34,7 +34,7 @@ public class SellAction extends Action {
      * @param sellItem An item that can be sold by an Actor
      * @param sellingAmount The amount of money an item costs
      */
-    public SellAction(String description, SellableItem sellItem, int sellingAmount) {
+    public SellAction(String description, Sellable sellItem, int sellingAmount) {
         this.description = description;
         this.sellItem = sellItem;
         this.sellingAmount = sellingAmount;
