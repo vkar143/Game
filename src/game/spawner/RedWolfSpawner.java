@@ -2,6 +2,7 @@ package game.spawner;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.EnemyActor;
+import game.actors.ForestKeeper;
 import game.actors.RedWolf;
 
 import java.util.Random;
@@ -47,9 +48,13 @@ public class RedWolfSpawner implements Spawner{
      */
     @Override
     public void spawnEnemy(Location location) {
-        if(random.nextInt(bound) < odds){
-            EnemyActor newEnemy = new RedWolf();
-            location.map().addActor(newEnemy,location);
+        if (random.nextInt(bound) < odds) {
+            EnemyActor newEnemy = new ForestKeeper();
+            if (location.canActorEnter(newEnemy)) {
+                location.map().addActor(newEnemy, location);
+            } else {
+                throw new IllegalArgumentException("Can't spawn there");
+            }
         }
     }
 }

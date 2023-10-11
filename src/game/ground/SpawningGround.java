@@ -35,13 +35,10 @@ public abstract class SpawningGround extends Ground {
     public void Spawn(Location location) {
         for(Exit exit: location.getExits()) {
             Location _location = exit.getDestination();
-            if (!(_location.containsAnActor())) {
-                try{
-                    spawner.spawnEnemy(_location);
-                    return;
-                } catch (Exception e){
-                    return;
-                }
+            try{
+                spawner.spawnEnemy(_location);
+                return;
+            } catch (IllegalArgumentException ignored){
             }
         }
     }

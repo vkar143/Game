@@ -48,7 +48,11 @@ public class ForestKeeperSpawner implements Spawner{
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds){
             EnemyActor newEnemy = new ForestKeeper();
-            location.map().addActor(newEnemy,location);
+            if(location.canActorEnter(newEnemy)){
+                location.map().addActor(newEnemy,location);
+            }else{
+                throw new IllegalArgumentException("Can't spawn there");
+            }
         }
     }
 }
