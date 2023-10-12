@@ -21,9 +21,9 @@ import game.general.Ability;
  * @version 1.0.0
  * @see Item
  * @see Consumable
- * @see Sellable
+ * @see SellableItem
  */
-public class BloodBerry extends Item implements Consumable, Sellable {
+public class BloodBerry extends Item implements Consumable, SellableItem {
     /**
      * Constant for the max health increase given
      */

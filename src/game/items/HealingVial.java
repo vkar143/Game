@@ -23,10 +23,10 @@ import java.util.Random;
  * @version 1.0.0
  * @see Item
  * @see Consumable
- * @see Buyable
- * @see Sellable
+ * @see BuyableItem
+ * @see SellableItem
  */
-public class HealingVial extends Item implements Consumable, Sellable, Buyable {
+public class HealingVial extends Item implements Consumable, SellableItem, BuyableItem {
     /**
      * variable that holds the Random class object
      */
@@ -132,7 +132,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
         if(actor.getBalance() > buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
-            return "buys the Healing Vial for " + buyingAmount + " runes";
+            return "buys the Refreshing Flask for " + buyingAmount + " runes";
         } else {
             return  "cannot afford the " + this;
         }

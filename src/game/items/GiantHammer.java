@@ -17,10 +17,10 @@ import game.general.Status;
  * @author Phoebe Jiang
  * @version 1.0.0
  * @see WeaponItem
- * @see Sellable
+ * @see SellableItem
  */
 
-public class GiantHammer extends WeaponItem implements Sellable {
+public class GiantHammer extends WeaponItem implements SellableItem {
     /**
      * Constant representing the selling amount of the Giant Hammer.
      */

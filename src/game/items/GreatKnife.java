@@ -19,11 +19,11 @@ import java.util.Random;
  * @author Phoebe Jiang
  * @version 1.0.0
  * @see WeaponItem
- * @see Sellable
- * @see Buyable
+ * @see SellableItem
+ * @see BuyableItem
  */
 
-public class GreatKnife extends WeaponItem implements Sellable, Buyable {
+public class GreatKnife extends WeaponItem implements SellableItem, BuyableItem{
     /**
      * Constant representing the selling amount of the Great Knife.
      */

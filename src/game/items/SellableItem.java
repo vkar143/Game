@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.actors.Actor;
  * @author Phoebe Jiang
  * @version 1.0.0
  */
-public interface Sellable {
+public interface SellableItem {
 
     /**
      * A method that can be personalised for each item that can be sold
