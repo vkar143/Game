@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.GreatKnife;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -68,10 +69,12 @@ public class StabAndStepAction extends Action {
 
         ArrayList<Exit> exitList = new ArrayList<>(map.locationOf(actor).getExits());
 
-        for (Exit exit : exitList) {
+        Iterator<Exit> iterator = exitList.iterator();
+        while (iterator.hasNext()) {
+            Exit exit = iterator.next();
             Location surroundingLocation = exit.getDestination();
-            if (!surroundingLocation.canActorEnter(actor)){
-                exitList.remove(exit);
+            if (!surroundingLocation.canActorEnter(actor)) {
+                iterator.remove(); // Remove the current element using the iterator
             }
         }
 
