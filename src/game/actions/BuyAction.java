@@ -2,11 +2,8 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.general.Ability;
-import game.items.BuyableItem;
+import game.items.Buyable;
 
 /**
  * A class that represents an action that can be used to buy an item
@@ -24,7 +21,7 @@ public class BuyAction extends Action {
     /**
      * BuyableItem interface
      */
-    private final BuyableItem buyItem;
+    private final Buyable buyItem;
     /**
      * The amount an item is bought for
      */
@@ -37,7 +34,7 @@ public class BuyAction extends Action {
      * @param buyItem An item that can be bought by an Actor
      * @param buyingAmount The amount of money an item costs
      */
-    public BuyAction(String description, BuyableItem buyItem, int buyingAmount) {
+    public BuyAction(String description, Buyable buyItem, int buyingAmount) {
         this.description = description;
         this.buyItem = buyItem;
         this.buyingAmount = buyingAmount;

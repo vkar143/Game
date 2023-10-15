@@ -23,10 +23,10 @@ import java.util.Random;
  * @version 1.0.0
  * @see Item
  * @see Consumable
- * @see BuyableItem
- * @see SellableItem
+ * @see Buyable
+ * @see Sellable
  */
-public class RefreshingFlask extends Item implements Consumable, SellableItem, BuyableItem {
+public class RefreshingFlask extends Item implements Consumable, Sellable, Buyable {
     /**
      * Variable that holds the Random class object.
      */
