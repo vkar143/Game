@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.ForestGameMap;
 import game.actors.Player;
 import game.actors.Traveller;
 import game.ground.*;
@@ -115,7 +116,7 @@ public class  Application {
                 "...........++++++.....................~~",
                 "..........~~+++++......................~",
                 ".........~~~~++++..................~~..~");
-        GameMap abxervyerGameMap = new GameMap(groundFactory, abxervyerMap);
+        ForestGameMap abxervyerGameMap = new ForestGameMap(groundFactory, abxervyerMap);
         world.addGameMap(abxervyerGameMap);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -151,12 +152,14 @@ public class  Application {
 
         Player player = new Player("The Abstracted One", '@', 150);
 
-        ancientWoodsGameMap.at(30,5).setGround(new Bushes(new RedWolfSpawner(3,10)));
+        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
 
-        world.addPlayer(player, abandonedVillageGameMap.at(28, 5));
+        world.addPlayer(player, abxervyerGameMap.at(28, 5));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
+        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(3,10)) );
+        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(3,10)) );
 
         world.run();
     }

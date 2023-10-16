@@ -11,6 +11,6 @@ import edu.monash.fit2099.engine.positions.Location;
  * @version 1.0.0
  */
 
-public interface Spawner {
-    void spawnEnemy(Location location);
+public abstract class Spawner {
+    public abstract void spawnEnemy(Location location);
 }

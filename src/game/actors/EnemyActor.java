@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public abstract class EnemyActor extends Actor {
     /**
-     * A map list of h=behaviours and their corresponding priorities
+     * A map list of behaviours and their corresponding priorities
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
     /**

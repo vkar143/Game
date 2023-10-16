@@ -9,13 +9,13 @@ import game.spawner.Spawner;
  * @version 1.0.0
  * @see SpawningGround
  */
-public class Bushes extends SpawningGround {
+public class Bush extends SpawningGround {
 
     /**
      * Constructor which takes a spawner object as a parameter.
      * @param _spawner The spawner object for this spawning ground
      */
-    public Bushes(Spawner _spawner) {
+    public Bush(Spawner _spawner) {
         super('m', _spawner);
     }
 }
