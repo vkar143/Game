@@ -1,6 +1,8 @@
 package game.weather;
 
 import java.util.ArrayList;
+
+import game.ForestGameMap;
 /***
  * this class is supposed to keep track of weather and provide main API for Actor to manipulate weather.
  */
@@ -18,5 +20,5 @@ public abstract class WeatherController {
     /***
      * 
      */
-    public abstract void processWeather();
+    public abstract void processWeather(ForestGameMap gameMap);
 }

@@ -27,7 +27,7 @@ public class AncientWoodWeatherController extends WeatherController{
         playturnCount++;
         return this.weatherList.get(weatherIndex);
     };
-
+    @Override
     public void processWeather(ForestGameMap gameMap){
         currentWeather().weatherEffect(gameMap);
     }
