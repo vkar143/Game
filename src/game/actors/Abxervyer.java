@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.ForestGameMap;
 import game.behaviours.FollowBehavior;
 import game.general.Status;
 import game.weather.AncientWoodWeatherController;
@@ -41,7 +42,7 @@ public class Abxervyer extends EnemyActor {
     @Override 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
         ancientWoodWeatherController.processWeather();
-        return super.playTurn(actions, lastAction, map, display);
+        return super.playTurn(actions, lastAction,(ForestGameMap)map, display);
     }
 
     /**

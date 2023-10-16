@@ -3,6 +3,7 @@ package game.weather;
 import java.util.ArrayList;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.ForestGameMap;
 
 public class AncientWoodWeatherController extends WeatherController{
     protected ArrayList<Location> spawnLocationAffectedByWeather = new ArrayList<>();
@@ -27,8 +28,8 @@ public class AncientWoodWeatherController extends WeatherController{
         return this.weatherList.get(weatherIndex);
     };
 
-    public void processWeather(){
-        
+    public void processWeather(ForestGameMap gameMap){
+        currentWeather().weatherEffect(gameMap);
     }
     
 }

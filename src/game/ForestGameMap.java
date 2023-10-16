@@ -50,6 +50,7 @@ public class ForestGameMap extends GameMap{
             spawnGround.updateSpawnRateMultiplier(multiplier);
      }
     }
+
 }
 
    
