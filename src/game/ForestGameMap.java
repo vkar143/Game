@@ -3,16 +3,18 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.GroundFactory;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.EnemyActor;
 import game.ground.Bush;
 import game.ground.Hut;
 import game.ground.SpawningGround;
 import game.spawner.RedWolfSpawner;
 
-public class ForestGameMap extends GameMap implements affectedByWeather {
+public class ForestGameMap extends GameMap{
     protected Bush bush = new Bush(new RedWolfSpawner(3,10));
     
     public ForestGameMap(GroundFactory groundFactory, List<String> lines) {
@@ -22,8 +24,8 @@ public class ForestGameMap extends GameMap implements affectedByWeather {
     /**
      * return list of Locations that have a Ground matches the Ground we wanna look for
      */
-
-    public ArrayList<Location> getWeatherAffectedSpawningGrounds(Class<? extends SpawningGround> ground) {
+    
+    public ArrayList<Location> getCertainSpawningGrounds(Class<? extends SpawningGround> ground) {
         ArrayList<Location> locations = new ArrayList<Location>();
         for (int x : widths) {
 			for (int y : heights) {
@@ -35,13 +37,19 @@ public class ForestGameMap extends GameMap implements affectedByWeather {
         }
         return locations;
     }
-     public void modifySpawnRate(float multiplier){}
 
-     @Override
-     public void tick(){
-        System.out.println(this.getWeatherAffectedSpawningGrounds(bush.getClass()));
-        super.tick();
+    /**
+     * modify spawn rate multiplier for all instances of a certain type of SpawingGround on a map
+     * @param multiplier
+     * @param spawningGround
+     */
+     public void modifySpawnRate(float multiplier, SpawningGround spawningGround) {
+        ArrayList<Location> spawnerLocations = getCertainSpawningGrounds(spawningGround.getClass());
+        for(Location location : spawnerLocations) { 
+            SpawningGround spawnGround = (SpawningGround)location.getGround();
+            spawnGround.updateSpawnRateMultiplier(multiplier);
      }
+    }
 }
 
    

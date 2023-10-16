@@ -15,7 +15,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class HollowSoldierSpawner implements Spawner {
+public class HollowSoldierSpawner extends Spawner {
     /**
      * variable that holds the odds of spawning
      */
@@ -43,7 +43,7 @@ public class HollowSoldierSpawner implements Spawner {
      * @param _location
      */
     @Override
-    public void spawnEnemy(Location _location) {
+    public void spawnActor(Location _location) {
         if(random.nextInt(bound) < odds){
             _location.map().addActor(new HollowSoldier(), _location);
     }}

@@ -16,23 +16,8 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class RedWolfSpawner implements Spawner{
-    /**
-     * spawning rate multiplier
-     */
-    private float spawnRateMultiplier = 1.0f;
-    /**
-     * variable that holds the odds of spawning
-     */
-    private final int odds;
-    /**
-     * variable that holds the bound of spawning
-     */
-    private final int bound;
-    /**
-     * variable that holds the Random class object
-     */
-    private final Random random;
+public class RedWolfSpawner extends Spawner{
+
 
     /**
      * Constructor for the red wolf spawner
@@ -50,17 +35,11 @@ public class RedWolfSpawner implements Spawner{
      * @param location location to spawn
      */
     @Override
-    public void spawnEnemy(Location location) {
+    public void spawnActor(Location location) {
         if(random.nextInt(bound) < Math.round(odds * spawnRateMultiplier)){
             EnemyActor newEnemy = new RedWolf();
             location.map().addActor(newEnemy,location);
         }
     }
 
-    public void updateSpawnRateMultiplier(float newMultiplier){
-        this.spawnRateMultiplier = newMultiplier;
-    }
-    public void resetSpawnRateMultiplier(){
-        this.spawnRateMultiplier = 1.0f;
-    }
 }

@@ -14,7 +14,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class WanderingUndeadSpawner implements Spawner {
+public class WanderingUndeadSpawner extends Spawner {
     /**
      * variable that holds the bound of spawning
      */
@@ -44,7 +44,7 @@ public class WanderingUndeadSpawner implements Spawner {
      * @param location location to spawn
      */
     @Override
-    public void spawnEnemy(Location location) {
+    public void spawnActor(Location location) {
         if(random.nextInt(bound) < odds){
             location.addActor(new WanderingUndead());
         }

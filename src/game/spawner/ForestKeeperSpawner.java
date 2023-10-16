@@ -15,7 +15,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class ForestKeeperSpawner implements Spawner{
+public class ForestKeeperSpawner extends Spawner{
     /**
      * variable that holds the odds of spawning
      */
@@ -45,7 +45,7 @@ public class ForestKeeperSpawner implements Spawner{
      * @param location
      */
     @Override
-    public void spawnEnemy(Location location) {
+    public void spawnActor(Location location) {
         if(random.nextInt(bound) < odds){
             EnemyActor newEnemy = new ForestKeeper();
             location.map().addActor(newEnemy,location);
