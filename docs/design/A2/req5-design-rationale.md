@@ -4,5 +4,8 @@
 # class(s) responsibility
 - `WeatherController`: a class that keep track of weather and provide main API for Actor to manipulate weather.
 - `AncientWoodWeatherController`: implementation of WeatherController.
-- `Weather`: 
+- `Weather`: provides API for abxervyer to  manipulate weather.
+- `SunnyForestWeather`: handles concrete implementation of manipulations to be done.
 - `ForestGameMap`: an extension to `GameMap` that allows to look up for certain SpawningGround and EnemyActor and modify certain attributes accordingly.
+# my design choice
+I assume a boss will always stay in one battlefield, and weather will only affect limited game maps. 
