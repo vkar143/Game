@@ -1,6 +1,7 @@
 package game.weather;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.ForestKeeper;
 import game.actors.RedWolf;
 import game.extended.ForestGameMap;
 import game.ground.Bush;
@@ -17,12 +18,14 @@ public class RainyForestWeather implements Weather{
     Hut hut = new Hut(new ForestKeeperSpawner(15,100));
     Bush bush = new Bush(new RedWolfSpawner(3,10));
     RedWolf redWolf = new RedWolf();
+    ForestKeeper forestKeeper = new ForestKeeper();
 
     public void weatherEffect(GameMap gameMap){
         ForestGameMap _gameMap = (ForestGameMap) gameMap;
         _gameMap.modifySpawnRate(HUT_SPAWN_RATE_MULTIPLIER, hut);
         _gameMap.modifySpawnRate(BUSH_SPAWN_RATE_MULTIPLIER, bush);
         _gameMap.modifyEnemyDamagaMultiplier(REDWOLF_DAMAGE_MULTIPLIER, redWolf);
+        _gameMap.healCertainEnemys(FOREST_KEEPER_HEAL_POINT, forestKeeper);
     }
     
 }

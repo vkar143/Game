@@ -77,5 +77,13 @@ public class ForestGameMap extends GameMap{
         }
         }
 
+    public void healCertainEnemys(int healPoint, EnemyActor enemy) {
+        ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
+        for(Location location : enemyLocations) { 
+            EnemyActor enemyActor = (EnemyActor)location.getActor();
+            enemyActor.heal(healPoint);
+    }
+
 }   
 
+}
