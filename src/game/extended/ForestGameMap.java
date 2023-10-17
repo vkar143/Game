@@ -15,7 +15,6 @@ import game.ground.SpawningGround;
 import game.spawner.RedWolfSpawner;
 
 public class ForestGameMap extends GameMap{
-    protected Bush bush = new Bush(new RedWolfSpawner(3,10));
     
     public ForestGameMap(GroundFactory groundFactory, List<String> lines) {
         super(groundFactory, lines);
