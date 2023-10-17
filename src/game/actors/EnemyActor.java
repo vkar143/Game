@@ -52,7 +52,7 @@ public abstract class EnemyActor extends Actor {
     /**
      * The offset value
      */
-    private final int OFFSET_VALUE = 0;
+    protected final int OFFSET_VALUE = 0;
 
 
     /**

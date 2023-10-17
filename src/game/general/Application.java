@@ -167,6 +167,8 @@ public class  Application {
         abxervyerGameMap.at(8, 11).addActor(abxervyer);
         abxervyer.addWeatherMap(abxervyerGameMap);
         abxervyer.addWeatherMap(ancientWoodsGameMap);
+        abxervyer.addBattleGameMap(abxervyerGameMap);
+        abxervyer.addLeaveGameMap(ancientWoodsGameMap);
 
         abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.run();
