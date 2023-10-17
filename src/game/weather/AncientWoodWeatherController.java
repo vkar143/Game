@@ -14,7 +14,9 @@ public class AncientWoodWeatherController{
     protected ArrayList<Weather> weatherList;
     protected ArrayList<GameMap> gameMapList;
     protected final int TURN_DIVIDER = 3;
-
+/**
+ * Constructor. Set all weathers that will appear on certain game map(s)
+ */
     public AncientWoodWeatherController(){
         ArrayList<Weather> weathersToAdd = new ArrayList<>();
         weathersToAdd.add(new SunnyForestWeather());
