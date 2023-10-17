@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.extended.ForestGameMap;
-
+/**
+ * Controller Keep track of playturn and manage weather switching.
+ */
 public class AncientWoodWeatherController{
     protected int playturnCount = 0;
     protected int weatherIndex = 0;
@@ -19,6 +21,9 @@ public class AncientWoodWeatherController{
         weathersToAdd.add(new RainyForestWeather());
         this.weatherList = weathersToAdd;
     }
+    /**
+    * This method is called every TURN_DIVIDER turns to track weather
+    */
     public void weatherTracker(){
         if(playturnCount !=0 && playturnCount % TURN_DIVIDER == 0){
             weatherIndex++;
@@ -30,13 +35,22 @@ public class AncientWoodWeatherController{
         System.out.println("Current Turn: "+playturnCount + "\nCurrent weather: " + weatherList.get(weatherIndex).getClass());
     }
 
-    /***
-     * 
-     */
+
+    /**
+    * Returns the current weather.
+    * 
+    * 
+    * @return The current weather or null if there is
+    */
     public Weather currentWeather(){
         return this.weatherList.get(weatherIndex);
     };
     
+    /**
+    * Processes the weather of the game
+    * 
+    * @param gameMapList - list of gamemap affected
+    */
     public void processWeather(ArrayList<ForestGameMap> gameMapList){
         weatherTracker();
         for(GameMap gameMap : gameMapList){

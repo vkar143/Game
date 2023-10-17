@@ -16,7 +16,9 @@ import game.general.Status;
 import game.ground.Gate;
 import game.items.Runes;
 import game.weather.AncientWoodWeatherController;
-
+/**
+ * Boss of Ancient Wood.
+ */
 public class Abxervyer extends EnemyActor {
     /***
      * game map where the boss exists
@@ -59,33 +61,65 @@ public class Abxervyer extends EnemyActor {
      * sets the intrinsic weapon of the enemy
      * @return IntrinsicWeapon
      */
+    /**
+    * Returns a damage weapon that is capable of attacking.
+    * 
+    * 
+    * @return an IntrinsicWeapon that is capable of attacking
+    */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(INTRINSIC_DAMAGE, "swings at", INTRINSIC_HIT_RATE);
     }
 
+    /**
+    * Called when the player presses one of the turn buttons.
+    * 
+    * @param actions - The list of actions that were pressed
+    * @param lastAction - The last action that was pressed
+    * @param map - The GameMap to play the turn on
+    * @param display - The Display to play the turn on
+    * 
+    * @return The next action to take
+    */
     @Override 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
         ancientWoodWeatherController.processWeather(weatherMap);
         return super.playTurn(actions, lastAction,map, display);
     }
 
+    /**
+    * Adds a map to the weather map
+    * 
+    * @param map - The map to add
+    */
     public void addWeatherMap(ForestGameMap map){
         weatherMap.add(map);
     }
+    /**
+    * Adds battle game map.
+    * 
+    * @param map - The map to add
+    */
     public void addBattleGameMap(GameMap map){
         battleGameMap = map;
     }
+    /**
+    * Adds a GameMap to the list of leave GameMap
+    * 
+    * @param map - The GameMap to be
+    */
     public void addLeaveGameMap(GameMap map){
         leaveGameMap = map;
     }
     /**
-     * Sets follow behaviour if player is within range of the enemy and then returns actionList
+     * get actions other actor can perform on it
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
      * @return ActionList of allowableActions
      */
+ 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
@@ -93,9 +127,15 @@ public class Abxervyer extends EnemyActor {
         }
         return super.allowableActions(otherActor, direction, map);
     }
-/**
- * Once defeated, boss leaves a Gate on where it last standed, drops runes, and print message.
- */
+
+    /**
+    * Once defeated, boss leaves a Gate on where it last standed, drops runes, and print message.
+    * 
+    * @param actor - The perpentrator
+    * @param map - The map of the actor
+    * 
+    * @return A string containing the result of actor being unconscious
+    */
     @Override
     public String unconscious(Actor actor, GameMap map){
         Location lastStand = battleGameMap.locationOf(this);

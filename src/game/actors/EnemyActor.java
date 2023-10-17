@@ -136,9 +136,6 @@ public abstract class EnemyActor extends Actor {
         builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
         return builder.toString();
     }
-//TODO: Tester
-    public float getDamageMultiplier(){
-        return this.damageMultiplier;
-    }
+
 
 }

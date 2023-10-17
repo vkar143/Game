@@ -13,17 +13,25 @@ import game.ground.Bush;
 import game.ground.Hut;
 import game.ground.SpawningGround;
 import game.spawner.RedWolfSpawner;
-
+/** 
+ * @author Zhuojun Zhao
+ * GameMap that provides functions necessary for execution
+ */
 public class ForestGameMap extends GameMap{
     
     public ForestGameMap(GroundFactory groundFactory, List<String> lines) {
         super(groundFactory, lines);
     }
 
-    /**
-     * return list of Locations that have a Ground matches the Ground we wanna look for
-     */
+
     
+    /**
+    * Returns an ArrayList of Ground objects that are spawning the specified ground.
+    * 
+    * @param ground - the ground to look for
+    * 
+    * @return an ArrayList of Ground
+    */
     public ArrayList<Location> getCertainSpawningGrounds(SpawningGround ground) {
         Class<? extends SpawningGround> groundClass = ground.getClass();
         ArrayList<Location> locations = new ArrayList<Location>();
@@ -38,10 +46,11 @@ public class ForestGameMap extends GameMap{
         return locations;
     }
 
-    /**
-     * modify spawn rate multiplier for all instances of a certain type of SpawingGround on a map
-     * @param multiplier
-     * @param spawningGround
+     /**
+     * Modifies the spawning rate of the ground.
+     * 
+     * @param multiplier - The multiplier to apply to the rate.
+     * @param spawningGround - The ground to modify
      */
      public void modifySpawnRate(float multiplier, SpawningGround spawningGround) {
         ArrayList<Location> spawnerLocations = getCertainSpawningGrounds(spawningGround);
@@ -51,6 +60,14 @@ public class ForestGameMap extends GameMap{
      }
     }
 
+
+    /**
+    * Returns an arraylist of locations where enemy is located.
+    * 
+    * @param enemy - the enemy to look for
+    * 
+    * @return an arraylist of locations
+    */
     public ArrayList<Location> getCertainEnemys(EnemyActor enemy) {
         Class<? extends EnemyActor> enemyClass = enemy.getClass();
         ArrayList<Location> locations = new ArrayList<Location>();
@@ -68,6 +85,12 @@ public class ForestGameMap extends GameMap{
         return locations;
 }
 
+    /**
+    * Modifies damage multiplier of enemy.
+    * 
+    * @param multiplier - Damage multiplier to be applied
+    * @param enemy - EnemyActor who's death is
+    */
     public void modifyEnemyDamagaMultiplier(float multiplier, EnemyActor enemy) {
             ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
             for(Location location : enemyLocations) { 
@@ -76,6 +99,12 @@ public class ForestGameMap extends GameMap{
         }
         }
 
+    /**
+    * Heals all enemys in this location that are able to heal the enemy.
+    * 
+    * @param healPoint - the point at which to heal the enemy
+    * @param enemy - the enemy to heal
+    */
     public void healCertainEnemys(int healPoint, EnemyActor enemy) {
         ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
         for(Location location : enemyLocations) { 

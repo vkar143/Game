@@ -103,8 +103,5 @@ public class RedWolf extends EnemyActor {
         return super.allowableActions(otherActor, direction, map);
     }
 
-//TODO: TESTER
-public float getDamage(){
-    return damageMultiplier * INTRINSIC_DAMAGE;  
-}
+
 }

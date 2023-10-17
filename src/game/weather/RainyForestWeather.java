@@ -8,7 +8,11 @@ import game.ground.Bush;
 import game.ground.Hut;
 import game.spawner.ForestKeeperSpawner;
 import game.spawner.RedWolfSpawner;
-
+    /**
+    * Execute effects related to this weather
+    * 
+    * 
+    */
 public class RainyForestWeather implements Weather{
     float HUT_SPAWN_RATE_MULTIPLIER = 1f;
     float BUSH_SPAWN_RATE_MULTIPLIER = 1.5f;
@@ -20,6 +24,11 @@ public class RainyForestWeather implements Weather{
     RedWolf redWolf = new RedWolf();
     ForestKeeper forestKeeper = new ForestKeeper();
 
+    /**
+    * Execute effects related to this weather
+    * 
+    * @param gameMap - game map that is affected by this weather
+    */
     public void weatherEffect(GameMap gameMap){
         ForestGameMap _gameMap = (ForestGameMap) gameMap;
         _gameMap.modifySpawnRate(HUT_SPAWN_RATE_MULTIPLIER, hut);

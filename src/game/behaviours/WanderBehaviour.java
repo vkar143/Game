@@ -37,8 +37,6 @@ public class WanderBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         EnemyActor enemy = (EnemyActor) actor;
-        //TODO: TESTER
-        System.out.println(enemy.getClass() + " Current damage multiplier: " + enemy.getDamageMultiplier());
         ArrayList<Action> actions = new ArrayList<>();
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
