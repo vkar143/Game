@@ -152,12 +152,16 @@ public class  Application {
         gateBackToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1), "Back to Burial Grounds"));
         ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
+        Gate gateToAbxervyerRoom = new Gate();
+        gateToAbxervyerRoom.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(10,11), "to Abxervyer battle field"));
+        ancientWoodsGameMap.at(10,6).setGround(gateBackToBurialGround);
+
         Player player = new Player("The Abstracted One", '@', 150);
 
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
 
-        world.addPlayer(player, abxervyerGameMap.at(28, 6));
+        world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
         abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100)) );
