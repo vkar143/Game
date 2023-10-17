@@ -1,17 +1,19 @@
 package game.actors;
 
+import java.util.ArrayList;
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.ForestGameMap;
 import game.behaviours.FollowBehavior;
+import game.extended.ForestGameMap;
 import game.general.Status;
 import game.weather.AncientWoodWeatherController;
-import game.weather.WeatherController;
 
 public class Abxervyer extends EnemyActor {
+    ArrayList<ForestGameMap> weatherMap = new ArrayList<>();
     /***
      * Weather controller that allows the enemy to controll weather of the gamemap
      */
@@ -41,8 +43,12 @@ public class Abxervyer extends EnemyActor {
     }
     @Override 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
-        ancientWoodWeatherController.processWeather();
-        return super.playTurn(actions, lastAction,(ForestGameMap)map, display);
+        ancientWoodWeatherController.processWeather(weatherMap);
+        return super.playTurn(actions, lastAction,map, display);
+    }
+
+    public void addWeatherMap(ForestGameMap map){
+        weatherMap.add(map);
     }
 
     /**

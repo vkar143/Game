@@ -8,9 +8,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.ForestGameMap;
+import game.actors.Abxervyer;
 import game.actors.Player;
 import game.actors.Traveller;
+import game.extended.ForestGameMap;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
@@ -92,7 +93,7 @@ public class  Application {
                 "....................~~~~.~~~~..........~........~~~~~~.....~",
                 "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
                 "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
-        GameMap ancientWoodsGameMap = new GameMap(groundFactory, ancientWoodsMap);
+        ForestGameMap ancientWoodsGameMap = new ForestGameMap(groundFactory, ancientWoodsMap);
         world.addGameMap(ancientWoodsGameMap);
 
         List<String> abxervyerMap = Arrays.asList(
@@ -152,15 +153,19 @@ public class  Application {
 
         Player player = new Player("The Abstracted One", '@', 150);
 
-        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(3,10)));
+        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
 
-        world.addPlayer(player, abxervyerGameMap.at(28, 5));
+        world.addPlayer(player, abxervyerGameMap.at(28, 6));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
-        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(3,10)) );
-        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(3,10)) );
-
+        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100)) );
+        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(30,100)) );
+        abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(15,100)) );
+        Abxervyer abxervyer = new Abxervyer();
+        abxervyerGameMap.at(8, 11).addActor(abxervyer);
+        abxervyer.addWeatherMap(abxervyerGameMap);
+        abxervyer.addWeatherMap(ancientWoodsGameMap);
         world.run();
     }
 }

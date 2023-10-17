@@ -1,7 +1,16 @@
 package game.weather;
 
-import game.ForestGameMap;
+import game.actors.EnemyActor;
+import game.extended.ForestGameMap;
+import game.ground.SpawningGround;
 
-public abstract class ForestWeather {
-    public abstract void weatherEffect(ForestGameMap gameMap);
+public abstract class ForestWeather{
+
+    public void modifySpawnRate(ForestGameMap gamemap, SpawningGround spawningGround, float spawnRateMultiplier){
+        gamemap.modifySpawnRate(spawnRateMultiplier, spawningGround);
+    }
+
+    public void modifyEnemyDamagaMultiplier(ForestGameMap gamemap, EnemyActor actor, float enemyDamageMultiplier){
+        
+    }
 }

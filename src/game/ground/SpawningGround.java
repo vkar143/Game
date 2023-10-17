@@ -57,7 +57,4 @@ public abstract class SpawningGround extends Ground {
     public void updateSpawnRateMultiplier(float newMultiplier){
         this.spawner.updateSpawnRateMultiplier(newMultiplier);
     }
-    public void resetSpawnRateMultiplier(){
-        this.spawner.resetSpawnRateMultiplier();
-    }
 }

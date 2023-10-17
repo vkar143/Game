@@ -46,7 +46,8 @@ public class ForestKeeperSpawner extends Spawner{
      */
     @Override
     public void spawnActor(Location location) {
-        if(random.nextInt(bound) < odds){
+        System.out.println("ForestKeeper current spawning rate: "+Math.round(odds * spawnRateMultiplier)+" / "+ bound);
+        if(random.nextInt(bound) < Math.round(odds * spawnRateMultiplier)){
             EnemyActor newEnemy = new ForestKeeper();
             location.map().addActor(newEnemy,location);
         }

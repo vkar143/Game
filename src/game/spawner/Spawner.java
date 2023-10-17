@@ -37,8 +37,4 @@ public abstract class Spawner {
         this.spawnRateMultiplier = newMultiplier;
     }
 
-    public void resetSpawnRateMultiplier(){
-        this.spawnRateMultiplier = 1.0f;
-    }
-
 }

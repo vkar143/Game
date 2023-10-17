@@ -2,34 +2,46 @@ package game.weather;
 
 import java.util.ArrayList;
 
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.ForestGameMap;
+import game.extended.ForestGameMap;
 
-public class AncientWoodWeatherController extends WeatherController{
-    protected ArrayList<Location> spawnLocationAffectedByWeather = new ArrayList<>();
+public class AncientWoodWeatherController{
+    protected int playturnCount = 0;
+    protected int weatherIndex = 0;
+    protected ArrayList<Weather> weatherList;
+    protected ArrayList<GameMap> gameMapList;
+    protected final int TURN_DIVIDER = 3;
 
     public AncientWoodWeatherController(){
-        super();
-        this.weatherList.add(new SunnyWeather());
+        ArrayList<Weather> weathersToAdd = new ArrayList<>();
+        weathersToAdd.add(new SunnyForestWeather());
+        weathersToAdd.add(new RainyForestWeather());
+        this.weatherList = weathersToAdd;
     }
-
-    /***
-     * return current weather, increase weather index, and switch weather after certain playturns.
-     */
-    public ForestWeather currentWeather(){
-        
-        if(playturnCount !=0 && playturnCount % 3 == 0){
+    public void weatherTracker(){
+        if(playturnCount !=0 && playturnCount % TURN_DIVIDER == 0){
             weatherIndex++;
         }
         if(weatherIndex > weatherList.size() - 1){
             weatherIndex = 0;
         }
         playturnCount++;
+        System.out.println("Current Turn: "+playturnCount + "\nCurrent weather: " + weatherList.get(weatherIndex).getClass());
+    }
+
+    /***
+     * 
+     */
+    public Weather currentWeather(){
         return this.weatherList.get(weatherIndex);
     };
-    @Override
-    public void processWeather(ForestGameMap gameMap){
-        currentWeather().weatherEffect(gameMap);
+    
+    public void processWeather(ArrayList<ForestGameMap> gameMapList){
+        weatherTracker();
+        for(GameMap gameMap : gameMapList){
+            currentWeather().weatherEffect(gameMap);
     }
     
+}
 }
