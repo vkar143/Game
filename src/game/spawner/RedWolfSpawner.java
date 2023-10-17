@@ -36,7 +36,6 @@ public class RedWolfSpawner extends Spawner{
      */
     @Override
     public void spawnActor(Location location) {
-        System.out.println("RedWolfSpawner current spawning rate: "+Math.round(odds * spawnRateMultiplier)+" / "+ bound);
         if(random.nextInt(bound) < Math.round(odds * spawnRateMultiplier)){
             EnemyActor newEnemy = new RedWolf();
             location.map().addActor(newEnemy,location);

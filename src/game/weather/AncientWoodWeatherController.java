@@ -34,7 +34,6 @@ public class AncientWoodWeatherController{
             weatherIndex = 0;
         }
         playturnCount++;
-        System.out.println("Current Turn: "+playturnCount + "\nCurrent weather: " + weatherList.get(weatherIndex).getClass());
     }
 
 
