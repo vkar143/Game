@@ -54,6 +54,7 @@ public abstract class EnemyActor extends Actor {
      */
     private final int OFFSET_VALUE = 0;
 
+
     /**
      * construct for the enemyActor abstract class.
      * @param name sets name
@@ -134,6 +135,10 @@ public abstract class EnemyActor extends Actor {
         map.locationOf(this).addItem(new Runes(getRuneAmount()));
         builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
         return builder.toString();
+    }
+//TODO: Tester
+    public float getDamageMultiplier(){
+        return this.damageMultiplier;
     }
 
 }

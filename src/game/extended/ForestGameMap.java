@@ -25,12 +25,13 @@ public class ForestGameMap extends GameMap{
      * return list of Locations that have a Ground matches the Ground we wanna look for
      */
     
-    public ArrayList<Location> getCertainSpawningGrounds(Class<? extends SpawningGround> ground) {
+    public ArrayList<Location> getCertainSpawningGrounds(SpawningGround ground) {
+        Class<? extends SpawningGround> groundClass = ground.getClass();
         ArrayList<Location> locations = new ArrayList<Location>();
         for (int x : widths) {
 			for (int y : heights) {
                 Ground currentGround = at(x, y).getGround();
-				if(ground.isAssignableFrom(currentGround.getClass())) {
+				if(groundClass.equals(currentGround.getClass())) {
                     locations.add(at(x, y));
                 }
             }
@@ -44,14 +45,37 @@ public class ForestGameMap extends GameMap{
      * @param spawningGround
      */
      public void modifySpawnRate(float multiplier, SpawningGround spawningGround) {
-        ArrayList<Location> spawnerLocations = getCertainSpawningGrounds(spawningGround.getClass());
+        ArrayList<Location> spawnerLocations = getCertainSpawningGrounds(spawningGround);
         for(Location location : spawnerLocations) { 
             SpawningGround spawnGround = (SpawningGround)location.getGround();
             spawnGround.updateSpawnRateMultiplier(multiplier);
      }
     }
 
+    public ArrayList<Location> getCertainEnemys(EnemyActor enemy) {
+        Class<? extends EnemyActor> enemyClass = enemy.getClass();
+        ArrayList<Location> locations = new ArrayList<Location>();
+        for (int x : widths) {
+            for (int y : heights) {
+                if(at(x,y).containsAnActor()){
+                    Actor currentActor = at(x, y).getActor();
+                    if(enemyClass.equals(currentActor.getClass())) {
+                        locations.add(at(x, y));
+                }
+                
+                }
+            }
+        }
+        return locations;
 }
 
-   
+    public void modifyEnemyDamagaMultiplier(float multiplier, EnemyActor enemy) {
+            ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
+            for(Location location : enemyLocations) { 
+                EnemyActor enemyActor = (EnemyActor)location.getActor();
+                enemyActor.updateDamageMultiplier(multiplier);
+        }
+        }
+
+}   
 

@@ -10,6 +10,10 @@
 - `ForestGameMap`: an extension to `GameMap` that allows to look up for certain SpawningGround and EnemyActor and modify certain attributes accordingly.
 # my design choice
 ## Weather
-I assume a boss will always stay in one battlefield, and weather will only affect limited game maps. Different game maps may have different weather effects combinations, and since GameMap does not provide API essential for certain implementations, e.g. return ArrayList of locations stored in a game map for other client to look up certain Grounds that are affected by weather(in order to implement modifySpawnRate()), I have to implement GameMap extensions to provide necessary methods to achieve weather effects.
+I assume a boss will always stay in one battlefield, and weather will only affect limited game maps. Different game maps may have different weather effects combinations. Since GameMap does not provide API essential for certain implementations, e.g. return ArrayList of locations stored in a game map for other client to look up certain Grounds that are affected by weather(in order to implement modifySpawnRate()), I have to implement GameMap extensions to provide necessary methods to achieve weather effects. 
+# extensibility
+## Weather Effect Functionality
+Different GameMap extensions may have different weather effects combinations and implemented accordingly. 
 ## potential hacky method & justification
-- casting is used in ForestGameMap.modifySpawnRate(), because I need to use spawnGround.updateSpawnRateMultiplier(multiplier) which is a method implemented in SpawningGround(which is one responsibility of SpawningGround, and We are not allowed to modify engine code anyway)
+- casting is used in 
+    - ForestGameMap.modifySpawnRate(), because I need to use spawnGround.updateSpawnRateMultiplier(multiplier) which is a method implemented in SpawningGround(which is one responsibility of SpawningGround, and We are not allowed to modify engine code anyway)

@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Abxervyer;
 import game.actors.Player;
+import game.actors.RedWolf;
 import game.actors.Traveller;
 import game.extended.ForestGameMap;
 import game.ground.*;
@@ -166,6 +167,8 @@ public class  Application {
         abxervyerGameMap.at(8, 11).addActor(abxervyer);
         abxervyer.addWeatherMap(abxervyerGameMap);
         abxervyer.addWeatherMap(ancientWoodsGameMap);
+
+        abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.run();
     }
 }

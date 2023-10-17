@@ -49,7 +49,8 @@ public abstract class Actor extends GameEntity implements Printable {
     /**
      * damage multiplier for actor's intrinsic weapon
      */
-    private float damageMultiplier;
+    //TODO: TESTER
+    protected float damageMultiplier;
     private Wallet wallet;
 
     /**
