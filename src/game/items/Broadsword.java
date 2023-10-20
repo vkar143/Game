@@ -22,10 +22,10 @@ import java.util.Random;
  * @author Phoebe Jiang
  * @version 1.0.0
  * @see WeaponItem
- * @see BuyableItem
- * @see SellableItem
+ * @see Buyable
+ * @see Sellable
  */
-public class Broadsword extends WeaponItem implements SellableItem, BuyableItem {
+public class Broadsword extends WeaponItem implements Sellable, Buyable {
 
     /**
      * Constant representing the damage dealt by the Broadsword.

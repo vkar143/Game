@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.OpenGateAction;
 import game.general.Ability;
 
+import java.util.ArrayList;
+
 /**
  *  A class for the Gate which transports the actor between levels if they have the key to unlock
  *  Created by:
@@ -20,7 +22,7 @@ public class Gate extends Ground {
     /**
      * Variable which holds the action that is used by this class
      */
-    private Action action;
+    private ArrayList<Action> actions = new ArrayList<>();
     /**
      * Variable that stores whether the gate has been opened or not
      */
@@ -40,7 +42,7 @@ public class Gate extends Ground {
      * @param action action added.
      */
     public void addAllowableAction(Action action) {
-        this.action = action;
+        this.actions.add(action);
     }
 
     /**
@@ -59,7 +61,9 @@ public class Gate extends Ground {
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionList = super.allowableActions(actor, location, direction);
         if (unlocked) {
-            actionList.add(action);
+            for(Action action: actions){
+                actionList.add(action);
+            }
             return actionList;
         }
         for (Item item : actor.getItemInventory()) {

@@ -8,19 +8,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Abxervyer;
 import game.actors.Player;
-import game.actors.RedWolf;
 import game.actors.Traveller;
-import game.extended.ForestGameMap;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.*;
-import game.spawner.ForestKeeperSpawner;
-import game.spawner.HollowSoldierSpawner;
-import game.spawner.RedWolfSpawner;
-import game.spawner.WanderingUndeadSpawner;
+import game.spawner.*;
 
 /**
  * The main class to start the game.
@@ -94,7 +88,7 @@ public class  Application {
                 "....................~~~~.~~~~..........~........~~~~~~.....~",
                 "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
                 "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
-        ForestGameMap ancientWoodsGameMap = new ForestGameMap(groundFactory, ancientWoodsMap);
+        GameMap ancientWoodsGameMap = new GameMap(groundFactory, ancientWoodsMap);
         world.addGameMap(ancientWoodsGameMap);
 
         List<String> abxervyerMap = Arrays.asList(
@@ -118,9 +112,27 @@ public class  Application {
                 "...........++++++.....................~~",
                 "..........~~+++++......................~",
                 ".........~~~~++++..................~~..~");
-        ForestGameMap abxervyerGameMap = new ForestGameMap(groundFactory, abxervyerMap);
+        List<String> OvergrownSanctuaryMap = Arrays.asList(
+                "++++.....++++........++++~~~~~.......~~~..........",
+                "++++......++.........++++~~~~.........~...........",
+                "+++..................+++++~~.......+++............",
+                "....................++++++......++++++............",
+                "...................++++........++++++~~...........",
+                "...................+++.........+++..~~~...........",
+                "..................+++..........++...~~~...........",
+                "~~~...........................~~~..~~~~...........",
+                "~~~~............+++..........~~~~~~~~~~...........",
+                "~~~~............+++.........~~~~~~~~~~~~..........",
+                "++~..............+++.......+~~........~~..........",
+                "+++..............+++......+++..........~~.........",
+                "+++..............+++......+++..........~~.........",
+                "~~~..............+++......+++..........~~~........",
+                "~~~~.............+++......+++..........~~~........"
+        );
+        GameMap abxervyerGameMap = new GameMap(groundFactory, abxervyerMap);
         world.addGameMap(abxervyerGameMap);
-
+        GameMap OvergrownSanctuaryGameMap = new GameMap(groundFactory, OvergrownSanctuaryMap);
+        world.addGameMap(OvergrownSanctuaryGameMap);
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -129,7 +141,7 @@ public class  Application {
                 exception.printStackTrace();
             }
         }
-
+        abandonedVillageGameMap.at(35,5).addItem(new Runes(50));
         abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
@@ -152,29 +164,27 @@ public class  Application {
         gateBackToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1), "Back to Burial Grounds"));
         ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
-        Gate gateToAbxervyerRoom = new Gate();
-        gateToAbxervyerRoom.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(10,11), "to Abxervyer battle field"));
-        ancientWoodsGameMap.at(10,6).setGround(gateBackToBurialGround);
-
         Player player = new Player("The Abstracted One", '@', 150);
 
-        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100)));
+        ancientWoodsGameMap.at(30, 5).setGround(new Bushes(new RedWolfSpawner(3,10)));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
-
-        world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
+        Gate gateToAbxervyer = new Gate();
+        gateToAbxervyer.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,1),"to Abxervyer"));
+        world.addPlayer(player, abxervyerGameMap.at(11, 10));
+        player.addItemToInventory(new Key());
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
-        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100)) );
-        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(30,100)) );
-        abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(15,100)) );
-        Abxervyer abxervyer = new Abxervyer();
-        abxervyerGameMap.at(8, 11).addActor(abxervyer);
-        abxervyer.addWeatherMap(abxervyerGameMap);
-        abxervyer.addWeatherMap(ancientWoodsGameMap);
-        abxervyer.addBattleGameMap(abxervyerGameMap);
-        abxervyer.addLeaveGameMap(ancientWoodsGameMap);
-
-        abxervyerGameMap.at(8, 12).addActor(new RedWolf());
+        ancientWoodsGameMap.at(10,10).setGround(gateToAbxervyer);
+        Gate gateToOvergrownSanctuary = new Gate();
+        gateToOvergrownSanctuary.addAllowableAction(new MoveActorAction(OvergrownSanctuaryGameMap.at(10,10),"to overgrown sanctuary"));
+        gateToOvergrownSanctuary.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1),"back to Ancient Woods"));
+        abxervyerGameMap.at(10,10).setGround(gateToOvergrownSanctuary);
+        TwigSpawner twigSpawner = new TwigSpawner(19,9);
+        Bushes twigBushes = new Bushes(twigSpawner);
+        EldenTreeSpawner eldenSpawner = new EldenTreeSpawner(10,2);
+        Hut eldenHut = new Hut(eldenSpawner);
+        OvergrownSanctuaryGameMap.at(5,5).setGround(twigBushes);
+        OvergrownSanctuaryGameMap.at(10,5).setGround(eldenHut);
         world.run();
     }
 }

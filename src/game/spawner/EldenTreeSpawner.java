@@ -1,22 +1,13 @@
 package game.spawner;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.EldentreeGuardian;
 import game.actors.EnemyActor;
-import game.actors.ForestKeeper;
-import game.actors.WanderingUndead;
+import game.actors.LivingTreeBranch;
 
 import java.util.Random;
-/**
- * Spawner for the Hollow Soldier Enemies
- *
- * Created by:
- * @author Ewan Lumsden Smith
- * Modified by:
- * @author Phoebe Jiang
- * @version 1.0.0
- * @see Spawner
- */
-public class WanderingUndeadSpawner implements Spawner {
+
+public class EldenTreeSpawner implements Spawner{
     /**
      * variable that holds the bound of spawning
      */
@@ -30,25 +21,15 @@ public class WanderingUndeadSpawner implements Spawner {
      */
     private final Random random;
 
-    /**
-     * Constructor for the Wandering Undead spawner
-     * @param odds numerator for the odds
-     * @param bound denominator for the odds
-     */
-    public WanderingUndeadSpawner(int bound, int odds) {
+    public EldenTreeSpawner(int bound, int odds) {
         this.bound = bound;
         this.odds = odds;
         this.random = new Random();
     }
-
-    /**
-     * Spawns the Wandering Undead at the param location
-     * @param location location to spawn
-     */
     @Override
     public void spawnEnemy(Location location) {
         if(random.nextInt(bound) < odds) {
-            EnemyActor newEnemy = new ForestKeeper();
+            EnemyActor newEnemy = new EldentreeGuardian();
             if (location.canActorEnter(newEnemy)) {
                 location.map().addActor(newEnemy, location);
             } else {

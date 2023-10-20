@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.actors.Actor;
  * @author Phoebe Jiang
  * @version 1.0.0
  */
-public interface BuyableItem {
+public interface Buyable {
 
     /**
      * A method that can be personalised for each item that can be bought

@@ -35,13 +35,10 @@ public abstract class SpawningGround extends Ground {
     public void Spawn(Location location) {
         for(Exit exit: location.getExits()) {
             Location _location = exit.getDestination();
-            if (!(_location.containsAnActor())) {
-                try{
-                    spawner.spawnActor(_location);
-                    return;
-                } catch (Exception e){
-                    return;
-                }
+            try{
+                spawner.spawnEnemy(_location);
+                return;
+            } catch (IllegalArgumentException ignored){
             }
         }
     }
@@ -53,8 +50,5 @@ public abstract class SpawningGround extends Ground {
     @Override
     public void tick(Location location) {
         Spawn(location);
-    }
-    public void updateSpawnRateMultiplier(float newMultiplier){
-        this.spawner.updateSpawnRateMultiplier(newMultiplier);
     }
 }

@@ -48,7 +48,11 @@ public class ForestKeeperSpawner extends Spawner{
     public void spawnActor(Location location) {
         if(random.nextInt(bound) < Math.round(odds * spawnRateMultiplier)){
             EnemyActor newEnemy = new ForestKeeper();
-            location.map().addActor(newEnemy,location);
+            if(location.canActorEnter(newEnemy)){
+                location.map().addActor(newEnemy,location);
+            }else{
+                throw new IllegalArgumentException("Can't spawn there");
+            }
         }
     }
 }
