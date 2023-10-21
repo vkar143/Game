@@ -2,19 +2,29 @@ package game.general;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.Abxervyer;
 import game.actors.Player;
+import game.actors.RedWolf;
 import game.actors.Traveller;
+import game.extended.ForestGameMap;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.*;
-import game.spawner.*;
+import game.spawner.ForestKeeperSpawner;
+import game.spawner.HollowSoldierSpawner;
+import game.spawner.RedWolfSpawner;
+import game.spawner.WanderingUndeadSpawner;
+
+import static game.general.GameMapCollection.abandonedVillageMap;
+import static game.general.GameMapCollection.burialGroundMap;
 
 /**
  * The main class to start the game.
@@ -38,101 +48,22 @@ public class  Application {
         World world = new World(new Display());
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
-        List<String> abandonedVillageMap = Arrays.asList(
-                "...........................................................",
-                "...#######.................................................",
-                "...#__.....................................................",
-                "...#..___#.................................................",
-                "...###.###................#######..........................",
-                "..........................#_____#..........................",
-                "........~~................#_____#..........................",
-                ".........~~~.....+........###_###..........................",
-                "...~~~~~~~~....+...........................................",
-                "....~~~~~......+..........................###..##..........",
-                "~~~~~~~...................................#___..#..........",
-                "~~~~~~....................................#..___#..........",
-                "~~~~~~~~~.................................#######..........");
 
-        GameMap abandonedVillageGameMap = new GameMap(groundFactory, abandonedVillageMap);
+        GameMap abandonedVillageGameMap = new GameMap(groundFactory, GameMapCollection.abandonedVillageMap);
         world.addGameMap(abandonedVillageGameMap);
 
-        List<String> burialGroundMap = Arrays.asList(
-                "...........+++++++........~~~~~~++....~~",
-                "...........++++++.........~~~~~~+.....~~",
-                "............++++...........~~~~~......++",
-                "............+.+.............~~~.......++",
-                "..........++~~~.......................++",
-                ".........+++~~~....#######...........+++",
-                ".........++++~.....#_____#.........+++++",
-                "..........+++......#_____#........++++++",
-                "..........+++......###_###.......~~+++++",
-                "..........~~.....................~~...++",
-                "..........~~~..................++.......",
-                "...........~~....~~~~~.........++.......",
-                "......~~....++..~~~~~~~~~~~......~......",
-                "....+~~~~..++++++++~~~~~~~~~....~~~.....",
-                "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
-        GameMap burialGroundGameMap = new GameMap(groundFactory, burialGroundMap);
+        GameMap burialGroundGameMap = new GameMap(groundFactory, GameMapCollection.burialGroundMap);
         world.addGameMap(burialGroundGameMap);
 
-        List<String> ancientWoodsMap = Arrays.asList(
-                "....+++..............................+++++++++....~~~....~~~",
-                "+...+++..............................++++++++.....~~~.....~~",
-                "++...............#######..............++++.........~~.......",
-                "++...............#_____#...........................~~~......",
-                "+................#_____#............................~~......",
-                ".................###_###............~...............~~.....~",
-                "...............................~.+++~~..............~~....~~",
-                ".....................~........~~+++++...............~~~...~~",
-                "....................~~~.........++++............~~~~~~~...~~",
-                "....................~~~~.~~~~..........~........~~~~~~.....~",
-                "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
-                "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
-        GameMap ancientWoodsGameMap = new GameMap(groundFactory, ancientWoodsMap);
+        ForestGameMap ancientWoodsGameMap = new ForestGameMap(groundFactory, GameMapCollection.ancientWoodsMap);
         world.addGameMap(ancientWoodsGameMap);
 
-        List<String> abxervyerMap = Arrays.asList(
-                "~~~~.......+++......~+++++..............",
-                "~~~~.......+++.......+++++..............",
-                "~~~++......+++........++++..............",
-                "~~~++......++...........+..............+",
-                "~~~~~~...........+.......~~~++........++",
-                "~~~~~~..........++++....~~~~++++......++",
-                "~~~~~~...........+++++++~~~~.++++.....++",
-                "~~~~~..............++++++~~...+++.....++",
-                "......................+++......++.....++",
-                ".......................+~~............++",
-                ".......................~~~~...........++",
-                "........................~~++...........+",
-                ".....++++...............+++++...........",
-                ".....++++~..............+++++...........",
-                "......+++~~.............++++...........~",
-                ".......++..++++.......................~~",
-                "...........+++++......................~~",
-                "...........++++++.....................~~",
-                "..........~~+++++......................~",
-                ".........~~~~++++..................~~..~");
-        List<String> OvergrownSanctuaryMap = Arrays.asList(
-                "++++.....++++........++++~~~~~.......~~~..........",
-                "++++......++.........++++~~~~.........~...........",
-                "+++..................+++++~~.......+++............",
-                "....................++++++......++++++............",
-                "...................++++........++++++~~...........",
-                "...................+++.........+++..~~~...........",
-                "..................+++..........++...~~~...........",
-                "~~~...........................~~~..~~~~...........",
-                "~~~~............+++..........~~~~~~~~~~...........",
-                "~~~~............+++.........~~~~~~~~~~~~..........",
-                "++~..............+++.......+~~........~~..........",
-                "+++..............+++......+++..........~~.........",
-                "+++..............+++......+++..........~~.........",
-                "~~~..............+++......+++..........~~~........",
-                "~~~~.............+++......+++..........~~~........"
-        );
-        GameMap abxervyerGameMap = new GameMap(groundFactory, abxervyerMap);
+        ForestGameMap abxervyerGameMap = new ForestGameMap(groundFactory, GameMapCollection.abxervyerMap);
         world.addGameMap(abxervyerGameMap);
-        GameMap OvergrownSanctuaryGameMap = new GameMap(groundFactory, OvergrownSanctuaryMap);
-        world.addGameMap(OvergrownSanctuaryGameMap);
+
+        GameMap overGrownSanctuary = new GameMap(groundFactory, GameMapCollection.overGrownSanctuary);
+        world.addGameMap(overGrownSanctuary);
+
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -141,8 +72,8 @@ public class  Application {
                 exception.printStackTrace();
             }
         }
-        abandonedVillageGameMap.at(35,5).addItem(new Runes(50));
-        abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1)));
+
+        abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1,new Random())));
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
 
@@ -154,7 +85,7 @@ public class  Application {
         gateBackToAbandonedVillage.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to Abandoned Village"));
         burialGroundGameMap.at(5,7).setGround(gateBackToAbandonedVillage);
 
-        burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10)));
+        burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10, new Random())));
 
         Gate gateToAncientWoods = new Gate();
         gateToAncientWoods.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the Ancient Woods!"));
@@ -164,27 +95,29 @@ public class  Application {
         gateBackToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1), "Back to Burial Grounds"));
         ancientWoodsGameMap.at(10,5).setGround(gateBackToBurialGround);
 
+        Gate gateToAbxervyerRoom = new Gate();
+        gateToAbxervyerRoom.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(10,11), "to Abxervyer battle field"));
+        ancientWoodsGameMap.at(10,6).setGround(gateBackToBurialGround);
+
         Player player = new Player("The Abstracted One", '@', 150);
 
-        ancientWoodsGameMap.at(30, 5).setGround(new Bushes(new RedWolfSpawner(3,10)));
-        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100)));
-        Gate gateToAbxervyer = new Gate();
-        gateToAbxervyer.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(1,1),"to Abxervyer"));
-        world.addPlayer(player, abxervyerGameMap.at(11, 10));
-        player.addItemToInventory(new Key());
+        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100,new Random())));
+        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100,new Random())));
+        ancientWoodsGameMap.at(27,6).addItem(new Runes(0));
+        world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
-        ancientWoodsGameMap.at(10,10).setGround(gateToAbxervyer);
-        Gate gateToOvergrownSanctuary = new Gate();
-        gateToOvergrownSanctuary.addAllowableAction(new MoveActorAction(OvergrownSanctuaryGameMap.at(10,10),"to overgrown sanctuary"));
-        gateToOvergrownSanctuary.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1),"back to Ancient Woods"));
-        abxervyerGameMap.at(10,10).setGround(gateToOvergrownSanctuary);
-        TwigSpawner twigSpawner = new TwigSpawner(19,9);
-        Bushes twigBushes = new Bushes(twigSpawner);
-        EldenTreeSpawner eldenSpawner = new EldenTreeSpawner(10,2);
-        Hut eldenHut = new Hut(eldenSpawner);
-        OvergrownSanctuaryGameMap.at(5,5).setGround(twigBushes);
-        OvergrownSanctuaryGameMap.at(10,5).setGround(eldenHut);
+        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100,new Random())) );
+        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(30,100,new Random())) );
+        abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(15,100,new Random())) );
+        Abxervyer abxervyer = new Abxervyer();
+        abxervyerGameMap.at(8, 11).addActor(abxervyer);
+        abxervyer.addWeatherMap(abxervyerGameMap);
+        abxervyer.addWeatherMap(ancientWoodsGameMap);
+        abxervyer.addBattleGameMap(abxervyerGameMap);
+        abxervyer.addLeaveGameMap(ancientWoodsGameMap);
+
+        abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.run();
     }
 }

@@ -66,7 +66,6 @@ public abstract class EnemyActor extends Actor {
         super(name, displayChar, hitPoints);
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
-        this.capabilitySet.addCapability(Ability.WALK_ON_VOID);
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = _runeAmount;
     }
@@ -90,7 +89,6 @@ public abstract class EnemyActor extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)

@@ -1,18 +1,15 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.FollowBehavior;
-import game.general.Status;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.items.Runes;
 
 import java.util.Random;
 
-public class EldentreeGuardian extends EnemyActor{
+public class EldentreeGuardian extends FollowingEnemy {
     /**
      * construct for the enemyActor abstract class.
      */
@@ -39,13 +36,5 @@ public class EldentreeGuardian extends EnemyActor{
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();
-    }
-
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(998,new FollowBehavior(otherActor));
-        }
-        return super.allowableActions(otherActor, direction, map);
     }
 }

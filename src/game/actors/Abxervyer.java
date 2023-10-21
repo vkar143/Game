@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehavior;
 import game.extended.ForestGameMap;
+import game.general.Ability;
 import game.general.Status;
 import game.ground.Gate;
 import game.items.Runes;
@@ -55,6 +56,7 @@ public class Abxervyer extends EnemyActor {
     private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
     public Abxervyer(){
         super("Abxervyer", 'Y', HIT_POINTS, COST);
+        addCapability(Ability.WALK_ON_VOID);
     }
     
     /**
@@ -131,7 +133,7 @@ public class Abxervyer extends EnemyActor {
     /**
     * Once defeated, boss leaves a Gate on where it last standed, drops runes, and print message.
     * 
-    * @param actor - The perpentrator
+    * @param actor - The perpetrator
     * @param map - The map of the actor
     * 
     * @return A string containing the result of actor being unconscious

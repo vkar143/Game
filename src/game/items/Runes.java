@@ -7,7 +7,6 @@ import game.actions.ConsumableAction;
 
 /**
  * Runes are dropped by enemies and used to trade with
- *
  * Created by:
  * @author Ewan Lumsden Smith
  * Modified by:

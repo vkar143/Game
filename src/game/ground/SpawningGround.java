@@ -1,5 +1,6 @@
 package game.ground;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -33,14 +34,7 @@ public abstract class SpawningGround extends Ground {
      * @param location takes a location on which to spawn
      */
     public void Spawn(Location location) {
-        for(Exit exit: location.getExits()) {
-            Location _location = exit.getDestination();
-            try{
-                spawner.spawnEnemy(_location);
-                return;
-            } catch (IllegalArgumentException ignored){
-            }
-        }
+        spawner.spawnNewActor(location);
     }
 
     /**
@@ -50,5 +44,9 @@ public abstract class SpawningGround extends Ground {
     @Override
     public void tick(Location location) {
         Spawn(location);
+    }
+
+    public void updateSpawnRateMultiplier(float newMultiplier){
+        this.spawner.updateSpawnRateMultiplier(newMultiplier);
     }
 }

@@ -11,7 +11,7 @@ import game.general.Ability;
  * @version 1.0.0
  * @see Actor
  */
-public abstract class Trader extends Actor {
+public abstract class Trader extends NPC {
 
     /**
      * The constructor of a trader actor that needs a name,

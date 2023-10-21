@@ -1,0 +1,36 @@
+package game.actors;
+
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.behaviours.FollowBehavior;
+import game.general.Status;
+
+public abstract class FollowingEnemy extends EnemyActor{
+    /**
+     * construct for the enemyActor abstract class.
+     *
+     * @param name        sets name
+     * @param displayChar sets display char
+     * @param hitPoints   sets hitPoints
+     * @param _runeAmount sets runeAmount
+     */
+    public FollowingEnemy(String name, char displayChar, int hitPoints, int _runeAmount) {
+        super(name, displayChar, hitPoints, _runeAmount);
+    }
+    /**
+     * Sets the follow behaviour in the object if the player comes within range and then returns allowable actions
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return ActionList of allowable actions for a given other actor.
+     */
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            addBehavior(998,new FollowBehavior(otherActor));
+        }
+        return super.allowableActions(otherActor, direction, map);
+    }
+}

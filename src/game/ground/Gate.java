@@ -36,6 +36,11 @@ public class Gate extends Ground {
         this.unlocked = false;
     }
 
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return false;
+    }
+
     /**
      * allows you to add a movement action
      *

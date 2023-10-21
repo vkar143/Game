@@ -1,11 +1,8 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.FollowBehavior;
-import game.general.Status;
 import game.items.HealingVial;
 import game.items.Runes;
 import java.util.Random;
@@ -18,7 +15,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see EnemyActor
  */
-public class RedWolf extends EnemyActor {
+public class RedWolf extends FollowingEnemy {
     /**
      * Constant for hit points of the actor
      */
@@ -86,21 +83,6 @@ public class RedWolf extends EnemyActor {
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         builder.insert(OFFSET,super.unconscious(actor, map));
         return builder.toString();
-    }
-
-    /**
-     * Sets the follow behaviour in the object if the player comes within range and then returns allowable actions
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList of allowable actions for a given other actor.
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY,new FollowBehavior(otherActor));
-        }
-        return super.allowableActions(otherActor, direction, map);
     }
 
 

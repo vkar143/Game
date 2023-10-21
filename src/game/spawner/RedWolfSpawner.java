@@ -1,8 +1,8 @@
 package game.spawner;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.EnemyActor;
-import game.actors.ForestKeeper;
 import game.actors.RedWolf;
 
 import java.util.Random;
@@ -17,44 +17,13 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class RedWolfSpawner implements Spawner{
-    /**
-     * variable that holds the odds of spawning
-     */
-    private final int odds;
-    /**
-     * variable that holds the bound of spawning
-     */
-    private final int bound;
-    /**
-     * variable that holds the Random class object
-     */
-    private final Random random;
-
-    /**
-     * Constructor for the red wolf spawner
-     * @param odds numerator for the odds
-     * @param bound denominator for the odds
-     */
-    public RedWolfSpawner(int odds, int bound) {
-        this.odds = odds;
-        this.bound = bound;
-        this.random = new Random();
+public class RedWolfSpawner extends Spawner{
+    public RedWolfSpawner(int odds, int bound, Random random) {
+        super(odds, bound, random);
     }
 
-    /**
-     * Spawns the Red Wolf at the param location
-     * @param location location to spawn
-     */
     @Override
-    public void spawnEnemy(Location location) {
-        if (random.nextInt(bound) < odds) {
-            EnemyActor newEnemy = new ForestKeeper();
-            if (location.canActorEnter(newEnemy)) {
-                location.map().addActor(newEnemy, location);
-            } else {
-                throw new IllegalArgumentException("Can't spawn there");
-            }
-        }
+    public Actor getNewActor() {
+        return new RedWolf();
     }
 }

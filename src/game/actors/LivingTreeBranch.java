@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.WanderBehaviour;
+import game.general.Ability;
 
 public class LivingTreeBranch extends EnemyActor{
     /**
@@ -9,6 +10,7 @@ public class LivingTreeBranch extends EnemyActor{
      */
     public LivingTreeBranch() {
         super("Living Tree Branch", '?', 75, 500);
+        addCapability(Ability.WALK_ON_VOID);
         behaviours.remove(997);
     }
 

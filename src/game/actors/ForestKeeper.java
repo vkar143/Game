@@ -1,11 +1,8 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.FollowBehavior;
-import game.general.Status;
 import game.items.HealingVial;
 import game.items.Runes;
 
@@ -19,7 +16,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see EnemyActor
  */
-public class ForestKeeper extends EnemyActor {
+public class ForestKeeper extends FollowingEnemy {
     /**
      * Constant for the Hit points
      */
@@ -82,20 +79,5 @@ public class ForestKeeper extends EnemyActor {
         }
         map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
         return builder.toString();
-    }
-
-    /**
-     * Sets follow behaviour if player is within range of the enemy and then returns actionList
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList of allowableActions
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY,new FollowBehavior(otherActor));
-        }
-        return super.allowableActions(otherActor, direction, map);
     }
 }
