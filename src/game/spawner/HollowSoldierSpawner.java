@@ -18,14 +18,19 @@ import java.util.Random;
  * @see Spawner
  */
 public class HollowSoldierSpawner extends Spawner {
-
+    /**
+     * Construct for the HollowSoldier Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public HollowSoldierSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
 
     /**
-     * Method to spawn enemy checks likelihood then spawns hollow soldier at its location
-     * @param _location
+     * Creates an instance of a HollowSoldier Enemy Actor
+     * @return an Actor instance of HollowSoldier
      */
     @Override
     public Actor getNewActor() {

@@ -18,12 +18,20 @@ import java.util.Random;
  * @see Spawner
  */
 public class RedWolfSpawner extends Spawner{
+    /**
+     * Construct for the Red Wolf Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public RedWolfSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
 
+    /**
+     * Creates a RedWolf Actor
+     * @return RedWolf instance
+     */
     @Override
-    public Actor getNewActor() {
-        return new RedWolf();
-    }
+    public Actor getNewActor() {return new RedWolf();}
 }

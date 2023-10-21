@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -15,10 +16,12 @@ import game.general.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
+import game.items.RefreshingFlask;
 import game.items.Runes;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * abstract class that enemy actors inherit from
@@ -40,34 +43,51 @@ public abstract class EnemyActor extends Actor {
     /**
      * The amount of Runes (currency) an actor or item has
      */
-    private final int runeAmount;
+    protected final int ruinAmount;
     /**
      * The priority of wander behaviour
      */
-    private final int WANDER_BEHAVIOUR_PRIORITY = 999;
+    protected final int WANDER_BEHAVIOUR_PRIORITY = 999;
     /**
      * The priority of attack behaviour
      */
-    private final int ATTACK_BEHAVIOUR_PRIORITY = 997;
+    protected final int ATTACK_BEHAVIOUR_PRIORITY = 800;
     /**
-     * The offset value
+     * the priority for the follow behaviour
      */
-    protected final int OFFSET_VALUE = 0;
-
+    protected final int FOLLOW_BEHAVIOUR_PRIORITY = 900;
+    /**
+     * the odds of ruins being dropped 1/1 currently
+      */
+    protected final float RUIN_DROP_ODDS = 1.0f;
 
     /**
      * construct for the enemyActor abstract class.
      * @param name sets name
      * @param displayChar sets display char
      * @param hitPoints sets hitPoints
-     * @param _runeAmount sets runeAmount
+     * @param runeAmount sets runeAmount
      */
-    public EnemyActor(String name, char displayChar, int hitPoints, int _runeAmount) {
+    public EnemyActor(String name, char displayChar, int hitPoints, int runeAmount) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Status.ENEMY);
-        this.runeAmount = _runeAmount;
+        this.ruinAmount = runeAmount;
+    }
+
+    /**
+     * a method to potentially drop an item
+     * @param location the location the item is being dropped
+     * @param item the item being dropped
+     * @param odds the chance of it dropping
+     * @return A string describing the drop if successful otherwise null.
+     */
+    public void dropItem(Location location, Item item, float odds){
+        Random random = new Random();
+        if(random.nextFloat() < odds){
+            location.addItem(item);
+        }
     }
 
     /**
@@ -98,14 +118,6 @@ public abstract class EnemyActor extends Actor {
     }
 
     /**
-     * Gets the current amount of Runes (currency in the game)
-     * @return The current amount of runes
-     */
-    public int getRuneAmount() {
-        return runeAmount;
-    }
-
-    /**
      * checks for weapons in the other actors inventory and if there are any weapons it returns an attack action for those weapons
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
@@ -120,20 +132,4 @@ public abstract class EnemyActor extends Actor {
         }
         return actions;
     }
-
-    /**
-     * If an enemy actor dies this is what should be executed
-     * @param actor the perpetrator
-     * @param map where the actor fell unconscious
-     * @return A string description of what happened when the enemy actor died
-     */
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        StringBuilder builder = new StringBuilder();
-        map.locationOf(this).addItem(new Runes(getRuneAmount()));
-        builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
-        return builder.toString();
-    }
-
-
 }

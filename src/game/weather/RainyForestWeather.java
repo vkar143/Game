@@ -8,7 +8,10 @@ import game.ground.Bush;
 import game.ground.Hut;
 import game.spawner.ForestKeeperSpawner;
 import game.spawner.RedWolfSpawner;
-    /**
+
+import java.util.Random;
+
+/**
     * Execute effects related to this weather
     * 
     * 
@@ -19,8 +22,8 @@ public class RainyForestWeather implements Weather{
     float REDWOLF_DAMAGE_MULTIPLIER = 1f;
     int FOREST_KEEPER_HEAL_POINT = 10;
 
-    Hut hut = new Hut(new ForestKeeperSpawner(15,100));
-    Bush bush = new Bush(new RedWolfSpawner(3,10));
+    Hut hut = new Hut(new ForestKeeperSpawner(15,100, new Random()));
+    Bush bush = new Bush(new RedWolfSpawner(3,10, new Random()));
     RedWolf redWolf = new RedWolf();
     ForestKeeper forestKeeper = new ForestKeeper();
 

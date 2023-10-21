@@ -10,14 +10,19 @@ import game.actors.RedWolf;
 import java.util.Random;
 
 public class EldenTreeSpawner extends Spawner {
+    /**
+     * Construct for the Eldentree Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public EldenTreeSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
 
     /**
-     * Spawns the Red Wolf at the param location
-     *
-     * @param location location to spawn
+     * Creates an instance of EldenTreeGuardian
+     * @return an instance of the EldentreeGuardian Actor class
      */
     @Override
     public Actor getNewActor() {

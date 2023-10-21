@@ -60,23 +60,27 @@ public class GreatSlamAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
-        AttackAction targetAttack = new AttackAction(target, direction, weaponItem);
-        targetAttack.execute(actor, map);
+        if(actor.getAttribute(BaseActorAttributes.STAMINA) >= STAMINA_DECREASE){
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
+            AttackAction targetAttack = new AttackAction(target, direction, weaponItem);
+            targetAttack.execute(actor, map);
 
-        this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER * 0.5f);
+            this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER * 0.5f);
 
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            Location surroundingLocation = exit.getDestination();
-            if (surroundingLocation.containsAnActor()) {
-                Actor surroundingActor = surroundingLocation.getActor();
-                AttackAction surroundingAttack = new AttackAction(surroundingActor, direction, weaponItem);
-                surroundingAttack.execute(actor, map);
+            for (Exit exit : map.locationOf(actor).getExits()) {
+                Location surroundingLocation = exit.getDestination();
+                if (surroundingLocation.containsAnActor()) {
+                    Actor surroundingActor = surroundingLocation.getActor();
+                    AttackAction surroundingAttack = new AttackAction(surroundingActor, direction, weaponItem);
+                    surroundingAttack.execute(actor, map);
+                }
             }
-        }
 
-        this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER);
-        return "SLAMMING";
+            this.weaponItem.updateDamageMultiplier(DAMAGE_MULTIPLIER);
+            return "SLAMMING";
+        }else{
+            return "Not enough stamina";
+        }
     }
 
     /**

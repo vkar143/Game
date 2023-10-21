@@ -19,13 +19,19 @@ import java.util.Random;
  * @see Spawner
  */
 public class ForestKeeperSpawner extends Spawner{
-
+    /**
+     * Construct for the ForestKeeper Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public ForestKeeperSpawner(int odds, int bound, Random random) {
         super(odds, bound,random);
     }
+
     /**
-     * Method to spawn enemy checks likelihood then spawns forest keeper at its location
-     * @param location
+     * creates a forest Keeper instance
+     * @return an instance of the ForestKeeper Actor class
      */
     @Override
     public Actor getNewActor() {

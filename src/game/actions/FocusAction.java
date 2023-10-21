@@ -54,11 +54,15 @@ public class FocusAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        weaponItem.increaseDamageMultiplier(MULTIPLIER_INCREASE_PERCENTAGE);
-        weaponItem.updateHitRate(FOCUS_HIT_RATE);
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
-        weaponItem.setFocusDuration(FOCUS_DURATION);
-        return "FOCUSING!";
+        if(actor.getAttribute(BaseActorAttributes.STAMINA) >= STAMINA_DECREASE) {
+            weaponItem.increaseDamageMultiplier(MULTIPLIER_INCREASE_PERCENTAGE);
+            weaponItem.updateHitRate(FOCUS_HIT_RATE);
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
+            weaponItem.setFocusDuration(FOCUS_DURATION);
+            return "FOCUSING!";
+        }else{
+            return "Not enough stamina";
+        }
     }
 
     /**

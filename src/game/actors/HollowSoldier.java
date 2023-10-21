@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
@@ -28,7 +29,7 @@ public class HollowSoldier extends EnemyActor {
     /**
      * The runes held by the HollowSoldier
      */
-    private static final int RUNES = 100;
+    private static final int RUINS = 100;
     /**
      * The intrinsic damage the weapon of the HollowSoldier can deal
      */
@@ -38,27 +39,19 @@ public class HollowSoldier extends EnemyActor {
      */
     private final int INTRINSIC_HIT_RATE = 50;
     /**
-     * The bound for the Healing Vial
-     */
-    private final int HEALING_VIAL_BOUND = 10;
-    /**
-     * The bound for the Refreshing Flask
-     */
-    private final int REFRESHING_FLASK_BOUND = 10;
-    /**
      * The chance a healing vial will be dropped
      */
-    private final int HEALING_VIAL_CHANCE = 2;
+    private final float HEALING_VIAL_CHANCE = 0.2f;
     /**
      * The chance a refreshing flask will be dropped
      */
-    private final int REFRESHING_FLASK_CHANCE = 4;
+    private final float REFRESHING_FLASK_CHANCE = 0.4f;
 
     /**
      * Constructor for instantiating a HollowSoldier
      */
     public HollowSoldier() {
-        super("Hollow soldier", '&', HIT_POINTS, RUNES);
+        super("Hollow soldier", '&', HIT_POINTS, RUINS);
     }
 
     /**
@@ -78,21 +71,10 @@ public class HollowSoldier extends EnemyActor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        StringBuilder builder = new StringBuilder();
-        Random healing_vial_random = new Random();
-        int healing_number = healing_vial_random.nextInt(HEALING_VIAL_BOUND);
-        if(healing_number < HEALING_VIAL_CHANCE){
-            map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
-        }
-        Random refreshing_flask_random = new Random();
-        int refreshing_number = refreshing_flask_random.nextInt(REFRESHING_FLASK_BOUND);
-        if(refreshing_number < REFRESHING_FLASK_CHANCE){
-            map.locationOf(this).addItem(new RefreshingFlask());
-            builder.append("\n").append(name).append(" dropped a refreshing flask").append("\n");
-        }
-        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
-        return builder.toString();
-
+        Location location = map.locationOf(this);
+        dropItem(location , new HealingVial(), HEALING_VIAL_CHANCE);
+        dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_CHANCE);
+        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        return super.unconscious(actor, map);
     }
 }

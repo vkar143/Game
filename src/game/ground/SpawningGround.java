@@ -1,7 +1,5 @@
 package game.ground;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.spawner.Spawner;
@@ -18,7 +16,6 @@ public abstract class SpawningGround extends Ground {
      * Variable which holds the Spawner used the Spawning Ground
      */
     protected Spawner spawner;
-
     /**
      * Constructor which takes a displayChar and spawner as a parameter
      * @param displayChar the Display Character of the Spawning Ground
@@ -46,6 +43,10 @@ public abstract class SpawningGround extends Ground {
         Spawn(location);
     }
 
+    /**
+     * updates the SpawnRate for the spawner
+     * @param newMultiplier a float for the new multiplier
+     */
     public void updateSpawnRateMultiplier(float newMultiplier){
         this.spawner.updateSpawnRateMultiplier(newMultiplier);
     }

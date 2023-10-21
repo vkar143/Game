@@ -144,8 +144,6 @@ public class Abxervyer extends EnemyActor {
         Gate gateToAncientWood = new Gate();
         gateToAncientWood.addAllowableAction(new MoveActorAction(leaveGameMap.at(1,1),"to the Ancient Woods!"));
         battleGameMap.at(lastStand.x(), lastStand.y()).setGround(gateToAncientWood);
-        StringBuilder builder = new StringBuilder();
-        builder.insert(OFFSET_VALUE,super.unconscious(actor, map));
-        return builder.toString();
+        return super.unconscious(actor, map);
     }
 }

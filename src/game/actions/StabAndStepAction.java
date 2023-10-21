@@ -63,27 +63,31 @@ public class StabAndStepAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
-        AttackAction stab = new AttackAction(target, direction, weaponItem);
-        stab.execute(actor, map);
+        if(actor.getAttribute(BaseActorAttributes.STAMINA) >= STAMINA_DECREASE) {
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
+            AttackAction stab = new AttackAction(target, direction, weaponItem);
+            stab.execute(actor, map);
 
-        ArrayList<Exit> exitList = new ArrayList<>(map.locationOf(actor).getExits());
+            ArrayList<Exit> exitList = new ArrayList<>(map.locationOf(actor).getExits());
 
-        Iterator<Exit> iterator = exitList.iterator();
-        while (iterator.hasNext()) {
-            Exit exit = iterator.next();
-            Location surroundingLocation = exit.getDestination();
-            if (!surroundingLocation.canActorEnter(actor)) {
-                iterator.remove(); // Remove the current element using the iterator
+            Iterator<Exit> iterator = exitList.iterator();
+            while (iterator.hasNext()) {
+                Exit exit = iterator.next();
+                Location surroundingLocation = exit.getDestination();
+                if (!surroundingLocation.canActorEnter(actor)) {
+                    iterator.remove(); // Remove the current element using the iterator
+                }
             }
+
+            Random random = new Random();
+            Exit chosenExit = exitList.get(random.nextInt(exitList.size()));
+            MoveActorAction step = new MoveActorAction(chosenExit.getDestination(), "safety");
+            step.execute(actor, map);
+
+            return "STABBING AND STEPPING";
+        }else{
+            return "Not enough stamina";
         }
-
-        Random random = new Random();
-        Exit chosenExit = exitList.get(random.nextInt(exitList.size()));
-        MoveActorAction step = new MoveActorAction(chosenExit.getDestination(), "safety");
-        step.execute(actor, map);
-
-        return "STABBING AND STEPPING";
     }
 
     /**

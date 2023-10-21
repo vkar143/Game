@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.Runes;
@@ -23,7 +24,7 @@ public class RedWolf extends FollowingEnemy {
     /**
      * Constant for the amount of runes RedWolf drops
      */
-    private static final int COST = 25;
+    private static final int RUINS = 25;
     /**
      * Constant for the damage the enemy actor deals.
      */
@@ -33,27 +34,16 @@ public class RedWolf extends FollowingEnemy {
      */
     private final int INTRINSIC_HIT_RATE = 80;
     /**
-     * Constant for the Follow Behaviour Priority
-     */
-    private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
-    /**
-     * constant the odds of the item drop
-     */
-    private final int BOUND = 10;
-    /**
      * constant for the odds of the item drop
      */
-    private final int CHANCE = 1;
-    /**
-     * Constant for the position in the string builder to add the super
-     */
-    private final int OFFSET = 1;
+    private final float HEALING_VIAL_DROP_CHANCE = 1.0f;
+
 
     /**
-     * RedWolf constructor
+     * Constructor for the Red Wolf class
      */
     public RedWolf() {
-        super("Red Wolf", 'r',HIT_POINTS, COST);
+        super("Red Wolf", 'r',HIT_POINTS, RUINS);
     }
 
     /**
@@ -73,16 +63,10 @@ public class RedWolf extends FollowingEnemy {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        Random random = new Random();
-        StringBuilder builder = new StringBuilder();
-        int number = random.nextInt(BOUND);
-        if(number < CHANCE){
-            map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
-        }
-        map.locationOf(this).addItem(new Runes(this.getRuneAmount()));
-        builder.insert(OFFSET,super.unconscious(actor, map));
-        return builder.toString();
+        Location location = map.locationOf(this);
+        dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
+        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        return super.unconscious(actor, map);
     }
 
 

@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.Key;
@@ -35,25 +36,13 @@ public class WanderingUndead extends EnemyActor {
      */
     private final int HIT_RATE = 50;
     /**
-     * The bound of the healing vial
-     */
-    private final int HEALING_VIAL_BOUND = 10;
-    /**
-     * The bound of the old key
-     */
-    private final int OLD_KEY_BOUND = 4;
-    /**
      * The chance of a healing vial being dropped
      */
-    private final int HEALING_VIAL_CHANCE = 2;
+    private final float HEALING_VIAL_CHANCE = 0.2f;
     /**
      * The chance of an old key being dropped
      */
-    private final int OLD_KEY_CHANCE = 1;
-    /**
-     * The offset amount
-     */
-    private final int OFFSET = 0;
+    private final float OLD_KEY_CHANCE = 1.0f;
 
     /**
      * Constructor for creating instances of the WanderingUndead
@@ -72,21 +61,11 @@ public class WanderingUndead extends EnemyActor {
     }
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        StringBuilder builder = new StringBuilder();
-        Random healingVialRandom = new Random();
-        int healingVialNumber = healingVialRandom.nextInt(HEALING_VIAL_BOUND);
-        if(healingVialNumber < HEALING_VIAL_CHANCE){
-            map.locationOf(this).addItem(new HealingVial());
-            builder.append("\n").append(name).append(" dropped a healing Vial").append("\n");
-        }
-        Random oldKeyRandom = new Random();
-        int oldKeyNumber = oldKeyRandom.nextInt(OLD_KEY_BOUND);
-        if(oldKeyNumber < OLD_KEY_CHANCE){
-            map.locationOf(this).addItem(new Key());
-            builder.append("\n").append(name).append(" dropped a key");
-        }
-        builder.insert(OFFSET,super.unconscious(actor, map));
-        return builder.toString();
+        Location location = map.locationOf(this);
+        dropItem(location, new HealingVial(), HEALING_VIAL_CHANCE);
+        dropItem(location, new Key(), OLD_KEY_CHANCE);
+        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        return super.unconscious(actor, map);
     }
 }
 

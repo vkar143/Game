@@ -3,7 +3,7 @@ package game.actors;
 import edu.monash.fit2099.engine.actors.Actor;
 
 /**
- * general abstract class that non threatening NPCs can extend from like traveller and the BlackSmith TA recommended.
+ * general abstract class that any nonthreatening NPCs can extend from like traveller and the BlackSmith (TA recommended.
  */
 public abstract class NPC extends Actor {
     /**

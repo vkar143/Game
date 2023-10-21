@@ -17,13 +17,19 @@ import java.util.Random;
  * @see Spawner
  */
 public class WanderingUndeadSpawner extends Spawner {
-
+    /**
+     * Construct for the Wandering Undead Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public WanderingUndeadSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
+
     /**
-     * Spawns the Wandering Undead at the param location
-     * @param location location to spawn
+     * returns an instance of a WanderingUndead
+     * @return an Actor instance of a WanderingUndead
      */
     @Override
     public Actor getNewActor() {

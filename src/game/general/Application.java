@@ -9,19 +9,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Abxervyer;
-import game.actors.Player;
-import game.actors.RedWolf;
-import game.actors.Traveller;
+import game.actors.*;
 import game.extended.ForestGameMap;
 import game.ground.*;
 import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.*;
-import game.spawner.ForestKeeperSpawner;
-import game.spawner.HollowSoldierSpawner;
-import game.spawner.RedWolfSpawner;
-import game.spawner.WanderingUndeadSpawner;
+import game.spawner.*;
 
 import static game.general.GameMapCollection.abandonedVillageMap;
 import static game.general.GameMapCollection.burialGroundMap;
@@ -116,6 +110,9 @@ public class  Application {
         abxervyer.addWeatherMap(ancientWoodsGameMap);
         abxervyer.addBattleGameMap(abxervyerGameMap);
         abxervyer.addLeaveGameMap(ancientWoodsGameMap);
+
+        overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(1,5,new Random())));
+        overGrownSanctuary.at(5,5).setGround(new Bush(new TreeBranchSpawner(9,10,new Random())));
 
         abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.run();

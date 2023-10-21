@@ -6,12 +6,19 @@ import game.actors.LivingTreeBranch;
 import java.util.Random;
 
 public class TreeBranchSpawner extends Spawner{
+    /**
+     * Construct for the Tree Branch Spawner
+     * @param odds odds of spawning
+     * @param bound bound for checking the odds
+     * @param random random generator
+     */
     public TreeBranchSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
+
     /**
-     * Spawns the Red Wolf at the param location
-     * @param location location to spawn
+     * creates a new LivingTreeBranch
+     * @return an instance of the LivingTreeBranch class
      */
     @Override
     public Actor getNewActor() {
