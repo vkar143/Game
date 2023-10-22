@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.general.Ability;
 
-public class Blacksmith extends Actor {
+public class Blacksmith extends NPC {
     /**
      * The constructor of the Actor class.
      *
