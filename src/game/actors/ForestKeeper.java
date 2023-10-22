@@ -14,7 +14,7 @@ import game.items.Runes;
  * @version 1.0.0
  * @see EnemyActor
  */
-public class ForestKeeper extends FollowingEnemy {
+public class ForestKeeper extends ForestEnemy {
     /**
      * Constant for the Hit points
      */

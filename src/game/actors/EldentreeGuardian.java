@@ -14,9 +14,9 @@ import game.items.Runes;
  * Created by:
  * @author Ewan Lumsden-Smith
  * @version 1.0.0
- * @see FollowingEnemy
+ * @see ForestEnemy
  */
-public class EldentreeGuardian extends FollowingEnemy {
+public class EldentreeGuardian extends ForestEnemy {
     /**
      * Constant that stores the max hit points
      */

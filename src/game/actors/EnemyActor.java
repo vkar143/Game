@@ -25,13 +25,12 @@ import java.util.Random;
 
 /**
  * abstract class that enemy actors inherit from
- *
  * Created by:
  * @author Ewan Lumsden-Smith, Phoebe Jiang & Vasi Karabourniotis
  * @version 1.0.0
  * @see Actor
  */
-public abstract class EnemyActor extends Actor {
+public abstract class EnemyActor extends Actor implements Droppable{
     /**
      * A map list of behaviours and their corresponding priorities
      */
@@ -57,7 +56,7 @@ public abstract class EnemyActor extends Actor {
      */
     protected final int FOLLOW_BEHAVIOUR_PRIORITY = 900;
     /**
-     * the odds of ruins being dropped 1/1 currently
+     * the odds of runes being dropped 1/1 currently
       */
     protected final float RUNE_DROP_CHANCE = 1.0f;
 
@@ -81,9 +80,9 @@ public abstract class EnemyActor extends Actor {
      * @param location the location the item is being dropped
      * @param item the item being dropped
      * @param chance the chance of it dropping
-     * @return A string describing the drop if successful otherwise null.
      */
-    public void drop(Location location, Item item, float chance){
+    @Override
+    public void drop(Location location, Item item, float chance) {
         Random random = new Random();
         if(random.nextFloat() < chance){
             location.addItem(item);

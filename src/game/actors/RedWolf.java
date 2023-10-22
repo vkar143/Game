@@ -9,13 +9,12 @@ import game.items.Runes;
 
 /**
  * RedWolf enemy actor class
- *
  * Created by:
  * @author Ewan Lumsden-Smith & Phoebe Jiang
  * @version 1.0.0
  * @see EnemyActor
  */
-public class RedWolf extends FollowingEnemy {
+public class RedWolf extends ForestEnemy {
     /**
      * Constant for hit points of the actor
      */
@@ -36,7 +35,6 @@ public class RedWolf extends FollowingEnemy {
      * constant for the odds of the item drop
      */
     private final float HEALING_VIAL_DROP_CHANCE = 1.0f;
-
 
     /**
      * Constructor for the Red Wolf class
@@ -67,6 +65,4 @@ public class RedWolf extends FollowingEnemy {
         drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
         return super.unconscious(actor, map);
     }
-
-
 }

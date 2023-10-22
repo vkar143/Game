@@ -13,7 +13,7 @@ import game.general.Status;
  * @version 1.0.0
  * @see EnemyActor
  */
-public abstract class FollowingEnemy extends EnemyActor{
+public abstract class ForestEnemy extends EnemyActor{
 
     /**
      * construct for the FollowingEnemy abstract class.
@@ -22,7 +22,7 @@ public abstract class FollowingEnemy extends EnemyActor{
      * @param hitPoints   sets hitPoints
      * @param _runeAmount sets runeAmount
      */
-    public FollowingEnemy(String name, char displayChar, int hitPoints, int _runeAmount) {
+    public ForestEnemy(String name, char displayChar, int hitPoints, int _runeAmount) {
         super(name, displayChar, hitPoints, _runeAmount);
     }
 
