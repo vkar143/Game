@@ -12,10 +12,6 @@ import java.util.Random;
 
 /**
  * hollow soldier extends enemy actor
- */
-/**
- * abstract class that enemy actors inherit from
- *
  * Created by:
  * @author Ewan Lumsden-Smith & Phoebe Jiang
  * @version 1.0.0
@@ -29,29 +25,29 @@ public class HollowSoldier extends EnemyActor {
     /**
      * The runes held by the HollowSoldier
      */
-    private static final int RUINS = 100;
+    private static final int RUNE_AMOUNT = 100;
     /**
      * The intrinsic damage the weapon of the HollowSoldier can deal
      */
-    private final int INTRINSIC_DAMAGE = 50;
+    private final int WEAPON_DAMAGE = 50;
     /**
      * The chance the HollowSoldier can hit the actor
      */
-    private final int INTRINSIC_HIT_RATE = 50;
+    private final int WEAPON_HIT_RATE = 50;
     /**
      * The chance a healing vial will be dropped
      */
-    private final float HEALING_VIAL_CHANCE = 0.2f;
+    private final float HEALING_VIAL_DROP_CHANCE = 0.2f;
     /**
      * The chance a refreshing flask will be dropped
      */
-    private final float REFRESHING_FLASK_CHANCE = 0.4f;
+    private final float REFRESHING_FLASK_DROP_CHANCE = 0.4f;
 
     /**
      * Constructor for instantiating a HollowSoldier
      */
     public HollowSoldier() {
-        super("Hollow soldier", '&', HIT_POINTS, RUINS);
+        super("Hollow soldier", '&', HIT_POINTS, RUNE_AMOUNT);
     }
 
     /**
@@ -60,7 +56,7 @@ public class HollowSoldier extends EnemyActor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Swings at",INTRINSIC_HIT_RATE);
+        return new IntrinsicWeapon(WEAPON_DAMAGE, "Swings at", WEAPON_HIT_RATE);
     }
 
     /**
@@ -72,9 +68,9 @@ public class HollowSoldier extends EnemyActor {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location , new HealingVial(), HEALING_VIAL_CHANCE);
-        dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
+        dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
+        dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
         return super.unconscious(actor, map);
     }
 }

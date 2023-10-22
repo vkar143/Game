@@ -25,15 +25,15 @@ public class ForestKeeper extends FollowingEnemy {
     /**
      * Constant for the number of runes dropped
      */
-    private static final int RUINS = 50;
+    private static final int RUNE_AMOUNT = 50;
     /**
      * Constant for the amount of damage dealt
      */
-    private final int INTRINSIC_DAMAGE = 25;
+    private final int WEAPON_DAMAGE = 25;
     /**
      * Constant for the likelihood of attack landing
      */
-    private final int INTRINSIC_HIT_RATE = 75;
+    private final int WEAPON_HIT_RATE = 75;
     /**
      * The chance of the enemy actor dropping a healing vial
      */
@@ -43,7 +43,7 @@ public class ForestKeeper extends FollowingEnemy {
      * Constructor: sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
     public ForestKeeper() {
-        super("Forest Keeper", '8', HIT_POINTS, RUINS);
+        super("Forest Keeper", '8', HIT_POINTS, RUNE_AMOUNT);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ForestKeeper extends FollowingEnemy {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "swings at", INTRINSIC_HIT_RATE);
+        return new IntrinsicWeapon(WEAPON_DAMAGE, "swings at", WEAPON_HIT_RATE);
     }
 
     /**
@@ -64,8 +64,8 @@ public class ForestKeeper extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(actor);
+        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
         dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }

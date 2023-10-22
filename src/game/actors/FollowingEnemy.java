@@ -7,7 +7,11 @@ import game.behaviours.FollowBehavior;
 import game.general.Status;
 
 /**
- * Abstract class for enemy actors that follow the player
+ * abstract class for EnemyActors that follow the player
+ * Created by:
+ * @author Ewan Lumsden Smith
+ * @version 1.0.0
+ * @see EnemyActor
  */
 public abstract class FollowingEnemy extends EnemyActor{
 

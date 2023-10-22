@@ -25,7 +25,6 @@ import java.util.Random;
 
 /**
  * abstract class that enemy actors inherit from
- *
  * Created by:
  * @author Ewan Lumsden-Smith, Phoebe Jiang & Vasi Karabourniotis
  * @version 1.0.0
@@ -37,13 +36,9 @@ public abstract class EnemyActor extends Actor {
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
     /**
-     * The actor who is the target of the enemy actor
-     */
-    protected Actor target;
-    /**
      * The amount of Runes (currency) an actor or item has
      */
-    protected final int ruinAmount;
+    protected final int runeAmount;
     /**
      * The priority of wander behaviour
      */
@@ -59,7 +54,7 @@ public abstract class EnemyActor extends Actor {
     /**
      * the odds of ruins being dropped 1/1 currently
       */
-    protected final float RUIN_DROP_ODDS = 1.0f;
+    protected final float RUNE_DROP_CHANCE = 1.0f;
 
     /**
      * construct for the enemyActor abstract class.
@@ -73,19 +68,19 @@ public abstract class EnemyActor extends Actor {
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Status.ENEMY);
-        this.ruinAmount = runeAmount;
+        this.runeAmount = runeAmount;
     }
 
     /**
      * a method to potentially drop an item
      * @param location the location the item is being dropped
      * @param item the item being dropped
-     * @param odds the chance of it dropping
+     * @param chance the chance of it dropping
      * @return A string describing the drop if successful otherwise null.
      */
-    public void dropItem(Location location, Item item, float odds){
+    public void dropItem(Location location, Item item, float chance){
         Random random = new Random();
-        if(random.nextFloat() < odds){
+        if(random.nextFloat() < chance){
             location.addItem(item);
         }
     }

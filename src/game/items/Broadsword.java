@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropAction;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
@@ -67,7 +68,6 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
         super("BroadSword", '1', DAMAGE, "Swings at", HIT_RATE);
         this.focusDuration = FOCUS_DURATION;
         this.capabilitySet.addCapability(Ability.ATTACK);
-//        this.capabilitySet.addCapability(Ability.CAN_BE_SOLD);
     }
 
     /**
@@ -165,7 +165,6 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
             actor.deductBalance(buyingAmount);
             return "Your runes were stolen!";
         }
-
     }
 }
 

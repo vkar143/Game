@@ -24,7 +24,7 @@ public class RedWolf extends FollowingEnemy {
     /**
      * Constant for the amount of runes RedWolf drops
      */
-    private static final int RUINS = 25;
+    private static final int RUNE_AMOUNT = 25;
     /**
      * Constant for the damage the enemy actor deals.
      */
@@ -43,7 +43,7 @@ public class RedWolf extends FollowingEnemy {
      * Constructor for the Red Wolf class
      */
     public RedWolf() {
-        super("Red Wolf", 'r',HIT_POINTS, RUINS);
+        super("Red Wolf", 'r',HIT_POINTS, RUNE_AMOUNT);
     }
 
     /**
@@ -64,8 +64,8 @@ public class RedWolf extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
+        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
         dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 

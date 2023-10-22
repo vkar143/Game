@@ -9,7 +9,7 @@ import game.actors.EnemyActor;
 
 
 /**
- * A class that helps spawn actors
+ * An abstract class that helps spawn actors
  * Created by:
  * @author Ewan Lumsden Smith
  * Modified by:

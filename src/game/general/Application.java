@@ -1,7 +1,5 @@
 package game.general;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.MoveActorAction;
@@ -16,9 +14,6 @@ import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.*;
 import game.spawner.*;
-
-import static game.general.GameMapCollection.abandonedVillageMap;
-import static game.general.GameMapCollection.burialGroundMap;
 
 /**
  * The main class to start the game.
@@ -112,7 +107,7 @@ public class  Application {
         abxervyer.addLeaveGameMap(ancientWoodsGameMap);
 
         overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(1,5,new Random())));
-        overGrownSanctuary.at(5,5).setGround(new Bush(new TreeBranchSpawner(9,10,new Random())));
+        overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(9,10,new Random())));
 
         abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.run();

@@ -20,7 +20,7 @@ public class LivingTreeBranch extends EnemyActor{
     /**
      * Constant storing the ruin amount
      */
-    private static final int RUIN_AMOUNT = 500;
+    private static final int RUNE_AMOUNT = 500;
     /**
      * constant storing the hit points
      */
@@ -41,7 +41,7 @@ public class LivingTreeBranch extends EnemyActor{
      * constructor for the LivingTreeBranch EnemyActor class
      */
     public LivingTreeBranch() {
-        super("Living Tree Branch", '?', HIT_POINTS, RUIN_AMOUNT);
+        super("Living Tree Branch", '?', HIT_POINTS, RUNE_AMOUNT);
         addCapability(Ability.WALK_ON_VOID);
         behaviours.remove(WANDER_BEHAVIOUR_PRIORITY);
     }
@@ -56,8 +56,8 @@ public class LivingTreeBranch extends EnemyActor{
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
+        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
         dropItem(location, new BloodBerry(), BLOOD_BERRY_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
         return super.unconscious(actor,map);
     }
 

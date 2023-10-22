@@ -5,14 +5,14 @@ import game.actors.LivingTreeBranch;
 
 import java.util.Random;
 
-public class TreeBranchSpawner extends Spawner{
+public class LivingTreeBranchSpawner extends Spawner{
     /**
      * Construct for the Tree Branch Spawner
      * @param odds odds of spawning
      * @param bound bound for checking the odds
      * @param random random generator
      */
-    public TreeBranchSpawner(int odds, int bound, Random random) {
+    public LivingTreeBranchSpawner(int odds, int bound, Random random) {
         super(odds, bound, random);
     }
 

@@ -26,15 +26,15 @@ public class EldentreeGuardian extends FollowingEnemy {
     /**
      * Constant that stores the amount of ruins
      */
-    private static final int RUINS = 250;
+    private static final int RUNE_AMOUNT = 250;
     /**
      * Constant that stores the weapon hit rate.
      */
-    private final int HIT_RATE = 80;
+    private final int WEAPON_HIT_RATE = 80;
     /**
      * Constant that stores the weapon damage
      */
-    private final int DAMAGE = 50;
+    private final int WEAPON_DAMAGE = 50;
     /**
      * Constant that stores the chance of a healing vial dropping
      */
@@ -48,7 +48,7 @@ public class EldentreeGuardian extends FollowingEnemy {
      * construct for the enemyActor abstract class.
      */
     public EldentreeGuardian() {
-        super("Eldentree Guardian", 'e', HIT_POINTS, RUINS);
+        super("Eldentree Guardian", 'e', HIT_POINTS, RUNE_AMOUNT);
         addCapability(Ability.WALK_ON_VOID);
     }
 
@@ -58,7 +58,7 @@ public class EldentreeGuardian extends FollowingEnemy {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(DAMAGE, "attacks player", HIT_RATE);
+        return new IntrinsicWeapon(WEAPON_DAMAGE, "attacks player", WEAPON_HIT_RATE);
     }
 
     /**
@@ -70,9 +70,9 @@ public class EldentreeGuardian extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
+        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
         dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
         dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }
