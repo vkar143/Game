@@ -8,8 +8,6 @@ import game.items.HealingVial;
 import game.items.Key;
 import game.items.Runes;
 
-import java.util.Random;
-
 /**
  * extends enemy actor the wandering undead is the class of the first enemy in the game
  *
@@ -62,9 +60,9 @@ public class WanderingUndead extends EnemyActor {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location, new HealingVial(), HEALING_VIAL_CHANCE);
-        dropItem(location, new Key(), OLD_KEY_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        drop(location, new HealingVial(), HEALING_VIAL_CHANCE);
+        drop(location, new Key(), OLD_KEY_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }

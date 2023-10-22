@@ -21,7 +21,7 @@ public class BuyAction extends Action {
     /**
      * BuyableItem interface
      */
-    private final Buyable buyItem;
+    private final Buyable buyable;
     /**
      * The amount an item is bought for
      */
@@ -31,12 +31,12 @@ public class BuyAction extends Action {
      * Constructor used for making an instance of BuyAction which needs
      * a description, a buyable item & its cost
      * @param description A String describing the action of buying
-     * @param buyItem An item that can be bought by an Actor
+     * @param buyable An item that can be bought by an Actor
      * @param buyingAmount The amount of money an item costs
      */
-    public BuyAction(String description, Buyable buyItem, int buyingAmount) {
+    public BuyAction(String description, Buyable buyable, int buyingAmount) {
         this.description = description;
-        this.buyItem = buyItem;
+        this.buyable = buyable;
         this.buyingAmount = buyingAmount;
     }
 
@@ -48,7 +48,7 @@ public class BuyAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return actor + " " + buyItem.buyItem(actor, buyingAmount);
+        return actor + " " + buyable.buy(actor, buyingAmount);
     }
 
     /**

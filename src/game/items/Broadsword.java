@@ -138,7 +138,7 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
      * @return A string that describes the result of executing the sell BloodBerry method
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
         return "sells the Broadsword for " + sellingAmount + " runes";
@@ -151,7 +151,7 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
      * @return A string that describes the result of executing the buy Broadsword method
      */
     @Override
-    public String buyItem(Actor actor, int buyingAmount) {
+    public String buy(Actor actor, int buyingAmount) {
         Random random = new Random();
         int chance = random.nextInt(BOUND_BUY_ITEM);
         if (actor.getBalance() < buyingAmount) {

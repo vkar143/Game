@@ -11,10 +11,8 @@ import game.spawner.RedWolfSpawner;
 
 import java.util.Random;
 
-/**
+    /**
     * Execute effects related to this weather
-    * 
-    * 
     */
 public class RainyForestWeather implements Weather{
     float HUT_SPAWN_RATE_MULTIPLIER = 1f;
@@ -36,8 +34,8 @@ public class RainyForestWeather implements Weather{
         ForestGameMap _gameMap = (ForestGameMap) gameMap;
         _gameMap.modifySpawnRate(HUT_SPAWN_RATE_MULTIPLIER, hut);
         _gameMap.modifySpawnRate(BUSH_SPAWN_RATE_MULTIPLIER, bush);
-        _gameMap.modifyEnemyDamagaMultiplier(REDWOLF_DAMAGE_MULTIPLIER, redWolf);
-        _gameMap.healCertainEnemys(FOREST_KEEPER_HEAL_POINT, forestKeeper);
+        _gameMap.modifyEnemyDamageMultiplier(REDWOLF_DAMAGE_MULTIPLIER, redWolf);
+        _gameMap.healCertainEnemies(FOREST_KEEPER_HEAL_POINT, forestKeeper);
     }
     
 }

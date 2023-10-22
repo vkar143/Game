@@ -9,8 +9,6 @@ import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.items.Runes;
 
-import java.util.Random;
-
 /**
  * Class for the EldentreeGuardian enemy
  * Created by:
@@ -26,7 +24,7 @@ public class EldentreeGuardian extends FollowingEnemy {
     /**
      * Constant that stores the amount of ruins
      */
-    private static final int RUINS = 250;
+    private static final int RUNES = 250;
     /**
      * Constant that stores the weapon hit rate.
      */
@@ -48,7 +46,7 @@ public class EldentreeGuardian extends FollowingEnemy {
      * construct for the enemyActor abstract class.
      */
     public EldentreeGuardian() {
-        super("Eldentree Guardian", 'e', HIT_POINTS, RUINS);
+        super("Eldentree Guardian", 'e', HIT_POINTS, RUNES);
         addCapability(Ability.WALK_ON_VOID);
     }
 
@@ -70,9 +68,9 @@ public class EldentreeGuardian extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
-        dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
+        drop(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }

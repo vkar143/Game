@@ -5,10 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
-import game.items.Key;
 import game.items.Runes;
-
-import java.util.Random;
 
 /**
  * class for the Forest Keeper which extends EnemyActor
@@ -25,7 +22,7 @@ public class ForestKeeper extends FollowingEnemy {
     /**
      * Constant for the number of runes dropped
      */
-    private static final int RUINS = 50;
+    private static final int RUNES = 50;
     /**
      * Constant for the amount of damage dealt
      */
@@ -43,7 +40,7 @@ public class ForestKeeper extends FollowingEnemy {
      * Constructor: sets the attributes as well as the behaviours and capabilities on an enemy actor
      */
     public ForestKeeper() {
-        super("Forest Keeper", '8', HIT_POINTS, RUINS);
+        super("Forest Keeper", '8', HIT_POINTS, RUNES);
     }
 
     /**
@@ -64,8 +61,8 @@ public class ForestKeeper extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(actor);
-        dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }

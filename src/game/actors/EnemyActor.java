@@ -7,17 +7,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.behaviours.FollowBehavior;
-import game.general.Ability;
 import game.general.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
-import game.items.RefreshingFlask;
-import game.items.Runes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +38,7 @@ public abstract class EnemyActor extends Actor {
     /**
      * The amount of Runes (currency) an actor or item has
      */
-    protected final int ruinAmount;
+    protected final int runeAmount;
     /**
      * The priority of wander behaviour
      */
@@ -59,7 +54,7 @@ public abstract class EnemyActor extends Actor {
     /**
      * the odds of ruins being dropped 1/1 currently
       */
-    protected final float RUIN_DROP_ODDS = 1.0f;
+    protected final float RUNE_DROP_ODDS = 1.0f;
 
     /**
      * construct for the enemyActor abstract class.
@@ -73,7 +68,7 @@ public abstract class EnemyActor extends Actor {
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Status.ENEMY);
-        this.ruinAmount = runeAmount;
+        this.runeAmount = runeAmount;
     }
 
     /**
@@ -83,7 +78,7 @@ public abstract class EnemyActor extends Actor {
      * @param odds the chance of it dropping
      * @return A string describing the drop if successful otherwise null.
      */
-    public void dropItem(Location location, Item item, float odds){
+    public void drop(Location location, Item item, float odds){
         Random random = new Random();
         if(random.nextFloat() < odds){
             location.addItem(item);

@@ -21,7 +21,7 @@ public class SellAction extends Action {
     /**
      * Sellable interface
      */
-    private final Sellable sellItem;
+    private final Sellable sellable;
     /**
      * The amount the item is sold for
      */
@@ -31,12 +31,12 @@ public class SellAction extends Action {
      * Constructor used for making an instance of SellAction which needs
      * a description, a sellable item & its cost
      * @param description A String describing the action of selling
-     * @param sellItem An item that can be sold by an Actor
+     * @param sellable An item that can be sold by an Actor
      * @param sellingAmount The amount of money an item costs
      */
-    public SellAction(String description, Sellable sellItem, int sellingAmount) {
+    public SellAction(String description, Sellable sellable, int sellingAmount) {
         this.description = description;
-        this.sellItem = sellItem;
+        this.sellable = sellable;
         this.sellingAmount = sellingAmount;
     }
 
@@ -48,7 +48,7 @@ public class SellAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return actor + " " + sellItem.sellItem(actor, sellingAmount);
+        return actor + " " + sellable.sell(actor, sellingAmount);
     }
 
     /**

@@ -20,6 +20,6 @@ public interface Sellable {
      * @param sellingAmount The amount the item will be sold for
      * @return A string that describes the result of executing the sell item method
      */
-    String sellItem (Actor actor, int sellingAmount);
+    String sell(Actor actor, int sellingAmount);
 }
 

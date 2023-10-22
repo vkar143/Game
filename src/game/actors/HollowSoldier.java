@@ -8,8 +8,6 @@ import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.items.Runes;
 
-import java.util.Random;
-
 /**
  * hollow soldier extends enemy actor
  */
@@ -29,7 +27,7 @@ public class HollowSoldier extends EnemyActor {
     /**
      * The runes held by the HollowSoldier
      */
-    private static final int RUINS = 100;
+    private static final int RUNES = 100;
     /**
      * The intrinsic damage the weapon of the HollowSoldier can deal
      */
@@ -51,7 +49,7 @@ public class HollowSoldier extends EnemyActor {
      * Constructor for instantiating a HollowSoldier
      */
     public HollowSoldier() {
-        super("Hollow soldier", '&', HIT_POINTS, RUINS);
+        super("Hollow soldier", '&', HIT_POINTS, RUNES);
     }
 
     /**
@@ -72,9 +70,9 @@ public class HollowSoldier extends EnemyActor {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location , new HealingVial(), HEALING_VIAL_CHANCE);
-        dropItem(location, new RefreshingFlask(), REFRESHING_FLASK_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        drop(location , new HealingVial(), HEALING_VIAL_CHANCE);
+        drop(location, new RefreshingFlask(), REFRESHING_FLASK_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 }

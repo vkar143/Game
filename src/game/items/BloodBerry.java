@@ -84,7 +84,7 @@ public class BloodBerry extends Item implements Consumable, Sellable {
      * @return A string that describes the result of executing the sell BloodBerry method
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
         return "sells the BloodBerry for " + sellingAmount + " runes";

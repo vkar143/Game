@@ -105,7 +105,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
      * @return A string that describes the result of executing the sell Healing Vial method
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         Random random = new Random();
         int chance = random.nextInt(BOUND_SELL_ITEM);
         if (chance < CHANCE_SELL_ITEM) {
@@ -123,7 +123,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
      * @return A string that describes the result of executing the buy Healing Vial method
      */
     @Override
-    public String buyItem(Actor actor, int buyingAmount) {
+    public String buy(Actor actor, int buyingAmount) {
         int chance = random.nextInt(BOUND_BUY_ITEM);
         int increasedAmount = 150;
         if (chance < CHANCE_BUY_ITEM) {

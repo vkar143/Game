@@ -68,7 +68,7 @@ public class GiantHammer extends WeaponItem implements Sellable {
      * @return Returns a string describing the transaction.
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         actor.addBalance(sellingAmount);
         actor.removeItemFromInventory(this);
         return "sells the Giant Hammer for " + sellingAmount + " runes";

@@ -89,7 +89,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
      * @return Returns a string describing the transaction.
      */
     @Override
-    public String buyItem(Actor actor, int buyingAmount) {
+    public String buy(Actor actor, int buyingAmount) {
         Random random = new Random();
         int chance = random.nextInt(BUYING_BOUND);
         if (actor.getBalance() < buyingAmount) {
@@ -119,7 +119,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
      * @return Returns a string describing the transaction.
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         Random random = new Random();
         int chance = random.nextInt(SELLING_BOUND);
 

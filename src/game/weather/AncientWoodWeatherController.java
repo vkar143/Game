@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.extended.ForestGameMap;
 /**
- * Controller Keep track of playturn and manage weather switching.
+ * Controller Keep track of play-turn and manage weather switching.
  */
 public class AncientWoodWeatherController{
     protected int playturnCount = 0;
@@ -36,11 +36,8 @@ public class AncientWoodWeatherController{
         playturnCount++;
     }
 
-
     /**
     * Returns the current weather.
-    * 
-    * 
     * @return The current weather or null if there is
     */
     public Weather currentWeather(){
@@ -49,8 +46,7 @@ public class AncientWoodWeatherController{
     
     /**
     * Processes the weather of the game
-    * 
-    * @param gameMapList - list of gamemap affected
+    * @param gameMapList - list of game map affected
     */
     public void processWeather(ArrayList<ForestGameMap> gameMapList){
         weatherTracker();

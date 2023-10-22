@@ -21,17 +21,17 @@ import game.weather.AncientWoodWeatherController;
  * Boss of Ancient Wood.
  */
 public class Abxervyer extends EnemyActor {
-    /***
+    /**
      * game map where the boss exists
      */
     GameMap battleGameMap;
-    /***
+    /**
      * game map player will go to once boss is defeated
      */
     GameMap leaveGameMap;
     ArrayList<ForestGameMap> weatherMap = new ArrayList<>();
-    /***
-     * Weather controller that allows the enemy to controll weather of the gamemap
+    /**
+     * Weather controller that allows the enemy to control weather of the game map
      */
     AncientWoodWeatherController ancientWoodWeatherController = new AncientWoodWeatherController();
     /**
@@ -58,17 +58,11 @@ public class Abxervyer extends EnemyActor {
         super("Abxervyer", 'Y', HIT_POINTS, COST);
         addCapability(Ability.WALK_ON_VOID);
     }
-    
-    /**
-     * sets the intrinsic weapon of the enemy
-     * @return IntrinsicWeapon
-     */
+
     /**
     * Returns a damage weapon that is capable of attacking.
-    * 
-    * 
     * @return an IntrinsicWeapon that is capable of attacking
-    */
+    *
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(INTRINSIC_DAMAGE, "swings at", INTRINSIC_HIT_RATE);

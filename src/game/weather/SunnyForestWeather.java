@@ -1,23 +1,17 @@
 package game.weather;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.actors.EnemyActor;
 import game.actors.RedWolf;
 import game.extended.ForestGameMap;
 import game.ground.Bush;
 import game.ground.Hut;
-import game.ground.SpawningGround;
 import game.spawner.ForestKeeperSpawner;
 import game.spawner.RedWolfSpawner;
 
     /**
     * Execute effects related to this weather
-    * 
-    * 
     */
 public class SunnyForestWeather implements Weather{
     float HUT_SPAWN_RATE_MULTIPLIER = 2f;
@@ -36,7 +30,7 @@ public class SunnyForestWeather implements Weather{
         ForestGameMap _gameMap = (ForestGameMap) gameMap;
         _gameMap.modifySpawnRate(HUT_SPAWN_RATE_MULTIPLIER, hut);
         _gameMap.modifySpawnRate(BUSH_SPAWN_RATE_MULTIPLIER, bush);
-        _gameMap.modifyEnemyDamagaMultiplier(REDWOLF_DAMAGE_MULTIPLIER, redWolf);
+        _gameMap.modifyEnemyDamageMultiplier(REDWOLF_DAMAGE_MULTIPLIER, redWolf);
     }
 
 

@@ -1,9 +1,6 @@
 package game.general;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -16,9 +13,6 @@ import game.ground.Graveyard;
 import game.ground.Void;
 import game.items.*;
 import game.spawner.*;
-
-import static game.general.GameMapCollection.abandonedVillageMap;
-import static game.general.GameMapCollection.burialGroundMap;
 
 /**
  * The main class to start the game.

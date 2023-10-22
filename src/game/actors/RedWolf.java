@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.Runes;
-import java.util.Random;
 
 /**
  * RedWolf enemy actor class
@@ -24,7 +23,7 @@ public class RedWolf extends FollowingEnemy {
     /**
      * Constant for the amount of runes RedWolf drops
      */
-    private static final int RUINS = 25;
+    private static final int RUNES = 25;
     /**
      * Constant for the damage the enemy actor deals.
      */
@@ -43,7 +42,7 @@ public class RedWolf extends FollowingEnemy {
      * Constructor for the Red Wolf class
      */
     public RedWolf() {
-        super("Red Wolf", 'r',HIT_POINTS, RUINS);
+        super("Red Wolf", 'r',HIT_POINTS, RUNES);
     }
 
     /**
@@ -64,8 +63,8 @@ public class RedWolf extends FollowingEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
-        dropItem(location, new Runes(ruinAmount), RUIN_DROP_ODDS);
+        drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
         return super.unconscious(actor, map);
     }
 
