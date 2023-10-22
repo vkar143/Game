@@ -13,5 +13,5 @@ package game.general;
  * @version 2.0.0
  */
 public enum Ability {
-    UNLOCK, WALK_ON_FLOOR, ATTACK, WALK_ON_VOID, CAN_TRADE
+    UNLOCK, WALK_ON_FLOOR, ATTACK, WALK_ON_VOID, CAN_TRADE, CAN_UPGRADE
 }
