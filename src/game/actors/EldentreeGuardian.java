@@ -70,7 +70,7 @@ public class EldentreeGuardian extends FollowingEnemy {
         Location location = map.locationOf(this);
         drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
         drop(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
-        drop(location, new Runes(runeAmount), RUNE_DROP_ODDS);
+        drop(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
         return super.unconscious(actor, map);
     }
 }
