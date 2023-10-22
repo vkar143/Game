@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.WanderBehaviour;
 import game.general.Ability;
 import game.items.BloodBerry;
 import game.items.Runes;
@@ -56,8 +55,8 @@ public class LivingTreeBranch extends EnemyActor{
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        dropItem(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
-        dropItem(location, new BloodBerry(), BLOOD_BERRY_DROP_CHANCE);
+        drop(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
+        drop(location, new BloodBerry(), BLOOD_BERRY_DROP_CHANCE);
         return super.unconscious(actor,map);
     }
 

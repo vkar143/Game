@@ -19,5 +19,5 @@ public interface Buyable {
      * @param buyingAmount The amount the item will be bought for
      * @return A string that describes the result of executing the buy item method
      */
-    String buyItem (Actor actor, int buyingAmount);
+    String buy(Actor actor, int buyingAmount);
 }

@@ -109,7 +109,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
      * @return A string that describes the result of executing the sell Refreshing Flask method
      */
     @Override
-    public String sellItem(Actor actor, int sellingAmount) {
+    public String sell(Actor actor, int sellingAmount) {
         int chance = random.nextInt(BOUND_SELL_ITEM);
         if (chance < CHANCE_SELL_ITEM){
             actor.removeItemFromInventory(this);
@@ -127,7 +127,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
      * @return A string that describes the result of executing the buy Refreshing Flask method
      */
     @Override
-    public String buyItem(Actor actor, int buyingAmount) {
+    public String buy(Actor actor, int buyingAmount) {
         int chance = random.nextInt(BOUND_BUY_ITEM);
         int discountedAmount = 80;
         if (chance < CHANCE_BUY_ITEM){

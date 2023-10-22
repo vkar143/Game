@@ -25,6 +25,7 @@ import java.util.Random;
 
 /**
  * abstract class that enemy actors inherit from
+ *
  * Created by:
  * @author Ewan Lumsden-Smith, Phoebe Jiang & Vasi Karabourniotis
  * @version 1.0.0
@@ -35,6 +36,10 @@ public abstract class EnemyActor extends Actor {
      * A map list of behaviours and their corresponding priorities
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
+    /**
+     * The actor who is the target of the enemy actor
+     */
+    protected Actor target;
     /**
      * The amount of Runes (currency) an actor or item has
      */
@@ -78,7 +83,7 @@ public abstract class EnemyActor extends Actor {
      * @param chance the chance of it dropping
      * @return A string describing the drop if successful otherwise null.
      */
-    public void dropItem(Location location, Item item, float chance){
+    public void drop(Location location, Item item, float chance){
         Random random = new Random();
         if(random.nextFloat() < chance){
             location.addItem(item);

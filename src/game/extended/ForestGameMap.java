@@ -9,11 +9,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.GroundFactory;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.EnemyActor;
-import game.ground.Bush;
-import game.ground.Hut;
 import game.ground.SpawningGround;
-import game.spawner.RedWolfSpawner;
-/** 
+
+/**
  * @author Zhuojun Zhao
  * GameMap that provides functions necessary for execution
  */
@@ -23,8 +21,6 @@ public class ForestGameMap extends GameMap{
         super(groundFactory, lines);
     }
 
-
-    
     /**
     * Returns an ArrayList of Ground objects that are spawning the specified ground.
     * 
@@ -68,7 +64,7 @@ public class ForestGameMap extends GameMap{
     * 
     * @return an arraylist of locations
     */
-    public ArrayList<Location> getCertainEnemys(EnemyActor enemy) {
+    public ArrayList<Location> getCertainEnemies(EnemyActor enemy) {
         Class<? extends EnemyActor> enemyClass = enemy.getClass();
         ArrayList<Location> locations = new ArrayList<Location>();
         for (int x : widths) {
@@ -89,10 +85,10 @@ public class ForestGameMap extends GameMap{
     * Modifies damage multiplier of enemy.
     * 
     * @param multiplier - Damage multiplier to be applied
-    * @param enemy - EnemyActor who's death is
+    * @param enemy - EnemyActor whose death is
     */
-    public void modifyEnemyDamagaMultiplier(float multiplier, EnemyActor enemy) {
-            ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
+    public void modifyEnemyDamageMultiplier(float multiplier, EnemyActor enemy) {
+            ArrayList<Location> enemyLocations = getCertainEnemies(enemy);
             for(Location location : enemyLocations) { 
                 EnemyActor enemyActor = (EnemyActor)location.getActor();
                 enemyActor.updateDamageMultiplier(multiplier);
@@ -100,13 +96,13 @@ public class ForestGameMap extends GameMap{
         }
 
     /**
-    * Heals all enemys in this location that are able to heal the enemy.
+    * Heals all enemies in this location that are able to heal the enemy.
     * 
     * @param healPoint - the point at which to heal the enemy
     * @param enemy - the enemy to heal
     */
-    public void healCertainEnemys(int healPoint, EnemyActor enemy) {
-        ArrayList<Location> enemyLocations = getCertainEnemys(enemy);
+    public void healCertainEnemies(int healPoint, EnemyActor enemy) {
+        ArrayList<Location> enemyLocations = getCertainEnemies(enemy);
         for(Location location : enemyLocations) { 
             EnemyActor enemyActor = (EnemyActor)location.getActor();
             enemyActor.heal(healPoint);

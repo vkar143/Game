@@ -3,6 +3,9 @@ package game.general;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class for storing all the GameMaps that are created for this application
+ */
 public class GameMapCollection {
     public static List<String> abandonedVillageMap = Arrays.asList(
             "...........................................................",

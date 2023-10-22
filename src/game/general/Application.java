@@ -1,7 +1,6 @@
 package game.general;
 
 import java.util.Random;
-
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
