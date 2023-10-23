@@ -146,7 +146,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
         if (chance < CHANCE_BUY_ITEM) {
             buyingAmount = (buyingAmount * increasedAmount)/100;
         }
-        if(actor.getBalance() > buyingAmount){
+        if(actor.getBalance() >= buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
             return "buys the Healing Vial for " + buyingAmount + " runes";
@@ -156,7 +156,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
     }
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
-        if (actor.getBalance() > upgradeAmount){
+        if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
             this.STAMINA_INCREASE_VALUE *= 8;
             this.upgradableTimes -= 1;

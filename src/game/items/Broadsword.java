@@ -180,7 +180,7 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable, Upgrada
     }
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
-        if (actor.getBalance() > upgradeAmount){
+        if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
             this.DAMAGE += UPGRADE_DAMAGE_INCREASE;
         } else {

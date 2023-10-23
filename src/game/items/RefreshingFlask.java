@@ -147,7 +147,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
         if (chance < CHANCE_BUY_ITEM){
             buyingAmount = (buyingAmount * discountedAmount)/100;
         }
-        if (actor.getBalance() > buyingAmount){
+        if (actor.getBalance() >= buyingAmount){
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
         } else {
@@ -157,7 +157,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
     }
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
-        if (actor.getBalance() > upgradeAmount){
+        if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
             this.STAMINA_INCREASE_VALUE *= 5;
             this.upgradableTimes -= 1;
