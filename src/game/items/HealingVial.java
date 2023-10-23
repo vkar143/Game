@@ -83,7 +83,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ConsumableAction("drink healing vial" ,this));
+        actionlist.add(new ConsumableAction("drinks the Healing Vial" ,this));
         return actionlist;
     }
 

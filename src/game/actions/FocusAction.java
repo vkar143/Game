@@ -76,6 +76,6 @@ public class FocusAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " uses focus with " + weaponItem ;
+        return actor + " focuses with the " + weaponItem ;
     }
 }

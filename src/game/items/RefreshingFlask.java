@@ -84,7 +84,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
     public ActionList allowableActions(Actor owner) {
         ActionList actionlist = new ActionList();
         actionlist.add(super.allowableActions(owner));
-        actionlist.add(new ConsumableAction("drink refreshing flask",this));
+        actionlist.add(new ConsumableAction("drinks the Refreshing Flask",this));
         return actionlist;
     }
 

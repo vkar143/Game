@@ -35,7 +35,7 @@ public class Blacksmith extends NPC {
 
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionList = new ActionList();
-        actionList.add(new ConversationAction("listen to the Blacksmith's monologue", blacksmithConversation));
+        actionList.add(new ConversationAction("listens to the Blacksmith's monologue", blacksmithConversation));
         return actionList;
     }
 
