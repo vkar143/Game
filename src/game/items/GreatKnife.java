@@ -37,7 +37,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgrada
     /**
      * Constant representing the hit rate of the Great Knife.
      */
-    private static int HIT_RATE = 70;
+    private static final int HIT_RATE = 70;
     /**
      * Constant representing the bound of the buyItem method.
      */
@@ -57,7 +57,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgrada
     /**
      * The amount to increase the hit rate if upgraded
      */
-    private final float UPGRADED_HIT_RATE_INCREASE = 1.01f;
+    private final int UPGRADED_HIT_RATE_INCREASE = 101;
     /**
      * Constant representing the cost to upgrade the Great Knife.
      */
@@ -149,11 +149,10 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgrada
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
-            this.HIT_RATE *= UPGRADED_HIT_RATE_INCREASE;
+            this.increaseHitRate(UPGRADED_HIT_RATE_INCREASE/100);
         } else {
             return "cannot afford to upgrade " + this;
         }
-        System.out.println(this.HIT_RATE);
         return "upgrades the Great Knife for " + upgradeAmount + " runes";
     }
 }
