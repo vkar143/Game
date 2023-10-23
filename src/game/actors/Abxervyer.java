@@ -54,6 +54,7 @@ public class Abxervyer extends EnemyActor {
      * Constant for the position in the hash Table for follow behaviour
      */
     private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
+
     public Abxervyer(){
         super("Abxervyer", 'Y', HIT_POINTS, COST);
         addCapability(Ability.WALK_ON_VOID);
@@ -125,7 +126,7 @@ public class Abxervyer extends EnemyActor {
     }
 
     /**
-    * Once defeated, boss leaves a Gate on where it last standed, drops runes, and print message.
+    * Once defeated, boss leaves a Gate on where it last stood, drops runes, and print message.
     * 
     * @param actor - The perpetrator
     * @param map - The map of the actor
@@ -138,6 +139,7 @@ public class Abxervyer extends EnemyActor {
         Gate gateToAncientWood = new Gate();
         gateToAncientWood.addAllowableAction(new MoveActorAction(leaveGameMap.at(1,1),"to the Ancient Woods!"));
         battleGameMap.at(lastStand.x(), lastStand.y()).setGround(gateToAncientWood);
+        actor.hasAttribute(Status.ABXERVYER_DEFEATED);
         return super.unconscious(actor, map);
     }
 }
