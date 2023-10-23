@@ -17,7 +17,6 @@ public interface Buyable {
      * A method that can be personalised for each item that can be bought
      * @param actor The actor which can buy the item
      * @param buyingAmount The amount the item will be bought for
-     * @return A string that describes the result of executing the buy item method
      */
     String buy(Actor actor, int buyingAmount);
 }
