@@ -11,8 +11,7 @@ import game.general.Ability;
 import game.general.Status;
 
 /**
- * Action for the player to use the "Great Slam" skill with the Giant Hammer.
- *
+ * A class that represents the Giant Hammer.
  * Created by:
  * @author Phoebe Jiang
  * @version 1.0.0

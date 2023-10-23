@@ -2,7 +2,6 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
@@ -15,8 +14,7 @@ import game.general.Status;
 import java.util.Random;
 
 /**
- * Action for the player to use the "Great Slam" skill with the Giant Hammer.
- *
+ * A class that represents the Great Knife.
  * Created by:
  * @author Phoebe Jiang
  * @version 1.0.0
@@ -145,6 +143,13 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgrada
             return "sells the Great Knife for " + sellingAmount + " runes";
         }
     }
+    /**
+     * Allows an actor to upgrade the Great Knife.
+     *
+     * @param actor Actor with the Great Knife.
+     * @param upgradeAmount Cost to upgrade the Great Knife.
+     * @return Returns a string describing the transaction.
+     */
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){

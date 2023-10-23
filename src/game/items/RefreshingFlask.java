@@ -155,6 +155,14 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
         }
         return "buys the Refreshing Flask for " + buyingAmount + " runes";
     }
+
+    /**
+     * Allows an actor to upgrade the Refreshing Flask.
+     *
+     * @param actor Actor with the Refreshing Flask.
+     * @param upgradeAmount Cost to upgrade the Refreshing Flask.
+     * @return Returns a string describing the transaction.
+     */
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){

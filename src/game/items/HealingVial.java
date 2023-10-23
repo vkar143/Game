@@ -15,7 +15,6 @@ import java.util.Random;
 
 /**
  * A class that represents the Healing Vial
- *
  * Created by:
  * @author Ewan Lumsden Smith
  * Modified by:
@@ -154,6 +153,14 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
             return  "cannot afford the " + this;
         }
     }
+
+    /**
+     * Allows an actor to upgrade the Healing Vial.
+     *
+     * @param actor Actor with the Healing Vial.
+     * @param upgradeAmount Cost to upgrade the Healing Vial.
+     * @return Returns a string describing the transaction.
+     */
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){

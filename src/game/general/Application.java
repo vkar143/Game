@@ -20,7 +20,7 @@ import game.spawner.*;
  * @author Adrian Kristanto
  * Modified by:
  * @author Phoebe Jiang
- * @author Vasiliki Karabourniotis
+ * @author Vasi Karabourniotis
  * @author Ewan Lumsden Smith
  * @version 2.0.0
  */

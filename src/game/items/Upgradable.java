@@ -2,6 +2,13 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
+/**
+ * A class that represents an interface for upgrading items
+ * Created by:
+ * @author Phoebe
+ * @version 1.0.0
+ */
+
 public interface Upgradable {
     /**
      * A method that can be personalised for each item that can be upgraded
