@@ -50,19 +50,6 @@ public class Traveller extends Trader {
     }
 
     /**
-     * Selects the action that will be performed for the current turn
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return An action that will be executed for the Traveller
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return new DoNothingAction();
-    }
-
-    /**
      * A list of buyable actions that an actor can choose to buy from the Traveller
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor

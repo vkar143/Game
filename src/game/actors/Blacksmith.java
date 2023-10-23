@@ -33,18 +33,6 @@ public class Blacksmith extends NPC {
     }
 
     /**
-     * At each turn, a valid action is performed.
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn.
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return the action the blacksmith will perform.
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return new DoNothingAction();
-    }
-    /**
      * Allows the Blacksmith to have a conversation
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
