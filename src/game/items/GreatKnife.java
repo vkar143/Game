@@ -2,11 +2,13 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.actions.SellAction;
 import game.actions.StabAndStepAction;
+import game.actions.UpgradeAction;
 import game.general.Ability;
 import game.general.Status;
 
@@ -23,7 +25,7 @@ import java.util.Random;
  * @see Buyable
  */
 
-public class GreatKnife extends WeaponItem implements Sellable, Buyable {
+public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgradable {
     /**
      * Constant representing the selling amount of the Great Knife.
      */
@@ -35,7 +37,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
     /**
      * Constant representing the hit rate of the Great Knife.
      */
-    private static final int HIT_RATE = 70;
+    private static int HIT_RATE = 70;
     /**
      * Constant representing the bound of the buyItem method.
      */
@@ -52,7 +54,14 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
      * Constant representing the chance that an actor's runes are stolen.
      */
     private static final int SELLING_CHANCE = 1;
-
+    /**
+     * The amount to increase the hit rate if upgraded
+     */
+    private final float UPGRADED_HIT_RATE_INCREASE = 1.01f;
+    /**
+     * Constant representing the cost to upgrade the Great Knife.
+     */
+    private final int UPGRADE_AMOUNT = 2000;
     /**
      * Constructor for the Great Knife.
      */
@@ -76,7 +85,10 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
             actions.add(new StabAndStepAction(target, location.toString(), this));
         }
         if (target.hasCapability(Ability.CAN_TRADE)) {
-            actions.add(new SellAction("sells the Giant Hammer", this, SELLING_AMOUNT));
+            actions.add(new SellAction("sells the Great Knife", this, SELLING_AMOUNT));
+        }
+        if (target.hasCapability(Ability.CAN_UPGRADE)) {
+            actions.add(new UpgradeAction("upgrades the Great Knife", this, UPGRADE_AMOUNT));
         }
         return actions;
     }
@@ -132,5 +144,16 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable {
             actor.removeItemFromInventory(this);
             return "sells the Great Knife for " + sellingAmount + " runes";
         }
+    }
+    @Override
+    public String upgrade(Actor actor, int upgradeAmount) {
+        if (actor.getBalance() > upgradeAmount){
+            actor.deductBalance(upgradeAmount);
+            this.HIT_RATE *= UPGRADED_HIT_RATE_INCREASE;
+        } else {
+            return "cannot afford to upgrade " + this;
+        }
+        System.out.println(this.HIT_RATE);
+        return "upgrades the Great Knife for " + upgradeAmount + " runes";
     }
 }

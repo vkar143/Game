@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.general.Ability;
 import game.actions.FocusAction;
 import game.general.Status;
@@ -26,12 +27,13 @@ import java.util.Random;
  * @see Buyable
  * @see Sellable
  */
-public class Broadsword extends WeaponItem implements Sellable, Buyable {
+public class Broadsword extends WeaponItem implements Sellable, Buyable, Upgradable {
 
     /**
      * Constant representing the damage dealt by the Broadsword.
+     * Not final as it may change due to upgrades.
      */
-    private static final int DAMAGE = 110;
+    private static int DAMAGE = 110;
     /**
      * Constant representing the hit rate of the Broadsword.
      */
@@ -60,7 +62,14 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
      * The focus duration of the Broadsword.
      */
     private int focusDuration;
-
+    /**
+     * The amount the damage of the Broadsword increases by when upgraded.
+     */
+    private final int UPGRADE_DAMAGE_INCREASE = 10;
+    /**
+     * Constant representing the cost to upgrade the Broadsword.
+     */
+    private final int UPGRADE_AMOUNT = 1000;
     /**
      * A constructor that creates an instance for Broadsword
      */
@@ -116,6 +125,9 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
         if (target.hasCapability(Ability.CAN_TRADE)) {
             actions.add(new SellAction("sells the Broadsword", this, SELLING_AMOUNT));
         }
+        if (target.hasCapability(Ability.CAN_UPGRADE)) {
+            actions.add(new UpgradeAction("upgrades the Broadsword", this, UPGRADE_AMOUNT));
+        }
         return actions;
     }
 
@@ -165,6 +177,16 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable {
             actor.deductBalance(buyingAmount);
             return "Your runes were stolen!";
         }
+    }
+    @Override
+    public String upgrade(Actor actor, int upgradeAmount) {
+        if (actor.getBalance() > upgradeAmount){
+            actor.deductBalance(upgradeAmount);
+            this.DAMAGE += UPGRADE_DAMAGE_INCREASE;
+        } else {
+            return "cannot afford to upgrade " + this;
+        }
+        return "upgrades the Broadsword for " + upgradeAmount + " runes";
     }
 }
 

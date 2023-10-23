@@ -37,6 +37,10 @@ public class FocusAction extends Action {
      * the focus duration of a weapon
      */
     private final int FOCUS_DURATION = 5;
+    /**
+     * The maximum the Broadsword's damage multiplier may be upgraded
+     */
+    private final int MAX_MULTIPLIER_INCREASE = 11;
 
     /**
      * sets the weapon
@@ -55,7 +59,7 @@ public class FocusAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         if(actor.getAttribute(BaseActorAttributes.STAMINA) >= STAMINA_DECREASE) {
-            weaponItem.increaseDamageMultiplier(MULTIPLIER_INCREASE_PERCENTAGE);
+            weaponItem.increaseDamageMultiplier(Math.max(MULTIPLIER_INCREASE_PERCENTAGE, MAX_MULTIPLIER_INCREASE));
             weaponItem.updateHitRate(FOCUS_HIT_RATE);
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, STAMINA_DECREASE);
             weaponItem.setFocusDuration(FOCUS_DURATION);

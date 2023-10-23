@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
+import game.items.*;
 
 /**
  * Class representing the Player.
@@ -56,6 +57,12 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
+        this.addBalance(10000);
+        this.addItemToInventory(new Broadsword());
+        this.addItemToInventory(new HealingVial());
+        this.addItemToInventory(new RefreshingFlask());
+        this.addItemToInventory(new GreatKnife());
+        this.addItemToInventory(new GiantHammer());
     }
 
     /**

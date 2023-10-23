@@ -36,7 +36,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
      * Constant representing the stamina increase value of the Refreshing Flask.
      * Is not final as can be modified if the Refreshing Flask is upgraded.
      */
-    private int STAMINA_INCREASE_VALUE = 30;
+    private int STAMINA_INCREASE_VALUE = 40;
     /**
      * Constant representing the selling amount of the Refreshing Flask.
      */
@@ -58,10 +58,9 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
      */
     private final int CHANCE_BUY_ITEM = 1;
     /**
-     * Constant representing how many times the Refreshing Flask can be updated.
+     * The amount of times the Refreshing Flask can be updated.
      */
-    private final int UPGRADABLE_TIMES = 1;
-
+    private int upgradableTimes = 1;
     /**
      * Constant representing the cost to upgrade the Refreshing Flask.
      */
@@ -111,7 +110,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
         if (target.hasCapability(Ability.CAN_TRADE)) {
             actionList.add(new SellAction("sells the Refreshing Flask", this, SELLING_AMOUNT));
         }
-        if (UPGRADABLE_TIMES > 0 && target.hasCapability(Ability.CAN_UPGRADE)) {
+        if (upgradableTimes > 0 && target.hasCapability(Ability.CAN_UPGRADE)) {
             actionList.add(new UpgradeAction("upgrades the Refreshing Flask", this, UPGRADE_AMOUNT));
         }
         return actionList;
@@ -161,6 +160,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
         if (actor.getBalance() > upgradeAmount){
             actor.deductBalance(upgradeAmount);
             this.STAMINA_INCREASE_VALUE *= 5;
+            this.upgradableTimes -= 1;
         } else {
             return "cannot afford to upgrade " + this;
         }
