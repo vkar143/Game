@@ -64,6 +64,7 @@ public class  Application {
         abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1,new Random())));
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
+        abandonedVillageGameMap.at(31,5).addActor(new Blacksmith());
 
         Gate gateToBurialGround = new Gate();
         gateToBurialGround.addAllowableAction(new MoveActorAction(burialGroundGameMap.at(1,1),"to the Burial Grounds!"));
