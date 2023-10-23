@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.general.Ability;
 
 import java.util.Random;
@@ -26,15 +27,16 @@ import java.util.Random;
  * @see Buyable
  * @see Sellable
  */
-public class RefreshingFlask extends Item implements Consumable, Sellable, Buyable {
+public class RefreshingFlask extends Item implements Consumable, Sellable, Buyable, Upgradable {
     /**
      * Variable that holds the Random class object.
      */
     private Random random;
     /**
      * Constant representing the stamina increase value of the Refreshing Flask.
+     * Is not final as can be modified if the Refreshing Flask is upgraded.
      */
-    private final int STAMINA_INCREASE_VALUE = 40;
+    private int STAMINA_INCREASE_VALUE = 30;
     /**
      * Constant representing the selling amount of the Refreshing Flask.
      */
@@ -55,6 +57,16 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
      * Constant representing the chance that the Refreshing Flask is discounted.
      */
     private final int CHANCE_BUY_ITEM = 1;
+    /**
+     * Constant representing how many times the Refreshing Flask can be updated.
+     */
+    private final int UPGRADABLE_TIMES = 1;
+
+    /**
+     * Constant representing the cost to upgrade the Refreshing Flask.
+     */
+    private final int UPGRADE_AMOUNT = 175;
+
 
     /**
      * A constructor that creates an instance for Refreshing Flask
@@ -99,6 +111,9 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
         if (target.hasCapability(Ability.CAN_TRADE)) {
             actionList.add(new SellAction("sells the Refreshing Flask", this, SELLING_AMOUNT));
         }
+        if (UPGRADABLE_TIMES > 0 && target.hasCapability(Ability.CAN_UPGRADE)) {
+            actionList.add(new UpgradeAction("upgrades the Refreshing Flask", this, UPGRADE_AMOUNT));
+        }
         return actionList;
     }
 
@@ -137,9 +152,19 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Buyab
             actor.deductBalance(buyingAmount);
             actor.addItemToInventory(this);
         } else {
-            return  "cannot afford " + this;
+            return "cannot afford " + this;
         }
         return "buys the Refreshing Flask for " + buyingAmount + " runes";
+    }
+    @Override
+    public String upgrade(Actor actor, int upgradeAmount) {
+        if (actor.getBalance() > upgradeAmount){
+            actor.deductBalance(upgradeAmount);
+            this.STAMINA_INCREASE_VALUE *= 5;
+        } else {
+            return "cannot afford to upgrade " + this;
+        }
+        return "upgrades the Refreshing Flask for " + upgradeAmount + " runes";
     }
 }
 

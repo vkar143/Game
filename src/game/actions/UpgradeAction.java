@@ -7,7 +7,6 @@ import game.items.Upgradable;
 
 /**
  * A class that represents an action that can be used to upgrade an item
- *
  * Created by:
  * @author Phoebe Jiang
  * @version 1.0.0

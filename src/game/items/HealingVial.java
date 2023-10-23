@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.general.Ability;
 
 import java.util.Random;
@@ -26,7 +27,7 @@ import java.util.Random;
  * @see Buyable
  * @see Sellable
  */
-public class HealingVial extends Item implements Consumable, Sellable, Buyable {
+public class HealingVial extends Item implements Consumable, Sellable, Buyable, Upgradable {
     /**
      * variable that holds the Random class object
      */
@@ -51,6 +52,19 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
      * Constant representing the chance the buying price of the Healing Vial is increased.
      */
     private final int CHANCE_BUY_ITEM = 1;
+    /**
+     * Constant representing how many times the Healing Vial can be updated.
+     */
+    private final int UPGRADABLE_TIMES = 1;
+    /**
+     * Constant representing the cost to upgrade the Healing Vial.
+     */
+    private final int UPGRADE_AMOUNT = 250;
+    /**
+     * Constant representing the stamina increase value of the Healing Vial.
+     * Is not final as can be modified if the Healing Vial is upgraded.
+     */
+    private int STAMINA_INCREASE_VALUE = 15;
 
     /**
      * A constructor that creates an instance for Healing Vial
@@ -79,7 +93,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
      */
     @Override
     public void consume(Actor actor) {
-        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH)/5);
+        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, STAMINA_INCREASE_VALUE);
         actor.removeItemFromInventory(this);
     }
 
@@ -94,6 +108,9 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
         ActionList actionList = super.allowableActions(target, location);
         if (target.hasCapability(Ability.CAN_TRADE)) {
             actionList.add(new SellAction("sells the Healing Vial ", this, SELLING_AMOUNT));
+        }
+        if (UPGRADABLE_TIMES > 0 && target.hasCapability(Ability.CAN_UPGRADE)) {
+            actionList.add(new UpgradeAction("upgrades the Healing Vial", this, UPGRADE_AMOUNT));
         }
         return actionList;
     }
@@ -136,5 +153,15 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable {
         } else {
             return  "cannot afford the " + this;
         }
+    }
+    @Override
+    public String upgrade(Actor actor, int upgradeAmount) {
+        if (actor.getBalance() > upgradeAmount){
+            actor.deductBalance(upgradeAmount);
+            this.STAMINA_INCREASE_VALUE *= 8;
+        } else {
+            return "cannot afford to upgrade " + this;
+        }
+        return "upgrades the Healing Vial for " + upgradeAmount + " runes";
     }
 }
