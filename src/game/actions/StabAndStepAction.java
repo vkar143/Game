@@ -75,7 +75,7 @@ public class StabAndStepAction extends Action {
                 Exit exit = iterator.next();
                 Location surroundingLocation = exit.getDestination();
                 if (!surroundingLocation.canActorEnter(actor)) {
-                    iterator.remove(); // Remove the current element using the iterator
+                    iterator.remove();
                 }
             }
 
