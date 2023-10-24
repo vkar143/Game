@@ -93,7 +93,7 @@ public class  Application {
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100,new Random())));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100,new Random())));
         ancientWoodsGameMap.at(27,6).addItem(new Runes(0));
-        //world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
+        world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
         abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100,new Random())) );

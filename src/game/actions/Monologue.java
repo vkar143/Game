@@ -5,21 +5,20 @@ import java.util.List;
 import java.util.Random;
 
 public class Monologue {
-    private List<String> monologueOptions = new ArrayList<>();
 
     public Monologue() {}
 
-    public void addMonologue(String monologue) {
-        monologueOptions.add(monologue);
+    public void addMonologue(List<String> monologueList, String monologue) {
+        monologueList.add(monologue);
     }
 
-    public void removeMonologue(String monologue) {
-        monologueOptions.remove(monologue);
+    public void removeMonologue(List<String> monologueList, String monologue) {
+        monologueList.remove(monologue);
     }
 
-    public String getRandomMonologue() {
+    public String getRandomMonologue(List<String> monologueList) {
         Random random = new Random();
-        int randomDraw = random.nextInt(monologueOptions.size());
-        return monologueOptions.get(randomDraw);
+        int randomDraw = random.nextInt(monologueList.size());
+        return monologueList.get(randomDraw);
     }
 }
