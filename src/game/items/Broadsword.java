@@ -63,7 +63,7 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable, Upgrada
      */
     private int focusDuration;
     /**
-     * The amount the damage of the Broadsword increases by when upgraded.
+     * The amount the damage to the Broadsword increases by when upgraded.
      */
     private final int UPGRADE_DAMAGE_INCREASE = 10;
     /**
@@ -182,7 +182,7 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable, Upgrada
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
-            this.DAMAGE += UPGRADE_DAMAGE_INCREASE;
+            DAMAGE += UPGRADE_DAMAGE_INCREASE;
         } else {
             return "cannot afford to upgrade " + this;
         }

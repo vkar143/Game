@@ -51,7 +51,7 @@ public class Blacksmith extends NPC implements Conversation{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionList = new ActionList();
-        actionList.add(new ConversationAction("listen to the Blacksmith's monologue", this));
+        actionList.add(new ConversationAction("listens to the Blacksmith's monologue", this));
         return actionList;
     }
 
