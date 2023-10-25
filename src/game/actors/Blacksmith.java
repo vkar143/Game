@@ -23,7 +23,13 @@ import java.util.List;
  */
 public class Blacksmith extends NPC implements Conversation{
     private static final int HIT_POINTS = 10;
+    /**
+     * An instance of the Monologue class
+     */
     private final Monologue blacksmithMonologue = new Monologue();
+    /**
+     * An array list of monologue string options
+     */
     private final List<String> monologueBlacksmith = new ArrayList<>();
 
     /**
@@ -48,10 +54,19 @@ public class Blacksmith extends NPC implements Conversation{
         return actionList;
     }
 
+    /**
+     * A getter method to retrieve a random string from the monologueBlacksmith array list
+     * @return A randomly chosen string
+     */
     public String getBlacksmithMonologue() {
         return blacksmithMonologue.getRandomMonologue(monologueBlacksmith);
     }
 
+    /**
+     * This method allows Blacksmith to have unique monologue options
+     * @param actor The actor who can have a conversation
+     * @return A randomly chosen string to be said by the Blacksmith
+     */
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Blacksmith
