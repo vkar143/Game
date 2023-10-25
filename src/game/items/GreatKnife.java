@@ -66,6 +66,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Buyable, Upgrada
     public GreatKnife() {
         super("Great Knife", '>', DAMAGE, "stabs", HIT_RATE);
         this.capabilitySet.addCapability(Ability.ATTACK);
+        this.capabilitySet.addCapability(Ability.HAS_GREAT_KNIFE);
     }
 
     /**

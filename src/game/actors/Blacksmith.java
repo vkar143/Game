@@ -82,7 +82,7 @@ public class Blacksmith extends NPC implements Conversation{
 
         //If actor has a giant hammer add this monologue
         for (Item item : actor.getItemInventory()) {
-            if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
+            if (item.hasCapability(Ability.HAS_GREAT_KNIFE)) {
                 String monologueHasHammer = "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.";
                 blacksmithMonologue.addMonologue(monologueBlacksmith, monologueHasHammer);
             }
