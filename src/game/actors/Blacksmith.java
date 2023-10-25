@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.Conversation;
 import game.actions.ConversationAction;
@@ -70,7 +71,7 @@ public class Blacksmith extends NPC implements Conversation{
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Blacksmith
-        if(this.hasAttribute(Ability.CAN_UPGRADE)){
+        if(this.hasCapability(Ability.CAN_UPGRADE)){
             String monologueRandom1 = "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.";
             blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom1);
             String monologueRandom2 = "It’s dangerous to go alone. Take my creation with you on your adventure!";
@@ -80,9 +81,11 @@ public class Blacksmith extends NPC implements Conversation{
         }
 
         //If actor has a giant hammer add this monologue
-        if(actor.hasAttribute(Ability.HAS_GIANT_HAMMER)){
-            String monologueHasHammer = "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.";
-            blacksmithMonologue.addMonologue(monologueBlacksmith, monologueHasHammer);
+        for (Item item : actor.getItemInventory()) {
+            if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
+                String monologueHasHammer = "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.";
+                blacksmithMonologue.addMonologue(monologueBlacksmith, monologueHasHammer);
+            }
         }
 
         String monologueAbxNotDefeated = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!";
