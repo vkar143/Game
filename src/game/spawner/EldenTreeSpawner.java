@@ -27,6 +27,7 @@ public class EldenTreeSpawner implements Spawner {
             for(Exit exit: location.getExits()){
                 if(exit.getDestination().canActorEnter(newEnemy)){
                     exit.getDestination().addActor(newEnemy);
+                    return;
                 }
             }
         }
@@ -34,7 +35,7 @@ public class EldenTreeSpawner implements Spawner {
 
     @Override
     public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate *= spawnRateMultiplier;
+        this.spawnRate = spawnRateMultiplier;
     }
 }
 

@@ -99,17 +99,20 @@ public class  Application {
         abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
         abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
         abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())) );
-        Abxervyer abxervyer = new Abxervyer();
+
+        Gate defeatedAbxervyerGate = new Gate();
+        defeatedAbxervyerGate.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1),"to the Ancient Woods!"));
+        defeatedAbxervyerGate.addAllowableAction(new MoveActorAction(overGrownSanctuary.at(1,1), "to the overGrown Sanctuary"));
+        Abxervyer abxervyer = new Abxervyer(defeatedAbxervyerGate);
         abxervyerGameMap.at(8, 11).addActor(abxervyer);
         abxervyer.addWeatherMap(abxervyerGameMap);
         abxervyer.addWeatherMap(ancientWoodsGameMap);
         abxervyer.addBattleGameMap(abxervyerGameMap);
-        abxervyer.addLeaveGameMap(ancientWoodsGameMap);
 
         overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(0.2f,new Random())));
         overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(0.9f,new Random())));
 
-        abxervyerGameMap.at(8, 12).addActor(new RedWolf());
+        abxervyerGameMap.at(27, 6).addActor(new RedWolf());
         world.addPlayer(player, abxervyerGameMap.at(28, 6));
         abxervyerGameMap.at(28, 7).addActor(new Blacksmith());
         world.run();

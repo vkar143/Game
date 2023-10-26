@@ -27,7 +27,6 @@ import game.items.*;
  */
 
 public class Player extends Actor {
-    private Location spawnPoint;
     /**
      * The maximum health of the player
      */
@@ -116,22 +115,7 @@ public class Player extends Actor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Punches",INTRINSIC_HIT_RATE);
-    }
-
-    /**
-     * when the player dies it removes them from the map and returns the death message
-     * @param actor the perpetrator
-     * @param map where the actor fell unconscious
-     * @return returns a string describing the death of the player
-     */
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        Location location = map.locationOf(this);
-        location.addItem(new Runes(getBalance()));
-        deductBalance(getBalance());
-        MoveActorAction respawn = new MoveActorAction(spawnPoint, "Respawning");
-        return respawn.execute(this, map);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Punches", INTRINSIC_HIT_RATE);
     }
 
     /**

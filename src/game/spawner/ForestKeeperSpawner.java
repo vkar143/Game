@@ -39,6 +39,7 @@ public class ForestKeeperSpawner implements Spawner{
             for(Exit exit: location.getExits()){
                 if(exit.getDestination().canActorEnter(newEnemy)){
                     exit.getDestination().addActor(newEnemy);
+                    return;
                 }
             }
         }
@@ -46,6 +47,6 @@ public class ForestKeeperSpawner implements Spawner{
 
     @Override
     public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate *= spawnRateMultiplier;
+        this.spawnRate = spawnRateMultiplier;
     }
 }

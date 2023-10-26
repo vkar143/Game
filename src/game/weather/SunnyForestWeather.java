@@ -14,12 +14,12 @@ import game.spawner.RedWolfSpawner;
     * Execute effects related to this weather
     */
 public class SunnyForestWeather implements Weather{
-    float HUT_SPAWN_RATE_MULTIPLIER = 2f;
-    float BUSH_SPAWN_RATE_MULTIPLIER = 1f;
+    float HUT_SPAWN_RATE_MULTIPLIER = 0.3f;
+    float BUSH_SPAWN_RATE_MULTIPLIER = 0.3f;
     float REDWOLF_DAMAGE_MULTIPLIER = 3f;
 
-    Hut hut = new Hut(new ForestKeeperSpawner(15,100, new Random()));
-    Bush bush = new Bush(new RedWolfSpawner(3,10, new Random()));
+    Hut hut = new Hut(new ForestKeeperSpawner(0.15f, new Random()));
+    Bush bush = new Bush(new RedWolfSpawner(0.3f, new Random()));
     RedWolf redWolf = new RedWolf();
     /**
     * Execute effects related to this weather

@@ -3,13 +3,11 @@ package game.spawner;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.RedWolf;
 import game.actors.WanderingUndead;
 
 import java.util.Random;
 /**
  * Spawner for the Hollow Soldier Enemies
- *
  * Created by:
  * @author Ewan Lumsden Smith
  * Modified by:
@@ -37,6 +35,7 @@ public class WanderingUndeadSpawner implements Spawner {
             for(Exit exit: location.getExits()){
                 if(exit.getDestination().canActorEnter(newEnemy)){
                     exit.getDestination().addActor(newEnemy);
+                    return;
                 }
             }
         }
@@ -44,6 +43,6 @@ public class WanderingUndeadSpawner implements Spawner {
 
     @Override
     public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate *= spawnRateMultiplier;
+        this.spawnRate = spawnRateMultiplier;
     }
 }

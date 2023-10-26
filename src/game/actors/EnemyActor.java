@@ -131,4 +131,9 @@ public abstract class EnemyActor extends Actor implements Droppable{
         }
         return actions;
     }
+
+    @Override
+    public String unconscious(GameMap map) {
+        return super.unconscious(map);
+    }
 }

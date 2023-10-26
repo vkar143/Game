@@ -15,13 +15,13 @@ import java.util.Random;
     * Execute effects related to this weather
     */
 public class RainyForestWeather implements Weather{
-    float HUT_SPAWN_RATE_MULTIPLIER = 1f;
-    float BUSH_SPAWN_RATE_MULTIPLIER = 1.5f;
+    float HUT_SPAWN_RATE_MULTIPLIER = 0.15f;
+    float BUSH_SPAWN_RATE_MULTIPLIER = 0.45f;
     float REDWOLF_DAMAGE_MULTIPLIER = 1f;
     int FOREST_KEEPER_HEAL_POINT = 10;
 
-    Hut hut = new Hut(new ForestKeeperSpawner(15,100, new Random()));
-    Bush bush = new Bush(new RedWolfSpawner(3,10, new Random()));
+    Hut hut = new Hut(new ForestKeeperSpawner(0.15f, new Random()));
+    Bush bush = new Bush(new RedWolfSpawner(0.3f, new Random()));
     RedWolf redWolf = new RedWolf();
     ForestKeeper forestKeeper = new ForestKeeper();
 

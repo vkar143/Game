@@ -26,9 +26,9 @@ public class Abxervyer extends EnemyActor {
      */
     GameMap battleGameMap;
     /**
-     * game map player will go to once boss is defeated
+     * the gate that will be opened when the boss is defeated
      */
-    GameMap leaveGameMap;
+    private final Gate lastStandGate;
     ArrayList<ForestGameMap> weatherMap = new ArrayList<>();
     /**
      * Weather controller that allows the enemy to control weather of the game map
@@ -55,9 +55,10 @@ public class Abxervyer extends EnemyActor {
      */
     private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
 
-    public Abxervyer(){
+    public Abxervyer(Gate finalGate){
         super("Abxervyer", 'Y', HIT_POINTS, COST);
         addCapability(Ability.WALK_ON_VOID);
+        this.lastStandGate = finalGate;
     }
 
     /**
@@ -106,17 +107,7 @@ public class Abxervyer extends EnemyActor {
     * 
     * @param map - The GameMap to be
     */
-    public void addLeaveGameMap(GameMap map){
-        leaveGameMap = map;
-    }
-    /**
-     * get actions other actor can perform on it
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return ActionList of allowableActions
-     */
- 
+
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
@@ -136,9 +127,7 @@ public class Abxervyer extends EnemyActor {
     @Override
     public String unconscious(Actor actor, GameMap map){
         Location lastStand = battleGameMap.locationOf(this);
-        Gate gateToAncientWood = new Gate();
-        gateToAncientWood.addAllowableAction(new MoveActorAction(leaveGameMap.at(1,1),"to the Ancient Woods!"));
-        battleGameMap.at(lastStand.x(), lastStand.y()).setGround(gateToAncientWood);
+        battleGameMap.at(lastStand.x(), lastStand.y()).setGround(lastStandGate);
         actor.hasAttribute(Status.ABXERVYER_DEFEATED);
         return super.unconscious(actor, map);
     }
