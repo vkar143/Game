@@ -1,9 +1,11 @@
 package game.spawner;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.HollowSoldier;
 import game.actors.RedWolf;
+import game.actors.WanderingUndead;
 
 import java.util.Random;
 
@@ -17,23 +19,33 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class HollowSoldierSpawner extends Spawner {
+public class HollowSoldierSpawner implements Spawner {
+    private float spawnRate;
+    private final Random random;
     /**
      * Construct for the HollowSoldier Spawner
-     * @param odds odds of spawning
-     * @param bound bound for checking the odds
+     * @param spawnRate for the chance of spawning
      * @param random random generator
      */
-    public HollowSoldierSpawner(int odds, int bound, Random random) {
-        super(odds, bound, random);
+    public HollowSoldierSpawner(float spawnRate, Random random) {
+        this.spawnRate = spawnRate;
+        this.random = random;
     }
 
-    /**
-     * Creates an instance of a HollowSoldier Enemy Actor
-     * @return an Actor instance of HollowSoldier
-     */
     @Override
-    public Actor getNewActor() {
-        return new HollowSoldier();
+    public void spawnNewActor(Location location) {
+        if(random.nextFloat() < spawnRate){
+            Actor newEnemy = new HollowSoldier();
+            for(Exit exit: location.getExits()){
+                if(exit.getDestination().canActorEnter(newEnemy)){
+                    exit.getDestination().addActor(newEnemy);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
+        this.spawnRate *= spawnRateMultiplier;
     }
 }

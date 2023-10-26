@@ -1,9 +1,11 @@
 package game.spawner;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.EnemyActor;
 import game.actors.RedWolf;
+import game.actors.WanderingUndead;
 
 import java.util.Random;
 
@@ -17,21 +19,28 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class RedWolfSpawner extends Spawner{
-    /**
-     * Construct for the Red Wolf Spawner
-     * @param odds odds of spawning
-     * @param bound bound for checking the odds
-     * @param random random generator
-     */
-    public RedWolfSpawner(int odds, int bound, Random random) {
-        super(odds, bound, random);
+public class RedWolfSpawner implements Spawner{
+    private float spawnRate;
+    private final Random random;
+    public RedWolfSpawner(float spawnRate, Random random) {
+        this.spawnRate = spawnRate;
+        this.random = random;
     }
 
-    /**
-     * Creates a RedWolf Actor
-     * @return RedWolf instance
-     */
     @Override
-    public Actor getNewActor() {return new RedWolf();}
+    public void spawnNewActor(Location location) {
+        if(random.nextFloat() < spawnRate){
+            Actor newEnemy = new RedWolf();
+            for(Exit exit: location.getExits()){
+                if(exit.getDestination().canActorEnter(newEnemy)){
+                    exit.getDestination().addActor(newEnemy);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
+        this.spawnRate *= spawnRateMultiplier;
+    }
 }

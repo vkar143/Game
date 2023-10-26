@@ -1,6 +1,7 @@
 package game.spawner;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.RedWolf;
 import game.actors.WanderingUndead;
@@ -16,23 +17,33 @@ import java.util.Random;
  * @version 1.0.0
  * @see Spawner
  */
-public class WanderingUndeadSpawner extends Spawner {
+public class WanderingUndeadSpawner implements Spawner {
+    private float spawnRate;
+    private final Random random;
     /**
      * Construct for the Wandering Undead Spawner
-     * @param odds odds of spawning
-     * @param bound bound for checking the odds
+     * @param spawnRate for the chance of spawning
      * @param random random generator
      */
-    public WanderingUndeadSpawner(int odds, int bound, Random random) {
-        super(odds, bound, random);
+    public WanderingUndeadSpawner(float spawnRate, Random random) {
+        this.spawnRate = spawnRate;
+        this.random = random;
     }
 
-    /**
-     * returns an instance of a WanderingUndead
-     * @return an Actor instance of a WanderingUndead
-     */
     @Override
-    public Actor getNewActor() {
-        return new WanderingUndead();
+    public void spawnNewActor(Location location) {
+        if(random.nextFloat() < spawnRate){
+            Actor newEnemy = new WanderingUndead();
+            for(Exit exit: location.getExits()){
+                if(exit.getDestination().canActorEnter(newEnemy)){
+                    exit.getDestination().addActor(newEnemy);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
+        this.spawnRate *= spawnRateMultiplier;
     }
 }

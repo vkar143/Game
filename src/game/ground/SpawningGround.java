@@ -19,19 +19,11 @@ public abstract class SpawningGround extends Ground {
     /**
      * Constructor which takes a displayChar and spawner as a parameter
      * @param displayChar the Display Character of the Spawning Ground
-     * @param _spawner the Spawner used by the spawning ground
+     * @param spawner the Spawner used by the spawning ground
      */
-    public SpawningGround(char displayChar, Spawner _spawner) {
+    public SpawningGround(char displayChar, Spawner spawner) {
         super(displayChar);
-        this.spawner = _spawner;
-    }
-
-    /**
-     * The Spawn method takes a location as a parameter and attempts to spawn an enemy.
-     * @param location takes a location on which to spawn
-     */
-    public void Spawn(Location location) {
-        spawner.spawnNewActor(location);
+        this.spawner = spawner;
     }
 
     /**
@@ -40,7 +32,7 @@ public abstract class SpawningGround extends Ground {
      */
     @Override
     public void tick(Location location) {
-        Spawn(location);
+        spawner.spawnNewActor(location);
     }
 
     /**

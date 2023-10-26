@@ -2,6 +2,7 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
@@ -9,6 +10,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.general.FancyMessage;
@@ -25,6 +27,7 @@ import game.items.*;
  */
 
 public class Player extends Actor {
+    private Location spawnPoint;
     /**
      * The maximum health of the player
      */
@@ -124,8 +127,11 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        map.removeActor(this);
-        return this + " met their demise at the hands of " + actor + "\n\n" + FancyMessage.YOU_DIED;
+        Location location = map.locationOf(this);
+        location.addItem(new Runes(getBalance()));
+        deductBalance(getBalance());
+        MoveActorAction respawn = new MoveActorAction(spawnPoint, "Respawning");
+        return respawn.execute(this, map);
     }
 
     /**

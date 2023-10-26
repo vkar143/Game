@@ -13,9 +13,9 @@ public class Graveyard extends SpawningGround {
 
     /**
      * Constructor for the Graveyard Class which takes a spawner as a parameter.
-     * @param _spawner the Spawner used by the object
+     * @param spawner the Spawner used by the object
      */
-    public Graveyard(Spawner _spawner) {
-        super('n', _spawner);
+    public Graveyard(Spawner spawner) {
+        super('n', spawner);
     }
 }

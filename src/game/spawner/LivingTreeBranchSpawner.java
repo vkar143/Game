@@ -1,27 +1,40 @@
 package game.spawner;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actors.LivingTreeBranch;
+import game.actors.WanderingUndead;
 
 import java.util.Random;
 
-public class LivingTreeBranchSpawner extends Spawner{
+public class LivingTreeBranchSpawner implements Spawner{
+    private float spawnRate;
+    private final Random random;
     /**
      * Construct for the Tree Branch Spawner
-     * @param odds odds of spawning
-     * @param bound bound for checking the odds
+     * @param spawnRate odds of spawning
      * @param random random generator
      */
-    public LivingTreeBranchSpawner(int odds, int bound, Random random) {
-        super(odds, bound, random);
+    public LivingTreeBranchSpawner(float spawnRate, Random random) {
+        this.spawnRate = spawnRate;
+        this.random = random;
     }
 
-    /**
-     * creates a new LivingTreeBranch
-     * @return an instance of the LivingTreeBranch class
-     */
     @Override
-    public Actor getNewActor() {
-        return new LivingTreeBranch();
+    public void spawnNewActor(Location location) {
+        if(random.nextFloat() < spawnRate){
+            Actor newEnemy = new LivingTreeBranch();
+            for(Exit exit: location.getExits()){
+                if(exit.getDestination().canActorEnter(newEnemy)){
+                    exit.getDestination().addActor(newEnemy);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
+        this.spawnRate *= spawnRateMultiplier;
     }
 }

@@ -61,7 +61,7 @@ public class  Application {
             }
         }
 
-        abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(4,1,new Random())));
+        abandonedVillageGameMap.at(30, 11).setGround(new Graveyard(new WanderingUndeadSpawner(0.25f, new Random())));
         abandonedVillageGameMap.at(10, 10).addItem(new BloodBerry());
         abandonedVillageGameMap.at(27,6).addItem(new Broadsword());
         abandonedVillageGameMap.at(31,5).addActor(new Blacksmith());
@@ -74,7 +74,7 @@ public class  Application {
         gateBackToAbandonedVillage.addAllowableAction(new MoveActorAction(abandonedVillageGameMap.at(1,1), "Back to Abandoned Village"));
         burialGroundGameMap.at(5,7).setGround(gateBackToAbandonedVillage);
 
-        burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(1,10, new Random())));
+        burialGroundGameMap.at(30,11).setGround(new Graveyard(new HollowSoldierSpawner(0.1f, new Random())));
 
         Gate gateToAncientWoods = new Gate();
         gateToAncientWoods.addAllowableAction(new MoveActorAction(ancientWoodsGameMap.at(1,1), "to the Ancient Woods!"));
@@ -90,15 +90,15 @@ public class  Application {
 
         Player player = new Player("The Abstracted One", '@', 150);
 
-        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(30,100,new Random())));
-        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(15,100,new Random())));
+        ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())));
+        ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
         ancientWoodsGameMap.at(27,6).addItem(new Runes(0));
         //world.addPlayer(player, ancientWoodsGameMap.at(28, 6));
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
         abxervyerGameMap.at(1,12).addItem(new GiantHammer());
-        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(30,100,new Random())) );
-        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(30,100,new Random())) );
-        abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(15,100,new Random())) );
+        abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
+        abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
+        abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())) );
         Abxervyer abxervyer = new Abxervyer();
         abxervyerGameMap.at(8, 11).addActor(abxervyer);
         abxervyer.addWeatherMap(abxervyerGameMap);
@@ -106,8 +106,8 @@ public class  Application {
         abxervyer.addBattleGameMap(abxervyerGameMap);
         abxervyer.addLeaveGameMap(ancientWoodsGameMap);
 
-        overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(1,5,new Random())));
-        overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(9,10,new Random())));
+        overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(0.2f,new Random())));
+        overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(0.9f,new Random())));
 
         abxervyerGameMap.at(8, 12).addActor(new RedWolf());
         world.addPlayer(player, abxervyerGameMap.at(28, 6));

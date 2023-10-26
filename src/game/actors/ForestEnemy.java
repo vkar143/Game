@@ -36,7 +36,7 @@ public abstract class ForestEnemy extends EnemyActor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY,new FollowBehavior(otherActor));
+            addBehavior(FOLLOW_BEHAVIOUR_PRIORITY, new FollowBehavior(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
     }

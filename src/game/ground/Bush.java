@@ -13,9 +13,9 @@ public class Bush extends SpawningGround {
 
     /**
      * Constructor which takes a spawner object as a parameter.
-     * @param _spawner The spawner object for this spawning ground
+     * @param spawner The spawner object for this spawning ground
      */
-    public Bush(Spawner _spawner) {
-        super('m', _spawner);
+    public Bush(Spawner spawner) {
+        super('m', spawner);
     }
 }

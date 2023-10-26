@@ -14,9 +14,9 @@ public class Hut extends SpawningGround {
 
     /**
      * constructor takes a spawner as a parameter
-     * @param _spawner The Spawning Object used by the spawning ground
+     * @param spawner The Spawning Object used by the spawning ground
      */
-    public Hut(Spawner _spawner) {
-        super('h', _spawner);
+    public Hut(Spawner spawner) {
+        super('h', spawner);
     }
 }
