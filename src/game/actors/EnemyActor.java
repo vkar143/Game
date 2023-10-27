@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.DieAction;
 import game.behaviours.FollowBehavior;
 import game.general.Ability;
 import game.general.Status;
@@ -109,8 +110,7 @@ public abstract class EnemyActor extends Actor implements Droppable{
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(!(isConscious())){
-            display.print(unconscious(map));
-            return new DoNothingAction();
+            return new DieAction();
         }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);

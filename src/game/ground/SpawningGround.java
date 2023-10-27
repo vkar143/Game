@@ -40,6 +40,6 @@ public abstract class SpawningGround extends Ground {
      * @param newMultiplier a float for the new multiplier
      */
     public void updateSpawnRateMultiplier(float newMultiplier){
-        this.spawner.updateSpawnRateMultiplier(newMultiplier);
+        this.spawner.updateSpawnRate(newMultiplier);
     }
 }

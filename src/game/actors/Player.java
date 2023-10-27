@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DieAction;
 import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.GameManager;
@@ -87,21 +88,24 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            display.println(unconscious(map));
+            unconscious(map);
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }
+
     public void die(GameMap map){
         Location lastStand = map.locationOf(this);
         Runes droppedRunes = new Runes(getBalance());
-        droppedRunes.addCapability(Status.NOT_AFFECTED_BY_RESPAWN);
+        droppedRunes.removeCapability(Status.AFFECTED_BY_RESPAWN);
         lastStand.addItem(droppedRunes);
+        deductBalance(getBalance());
         modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
         modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
         map.removeActor(this);
     }
+
     @Override
     public String unconscious(GameMap map) {
         die(map);

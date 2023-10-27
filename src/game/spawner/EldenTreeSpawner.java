@@ -8,8 +8,14 @@ import game.actors.*;
 import java.util.Random;
 
 public class EldenTreeSpawner implements Spawner {
+    /**
+     * variable for the spawn rate of the spawner
+     */
     private float spawnRate;
-    private Random random;
+    /**
+     * contains the random generator class
+     */
+    private final Random random;
     /**
      * Construct for the Eldentree Guardian Spawner
      * @param spawnRate for the chance of spawning
@@ -20,6 +26,10 @@ public class EldenTreeSpawner implements Spawner {
         this.random = random;
     }
 
+    /**
+     * spawns the elden tree at location
+     * @param location the location of spawning
+     */
     @Override
     public void spawnNewActor(Location location) {
         if(random.nextFloat() < spawnRate){
@@ -33,9 +43,13 @@ public class EldenTreeSpawner implements Spawner {
         }
     }
 
+    /**
+     * sets the new spawn rate for the spawner
+     * @param newSpawnRate the adjusted spawn rate
+     */
     @Override
-    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate = spawnRateMultiplier;
+    public void updateSpawnRate(float newSpawnRate) {
+        this.spawnRate = newSpawnRate;
     }
 }
 

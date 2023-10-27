@@ -1,11 +1,6 @@
 package game.spawner;
 
-import java.util.Random;
-
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.EnemyActor;
 
 
 /**
@@ -18,9 +13,16 @@ import game.actors.EnemyActor;
  * @version 1.0.0
  */
 public interface Spawner {
-
+    /**
+     * class for spawning a new actor
+     * @param location the location of spawning
+     */
     void spawnNewActor(Location location);
 
-    void updateSpawnRateMultiplier(float spawnRateMultiplier);
+    /**
+     * adjusts the spawn rate of the spawner
+     * @param newSpawnRate the adjusted spawn rate
+     */
+    void updateSpawnRate(float newSpawnRate);
 
 }

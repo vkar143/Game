@@ -119,6 +119,14 @@ public class  Application {
         gameManager.initialiseGame();
         while(true){
             world.run();
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+                try {
+                    Thread.sleep(200);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
             gameManager.respawn();
         }
     }

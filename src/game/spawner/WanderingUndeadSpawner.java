@@ -16,8 +16,14 @@ import java.util.Random;
  * @see Spawner
  */
 public class WanderingUndeadSpawner implements Spawner {
+    /**
+     * variable for the spawnrate of the spawner
+     */
     private float spawnRate;
-    private final Random random;
+    /**
+     * contains the random generator class
+     */
+    private final Random RANDOM;
     /**
      * Construct for the Wandering Undead Spawner
      * @param spawnRate for the chance of spawning
@@ -25,12 +31,16 @@ public class WanderingUndeadSpawner implements Spawner {
      */
     public WanderingUndeadSpawner(float spawnRate, Random random) {
         this.spawnRate = spawnRate;
-        this.random = random;
+        this.RANDOM = random;
     }
 
+    /**
+     * spawns the wandering undead at location
+     * @param location the location of spawning
+     */
     @Override
     public void spawnNewActor(Location location) {
-        if(random.nextFloat() < spawnRate){
+        if(RANDOM.nextFloat() < spawnRate){
             Actor newEnemy = new WanderingUndead();
             for(Exit exit: location.getExits()){
                 if(exit.getDestination().canActorEnter(newEnemy)){
@@ -41,8 +51,12 @@ public class WanderingUndeadSpawner implements Spawner {
         }
     }
 
+    /**
+     * sets the new spawn rate for the spawner
+     * @param newSpawnRate the adjusted spawn rate
+     */
     @Override
-    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate = spawnRateMultiplier;
+    public void updateSpawnRate(float newSpawnRate) {
+        this.spawnRate = newSpawnRate;
     }
 }

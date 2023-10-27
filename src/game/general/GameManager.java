@@ -55,8 +55,10 @@ public class GameManager {
 
         GameMap overGrownSanctuary = new GameMap(groundFactory, GameMapCollection.overGrownSanctuary);
         addMap(overGrownSanctuary);
+
         setActors();
         setGrounds();
+        setItems();
     }
 
     public void setActors() {
@@ -79,6 +81,9 @@ public class GameManager {
         ancientWoodsGameMap.at(20, 3).addActor(new Traveller());
     }
 
+    public void setItems(){
+
+    }
     public void setGrounds() {
         GameMap abandonedVillageGameMap = gameMaps.get(0);
         GameMap burialGroundGameMap = gameMaps.get(1);
@@ -91,7 +96,6 @@ public class GameManager {
         abxervyerGameMap.at(7, 8).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
         abxervyerGameMap.at(7, 9).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())) );
         abxervyerGameMap.at(7, 10).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
-
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
         Gate gateToBurialGround = new Gate();
@@ -129,7 +133,7 @@ public class GameManager {
 
                 List<Item> itemsToRemove = new ArrayList<>();
                 for (Item item : currentLocation.getItems()) {
-                    if (!(item.hasCapability(Status.NOT_AFFECTED_BY_RESPAWN))) {
+                    if (item.hasCapability(Status.AFFECTED_BY_RESPAWN)) {
                         itemsToRemove.add(item);
                     }
                 }

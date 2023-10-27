@@ -20,13 +20,23 @@ import java.util.Random;
  * @see Spawner
  */
 public class RedWolfSpawner implements Spawner{
+    /**
+     * variable for the spawnrate of the spawner
+     */
     private float spawnRate;
+    /**
+     * contains the random generator class
+     */
     private final Random random;
     public RedWolfSpawner(float spawnRate, Random random) {
         this.spawnRate = spawnRate;
         this.random = random;
     }
 
+    /**
+     * spawns the redwolf at location
+     * @param location the location of spawning
+     */
     @Override
     public void spawnNewActor(Location location) {
         if(random.nextFloat() < spawnRate){
@@ -40,8 +50,12 @@ public class RedWolfSpawner implements Spawner{
         }
     }
 
+    /**
+     * sets the new spawn rate for the spawner
+     * @param newSpawnRate the adjusted spawn rate
+     */
     @Override
-    public void updateSpawnRateMultiplier(float spawnRateMultiplier) {
-        this.spawnRate = spawnRateMultiplier;
+    public void updateSpawnRate(float newSpawnRate) {
+        this.spawnRate = newSpawnRate;
     }
 }

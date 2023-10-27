@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumableAction;
+import game.general.Status;
 
 /**
  * Runes are dropped by enemies and used to trade with
@@ -27,6 +28,7 @@ public class Runes extends Item implements Consumable{
     public Runes(int amount) {
         super("Runes", '$', true);
         this.amount = amount;
+        addCapability(Status.AFFECTED_BY_RESPAWN);
     }
 
     /**
