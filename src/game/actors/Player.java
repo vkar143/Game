@@ -14,6 +14,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.general.FancyMessage;
+import game.general.GameManager;
 import game.general.Status;
 import game.items.*;
 
@@ -85,20 +86,32 @@ public class Player extends Actor {
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
-        if(!this.isConscious()){
-            for (String line : FancyMessage.YOU_DIED.split("\n")) {
-                new Display().println(line);
-                try {
-                    Thread.sleep(MILLIS);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-            System.exit(EXIT_STATUS);
+        if(!this.isConscious()) {
+            display.println(unconscious(map));
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
+    }
+    public void die(GameMap map){
+        Location lastStand = map.locationOf(this);
+        Runes droppedRunes = new Runes(getBalance());
+        droppedRunes.addCapability(Status.NOT_AFFECTED_BY_RESPAWN);
+        lastStand.addItem(droppedRunes);
+        modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
+        modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
+        map.removeActor(this);
+    }
+    @Override
+    public String unconscious(GameMap map) {
+        die(map);
+        return super.unconscious(map);
+    }
+
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        die(map);
+        return super.unconscious(actor, map);
     }
 
     /**
