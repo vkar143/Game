@@ -31,7 +31,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Actor
  */
-public abstract class EnemyActor extends Actor implements Droppable{
+public abstract class EnemyActor extends Actor {
     /**
      * A map list of behaviours and their corresponding priorities
      */
@@ -82,7 +82,6 @@ public abstract class EnemyActor extends Actor implements Droppable{
      * @param item the item being dropped
      * @param chance the chance of it dropping
      */
-    @Override
     public void drop(Location location, Item item, float chance) {
         Random random = new Random();
         if(random.nextFloat() < chance){
@@ -136,8 +135,4 @@ public abstract class EnemyActor extends Actor implements Droppable{
         return actions;
     }
 
-    @Override
-    public String unconscious(GameMap map) {
-        return super.unconscious(map);
-    }
 }
