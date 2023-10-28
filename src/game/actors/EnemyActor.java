@@ -117,6 +117,12 @@ public abstract class EnemyActor extends Actor implements Droppable{
             if (action != null)
                 return action;
         }
+
+        // do what you want with this, if the actor steps on void this will be executed
+        if(!this.isConscious()){
+            this.unconscious(map);
+        }
+
         return new DoNothingAction();
     }
 
@@ -133,11 +139,7 @@ public abstract class EnemyActor extends Actor implements Droppable{
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction, otherActor.getIntrinsicWeapon()));
         }
-        return actions;
-    }
 
-    @Override
-    public String unconscious(GameMap map) {
-        return super.unconscious(map);
+        return actions;
     }
 }
