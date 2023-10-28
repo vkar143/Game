@@ -1,12 +1,20 @@
 package game.actors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BuyAction;
+import game.actions.Conversation;
+import game.actions.Monologue;
+import game.general.Ability;
+import game.general.Status;
 import game.items.Broadsword;
 import game.items.GreatKnife;
 import game.items.HealingVial;
@@ -20,7 +28,7 @@ import game.items.RefreshingFlask;
  * @version 1.0.0
  * @see Trader
  */
-public class Traveller extends Trader {
+public class Traveller extends Trader implements Conversation{
     /**
      * The amount of hit points the traveller has
      */
@@ -41,6 +49,14 @@ public class Traveller extends Trader {
      * The cost of a Great Knife
      */
     private final int GREAT_KNIFE_COST = 300;
+        /**
+     * An instance of the Monologue class
+     */
+    private final Monologue travellerMonologue = new Monologue();
+    /**
+     * An array list of monologue string options
+     */
+    private final List<String> monologueTraveller = new ArrayList<>();
 
     /**
      * A constructor that creates an instance of Traveller
@@ -65,5 +81,58 @@ public class Traveller extends Trader {
         actionList.add(new BuyAction("buys Great Knife", new GreatKnife(), GREAT_KNIFE_COST));
         return actionList;
     }
+    /**
+     * A getter method to retrieve a random string from the monologueTraveller array list
+     * @return A randomly chosen string
+     */
+    public String getTravellerMonologue() {
+        return travellerMonologue.getRandomMonologue(monologueTraveller);
+    }
+    /**
+     * This method allows isolated traveller to have unique monologue options
+     * @param actor The actor that the traveller can have a conversation with
+     * @return A randomly chosen string to be said by the traveller
+     */
+    @Override
+    public String conversation(Actor actor) {
+        //Add the common monologue lines for Traveller
+        String monologueRandom1 = "Of course, I will never give you up, valuable customer!";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom1);
+        String monologueRandom2 = "I promise I will never let you down with the quality of the items that I sell.";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom2);
+        String monologueRandom3 = "You can always find me here. I'm never gonna run around and desert you, dear customer!";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom3);
+        String monologueRandom4 = "I'm never gonna make you cry with unfair prices.";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom4);
+        String monologueRandom5 = "Trust is essential in this business. I promise I’m never gonna say goodbye to a valuable customer like you.";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom5);
+        String monologueRandom6 = "Don't worry, I’m never gonna tell a lie and hurt you.";
+        travellerMonologue.addMonologue(monologueTraveller, monologueRandom6);
 
+        //If actor has a giant hammer add this monologue
+        for (Item item : actor.getItemInventory()) {
+            if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
+                String monologueHasGHammer = "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.";
+                travellerMonologue.addMonologue(monologueTraveller, monologueHasGHammer);
+            }
+        }
+
+        String monologueAbxNotDefeated = "You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.";
+        //If actor hasn't defeated the Abxervyer add this monologue
+        if(!actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
+            travellerMonologue.addMonologue(monologueTraveller, monologueAbxNotDefeated);
+        }
+
+        String monologueAbxDefeated = "Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.";
+        //If actor has defeated the Abxervyer and still holds giant hammer, add this monologue and remove the not defeated monologue
+        for (Item item : actor.getItemInventory()) {
+            if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
+                if(actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
+                    travellerMonologue.addMonologue(monologueTraveller, monologueAbxDefeated);
+                    travellerMonologue.removeMonologue(monologueTraveller, monologueAbxNotDefeated);
+                }
+            }
+        }
+        return getTravellerMonologue();
+    }
 }
