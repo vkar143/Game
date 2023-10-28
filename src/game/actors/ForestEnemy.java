@@ -38,10 +38,6 @@ public abstract class ForestEnemy extends EnemyActor{
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             addBehavior(FOLLOW_BEHAVIOUR_PRIORITY, new FollowBehavior(otherActor));
         }
-        if(!this.isConscious()){
-            this.unconscious(map);
-        }
         return super.allowableActions(otherActor, direction, map);
     }
-
 }
