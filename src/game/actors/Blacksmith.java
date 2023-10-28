@@ -23,6 +23,9 @@ import java.util.List;
  * @see NPC
  */
 public class Blacksmith extends NPC implements Conversation{
+    /**
+     * Hit points for the Blacksmith
+     */
     private static final int HIT_POINTS = 10;
     /**
      * An instance of the Monologue class
@@ -71,16 +74,14 @@ public class Blacksmith extends NPC implements Conversation{
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Blacksmith
-        if(this.hasCapability(Ability.CAN_UPGRADE)){
-            String monologueRandom1 = "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.";
-            blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom1);
-            String monologueRandom2 = "It’s dangerous to go alone. Take my creation with you on your adventure!";
-            blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom2);
-            String monologueRandom3 = "Ah, it’s you. Let’s get back to make your weapons stronger.";
-            blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom3);
-        }
+        String monologueRandom1 = "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.";
+        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom1);
+        String monologueRandom2 = "It’s dangerous to go alone. Take my creation with you on your adventure!";
+        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom2);
+        String monologueRandom3 = "Ah, it’s you. Let’s get back to make your weapons stronger.";
+        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom3);
 
-        //If actor has a giant hammer add this monologue
+        //If actor has a great knife add this monologue
         for (Item item : actor.getItemInventory()) {
             if (item.hasCapability(Ability.HAS_GREAT_KNIFE)) {
                 String monologueHasGKnife = "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.";
