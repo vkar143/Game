@@ -92,7 +92,6 @@ public class  Application {
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
         ancientWoodsGameMap.at(27,6).addItem(new Runes(0));
-        ancientWoodsGameMap.at(22, 4).addActor(new Blacksmith());
         ancientWoodsGameMap.at(18, 3).addActor(new Traveller());
         ancientWoodsGameMap.at(20, 4).addItem(new GreatKnife());
 
@@ -109,12 +108,10 @@ public class  Application {
         abxervyer.addWeatherMap(abxervyerGameMap);
         abxervyer.addWeatherMap(ancientWoodsGameMap);
         abxervyer.addBattleGameMap(abxervyerGameMap);
-        overGrownSanctuary.at(17,12).setGround(new Graveyard(new HollowSoldierSpawner(0.1f, new Random())));
 
+        overGrownSanctuary.at(17,12).setGround(new Graveyard(new HollowSoldierSpawner(0.1f, new Random())));
         overGrownSanctuary.at(10,10).setGround(new Hut(new EldenTreeSpawner(0.2f,new Random())));
         overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(0.9f,new Random())));
-        player.addItemToInventory(new Key());
-        abxervyerGameMap.at(29, 6).addActor(new RedWolf());
         world.addPlayer(player, abandonedVillageGameMap.at(29, 5));
         world.run();
     }
