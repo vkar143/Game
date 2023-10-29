@@ -136,7 +136,7 @@ public class Abxervyer extends EnemyActor {
     public String unconscious(Actor actor, GameMap map){
         Location lastStand = battleGameMap.locationOf(this);
         battleGameMap.at(lastStand.x(), lastStand.y()).setGround(lastStandGate);
-        actor.hasAttribute(Status.ABXERVYER_DEFEATED);
+        actor.addCapability(Status.ABXERVYER_DEFEATED);
         return super.unconscious(actor, map);
     }
 }

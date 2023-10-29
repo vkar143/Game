@@ -91,13 +91,13 @@ public class Blacksmith extends NPC implements Conversation{
 
         String monologueAbxNotDefeated = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!";
         //If actor hasn't defeated the Abxervyer add this monologue
-        if(!actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
+        if(!actor.hasCapability(Status.ABXERVYER_DEFEATED)){
             blacksmithMonologue.addMonologue(monologueBlacksmith, monologueAbxNotDefeated);
         }
 
         String monologueAbxDefeated = "Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.";
         //If actor has defeated the Abxervyer add this monologue and remove the not defeated monologue
-        if(actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
+        if(actor.hasCapability(Status.ABXERVYER_DEFEATED)){
             blacksmithMonologue.addMonologue(monologueBlacksmith, monologueAbxDefeated);
             blacksmithMonologue.removeMonologue(monologueBlacksmith, monologueAbxNotDefeated);
         }
