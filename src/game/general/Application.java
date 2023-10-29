@@ -116,7 +116,6 @@ public class  Application {
         player.addItemToInventory(new Key());
         abxervyerGameMap.at(29, 6).addActor(new RedWolf());
         world.addPlayer(player, abandonedVillageGameMap.at(29, 5));
-        abxervyerGameMap.at(28, 7).addActor(new Blacksmith());
         world.run();
     }
 }
