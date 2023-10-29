@@ -22,7 +22,7 @@ public class Gate extends Ground {
     /**
      * Variable which holds the action that is used by this class
      */
-    private ArrayList<Action> actions = new ArrayList<>();
+    private final ArrayList<Action> actions = new ArrayList<>();
     /**
      * Variable that stores whether the gate has been opened or not
      */
