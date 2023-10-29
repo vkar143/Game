@@ -112,19 +112,6 @@ public class Traveller extends Trader implements Conversation{
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Traveller
-//        String monologueRandom1 = "Of course, I will never give you up, valuable customer!";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom1);
-//        String monologueRandom2 = "I promise I will never let you down with the quality of the items that I sell.";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom2);
-//        String monologueRandom3 = "You can always find me here. I'm never gonna run around and desert you, dear customer!";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom3);
-//        String monologueRandom4 = "I'm never gonna make you cry with unfair prices.";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom4);
-//        String monologueRandom5 = "Trust is essential in this business. I promise I’m never gonna say goodbye to a valuable customer like you.";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom5);
-//        String monologueRandom6 = "Don't worry, I’m never gonna tell a lie and hurt you.";
-//        travellerMonologue.addMonologue(monologueTraveller, monologueRandom6);
-
         for(String monologue : this.travellerStrings) {
             travellerMonologue.addMonologue(monologueTraveller, monologue);
         }
