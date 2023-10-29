@@ -11,6 +11,7 @@ import game.general.Ability;
 import game.general.Status;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,7 +36,14 @@ public class Blacksmith extends NPC implements Conversation{
      * An array list of monologue string options
      */
     private final List<String> monologueBlacksmith = new ArrayList<>();
-
+    /**
+     * An array list of the default strings
+     */
+    private final List<String> blacksmithRandomMonologue = new ArrayList<>(Arrays.asList(
+            "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.",
+            "It’s dangerous to go alone. Take my creation with you on your adventure!",
+            "Ah, it’s you. Let’s get back to make your weapons stronger."
+    ));
     /**
      * The constructor of the Actor class.
      */
@@ -74,12 +82,9 @@ public class Blacksmith extends NPC implements Conversation{
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Blacksmith
-        String monologueRandom1 = "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.";
-        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom1);
-        String monologueRandom2 = "It’s dangerous to go alone. Take my creation with you on your adventure!";
-        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom2);
-        String monologueRandom3 = "Ah, it’s you. Let’s get back to make your weapons stronger.";
-        blacksmithMonologue.addMonologue(monologueBlacksmith, monologueRandom3);
+        for(String monologue : this.blacksmithRandomMonologue) {
+            blacksmithMonologue.addMonologue(monologueBlacksmith, monologue);
+        }
 
         //If actor has a great knife add this monologue
         for (Item item : actor.getItemInventory()) {
