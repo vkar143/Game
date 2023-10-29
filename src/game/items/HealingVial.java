@@ -63,7 +63,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
      * Constant representing the stamina increase value of the Healing Vial.
      * Is not final as can be modified if the Healing Vial is upgraded.
      */
-    private int STAMINA_INCREASE_VALUE = 20;
+    private int HEALTH_INCREASE_VALUE = 15;
 
     /**
      * A constructor that creates an instance for Healing Vial
@@ -92,7 +92,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
      */
     @Override
     public void consume(Actor actor) {
-        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, STAMINA_INCREASE_VALUE);
+        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HEALTH_INCREASE_VALUE);
         actor.removeItemFromInventory(this);
     }
 
@@ -165,7 +165,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Buyable, 
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){
             actor.deductBalance(upgradeAmount);
-            this.STAMINA_INCREASE_VALUE *= 8;
+            this.HEALTH_INCREASE_VALUE *= 8;
             this.upgradableTimes -= 1;
         } else {
             return "cannot afford to upgrade " + this;

@@ -116,14 +116,6 @@ public class Traveller extends Trader implements Conversation{
             travellerMonologue.addMonologue(monologueTraveller, monologue);
         }
 
-        //If actor has a giant hammer add this monologue
-        for (Item item : actor.getItemInventory()) {
-            if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
-                String monologueHasGHammer = "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.";
-                travellerMonologue.addMonologue(monologueTraveller, monologueHasGHammer);
-            }
-        }
-
         String monologueAbxNotDefeated = "You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.";
         //If actor hasn't defeated the Abxervyer add this monologue
         if(!actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
@@ -131,10 +123,13 @@ public class Traveller extends Trader implements Conversation{
         }
 
         String monologueAbxDefeated = "Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.";
-        //If actor has defeated the Abxervyer and still holds giant hammer, add this monologue and remove the not defeated monologue
         for (Item item : actor.getItemInventory()) {
             if (item.hasCapability(Ability.HAS_GIANT_HAMMER)) {
+                //If actor has a giant hammer add this monologue
+                String monologueHasGHammer = "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.";
+                travellerMonologue.addMonologue(monologueTraveller, monologueHasGHammer);
                 if(actor.hasAttribute(Status.ABXERVYER_DEFEATED)){
+                    //If actor has defeated the Abxervyer and still holds giant hammer, add this monologue and remove the not defeated monologue
                     travellerMonologue.addMonologue(monologueTraveller, monologueAbxDefeated);
                     travellerMonologue.removeMonologue(monologueTraveller, monologueAbxNotDefeated);
                 }
