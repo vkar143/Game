@@ -65,7 +65,7 @@ public class Traveller extends Trader implements Conversation{
     /**
      * An array list of default string options
      */
-    private final List<String> travellerStrings = new ArrayList<>(Arrays.asList(
+    private final List<String> travellerRandomStrings = new ArrayList<>(Arrays.asList(
             "Of course, I will never give you up, valuable customer!",
             "I promise I will never let you down with the quality of the items that I sell.",
             "You can always find me here. I'm never gonna run around and desert you, dear customer!",
@@ -112,7 +112,7 @@ public class Traveller extends Trader implements Conversation{
     @Override
     public String conversation(Actor actor) {
         //Add the common monologue lines for Traveller
-        for(String monologue : this.travellerStrings) {
+        for(String monologue : this.travellerRandomStrings) {
             travellerMonologue.addMonologue(monologueTraveller, monologue);
         }
 
