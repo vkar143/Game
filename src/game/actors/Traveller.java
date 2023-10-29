@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BuyAction;
 import game.actions.Conversation;
+import game.actions.ConversationAction;
 import game.actions.Monologue;
 import game.general.Ability;
 import game.general.Status;
@@ -25,6 +26,8 @@ import game.items.RefreshingFlask;
  *
  * Created by:
  * @author Vasi Karabourniotis
+ * modified by:
+ * @author Zhuojun Zhao
  * @version 1.0.0
  * @see Trader
  */
@@ -79,6 +82,7 @@ public class Traveller extends Trader implements Conversation{
         actionList.add(new BuyAction("buys Refreshing Flask", new RefreshingFlask(), REFRESHING_FLASK_COST));
         actionList.add(new BuyAction("buys Healing Vial", new HealingVial(), HEALING_VIAL_COST));
         actionList.add(new BuyAction("buys Great Knife", new GreatKnife(), GREAT_KNIFE_COST));
+        actionList.add(new ConversationAction("listens to the Traveller's monologue", this));
         return actionList;
     }
     /**
