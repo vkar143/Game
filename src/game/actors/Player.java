@@ -108,7 +108,7 @@ public class Player extends Actor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(10000, "Punches", 100);
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Punches", INTRINSIC_HIT_RATE);
     }
 
     /**

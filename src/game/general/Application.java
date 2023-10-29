@@ -87,7 +87,7 @@ public class  Application {
         gateToAbxervyerRoom.addAllowableAction(new MoveActorAction(abxervyerGameMap.at(10,11), "to Abxervyer battle field"));
         ancientWoodsGameMap.at(10,6).setGround(gateBackToBurialGround);
 
-        Player player = new Player("The Abstracted One", '@', 2000);
+        Player player = new Player("The Abstracted One", '@', 150);
 
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
@@ -115,7 +115,7 @@ public class  Application {
         overGrownSanctuary.at(5,5).setGround(new Bush(new LivingTreeBranchSpawner(0.9f,new Random())));
         player.addItemToInventory(new Key());
         abxervyerGameMap.at(29, 6).addActor(new RedWolf());
-        world.addPlayer(player, abandonedVillageGameMap.at(26, 8));
+        world.addPlayer(player, abandonedVillageGameMap.at(29, 5));
         abxervyerGameMap.at(28, 7).addActor(new Blacksmith());
         world.run();
     }
