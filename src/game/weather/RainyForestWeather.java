@@ -11,9 +11,11 @@ import game.spawner.RedWolfSpawner;
 
 import java.util.Random;
 
-    /**
-    * Execute effects related to this weather
-    */
+/**
+* Execute effects related to this weather
+ * Created by:
+ * @author Zhuojun Zhao
+*/
 public class RainyForestWeather implements Weather{
     float HUT_SPAWN_RATE_MULTIPLIER = 0.15f;
     float BUSH_SPAWN_RATE_MULTIPLIER = 0.45f;

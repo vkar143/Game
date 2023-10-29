@@ -8,7 +8,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
- * general abstract class that any nonthreatening NPCs can extend from like traveller and the BlackSmith (TA recommended.
+ * general abstract class that any nonthreatening NPCs can extend from like traveller and the BlackSmith
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * Modified by:
+ * @author Phoebe Jiang
+ * @version 1.0.0
+ * @see Actor
  */
 public abstract class NPC extends Actor {
     /**

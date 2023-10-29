@@ -15,6 +15,9 @@ import game.items.GiantHammer;
  *
  * Created by:
  * @author Phoebe Jiang
+ * Modified by:
+ * @author Ewan Lumsden-Smith
+ * @author Vasi Karabourniotis
  * @version 1.0.0
  * @see Action
  */

@@ -7,6 +7,15 @@ import game.actors.*;
 
 import java.util.Random;
 
+/**
+ * Class for spawning Elden Trees
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * @version 1.0.0
+ * @see Spawner
+ */
+
 public class EldenTreeSpawner implements Spawner {
     /**
      * variable for the spawn rate of the spawner

@@ -12,6 +12,8 @@ import java.util.Random;
  *
  * Created by:
  * @author Ewan Lumsden-Smith
+ * Modified by:
+ * @author Vasi Karabourniotis
  * @version 1.0.0
  * @see Action
  */
@@ -36,6 +38,9 @@ public class AttackAction extends Action {
      * Weapon used for the attack
      */
     private Weapon weapon;
+    /**
+     * Chance to hit enemies
+     */
     private final int TOTAL_POSSIBILITY_TO_HIT = 100;
 
     /**

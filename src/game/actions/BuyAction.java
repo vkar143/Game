@@ -9,7 +9,9 @@ import game.items.Buyable;
  * A class that represents an action that can be used to buy an item
  *
  * Created by:
- * @author Vasi
+ * @author Vasi Karabourniotis
+ * Modified by:
+ * @author Ewan Lumsden-Smith
  * @version 1.0.0
  * @see Action
  */

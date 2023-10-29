@@ -10,6 +10,8 @@ import game.items.Sellable;
  *
  * Created by:
  * @author Vasi Karabourniotis
+ * Modified by:
+ * @author Ewan Lumsden-Smith
  * @version 1.0.0
  * @see Action
  */

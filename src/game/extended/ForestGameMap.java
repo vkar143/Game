@@ -12,8 +12,11 @@ import game.actors.EnemyActor;
 import game.ground.SpawningGround;
 
 /**
- * @author Zhuojun Zhao
  * GameMap that provides functions necessary for execution
+ * Created by:
+ * @author Zhuojun Zhao
+ * @version 1.0.0
+ * @see GameMap
  */
 public class ForestGameMap extends GameMap{
     

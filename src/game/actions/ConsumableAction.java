@@ -10,6 +10,8 @@ import game.items.Consumable;
  *
  * Created by:
  * @author Ewan Lumsden-Smith
+ * Modified by:
+ * @author Vasi Karabourniotis
  * @version 1.0.0
  * @see Action
  */

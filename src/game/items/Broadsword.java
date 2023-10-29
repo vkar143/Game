@@ -178,6 +178,13 @@ public class Broadsword extends WeaponItem implements Sellable, Buyable, Upgrada
             return "Your runes were stolen!";
         }
     }
+
+    /**
+     * Allows an actor to upgrade the Broadsword
+     * @param actor The actor which can buy the item
+     * @param upgradeAmount The amount the item will be upgraded for
+     * @return A string confirming action was successful
+     */
     @Override
     public String upgrade(Actor actor, int upgradeAmount) {
         if (actor.getBalance() >= upgradeAmount){

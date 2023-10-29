@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.extended.ForestGameMap;
 /**
  * Controller Keep track of play-turn and manage weather switching.
+ *
+ * Created by:
+ * @author Zhuojun Zhao
  */
 public class AncientWoodWeatherController{
     protected int playturnCount = 0;

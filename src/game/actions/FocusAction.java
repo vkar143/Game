@@ -11,7 +11,10 @@ import game.items.Broadsword;
  * Focus action is used by the BroadSword Item
  *
  * Created by:
- * @author Phoebe Jiang & Ewan Lumsden-Smith
+ * @author Phoebe Jiang
+ * Modified by:
+ * @author Ewan Lumsden-Smith
+ * @author Vasi Karabourniotis
  * @version 1.0.0
  * @see Action
  */

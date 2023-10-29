@@ -8,6 +8,15 @@ import game.actors.WanderingUndead;
 
 import java.util.Random;
 
+/**
+ * Class for Spawning the Living Tree Branches
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * @version 1.0.0
+ * @see Spawner
+ */
+
 public class LivingTreeBranchSpawner implements Spawner{
     /**
      * variable for the spawn rate of the spawner

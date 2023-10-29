@@ -21,7 +21,7 @@ import java.util.Random;
  */
 public class HollowSoldierSpawner implements Spawner {
     /**
-     * variable for the spawnrate of the spawner
+     * variable for the spawn rate of the spawner
      */
     private float spawnRate;
     /**

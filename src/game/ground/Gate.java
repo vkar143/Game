@@ -36,6 +36,11 @@ public class Gate extends Ground {
         this.unlocked = false;
     }
 
+    /**
+     * Whether an actor can enter
+     * @param actor the Actor to check
+     * @return A boolean value
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return false;

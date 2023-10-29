@@ -5,6 +5,10 @@ import java.util.List;
 
 /**
  * Class for storing all the GameMaps that are created for this application
+ *
+ * Created by:
+ * @author Ewan Lumsden-Smith
+ * @version 1.0.0
  */
 public class GameMapCollection {
     public static List<String> abandonedVillageMap = Arrays.asList(

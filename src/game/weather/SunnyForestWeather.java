@@ -10,9 +10,11 @@ import game.ground.Hut;
 import game.spawner.ForestKeeperSpawner;
 import game.spawner.RedWolfSpawner;
 
-    /**
-    * Execute effects related to this weather
-    */
+/**
+* Execute effects related to this weather
+ * Created by:
+ * @author Zhuojun Zhao
+*/
 public class SunnyForestWeather implements Weather{
     float HUT_SPAWN_RATE_MULTIPLIER = 0.3f;
     float BUSH_SPAWN_RATE_MULTIPLIER = 0.3f;

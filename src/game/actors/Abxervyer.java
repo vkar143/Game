@@ -19,6 +19,14 @@ import game.items.Runes;
 import game.weather.AncientWoodWeatherController;
 /**
  * Boss of Ancient Wood.
+ *
+ * Created by:
+ * @author Zhuojun Zhao
+ * Modified by:
+ * @author Ewan Lumsden-Smith
+ * @author Vasi Karabourniotis
+ * @version 1.0.0
+ * @see EnemyActor
  */
 public class Abxervyer extends EnemyActor {
     /**
@@ -29,6 +37,9 @@ public class Abxervyer extends EnemyActor {
      * the gate that will be opened when the boss is defeated
      */
     private final Gate lastStandGate;
+    /**
+     * An array list of the weather maps
+     */
     ArrayList<ForestGameMap> weatherMap = new ArrayList<>();
     /**
      * Weather controller that allows the enemy to control weather of the game map
@@ -55,19 +66,14 @@ public class Abxervyer extends EnemyActor {
      */
     private final int FOLLOW_BEHAVIOUR_PRIORITY = 998;
 
+    /**
+     * A constructor for creating an instance of Abxervyer
+     * @param finalGate The gate that will be used by Abxervyer
+     */
     public Abxervyer(Gate finalGate){
         super("Abxervyer", 'Y', HIT_POINTS, COST);
         addCapability(Ability.WALK_ON_VOID);
         this.lastStandGate = finalGate;
-    }
-
-    /**
-    * Returns a damage weapon that is capable of attacking.
-    * @return an IntrinsicWeapon that is capable of attacking
-    *
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "swings at", INTRINSIC_HIT_RATE);
     }
 
     /**
@@ -103,19 +109,22 @@ public class Abxervyer extends EnemyActor {
         battleGameMap = map;
     }
 
+    /**
+     * Returns a damage weapon that is capable of attacking.
+     * @return an IntrinsicWeapon that is capable of attacking
+     */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(INTRINSIC_DAMAGE, " ATTACKS", INTRINSIC_HIT_RATE);
     }
 
     /**
-    * Adds a GameMap to the list of leave GameMap
-    * 
-    * @param map - The GameMap to be
-    */
-
-
-
+     * The list of allowable actions by Abxervyer
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return A list of actions for Abxervyer
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
