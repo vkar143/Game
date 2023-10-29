@@ -7,18 +7,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DieAction;
-import game.behaviours.FollowBehavior;
-import game.general.Ability;
 import game.general.Status;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
-import game.items.RefreshingFlask;
-import game.items.Runes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +26,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Actor
  */
-public abstract class EnemyActor extends Actor implements Droppable{
+public abstract class EnemyActor extends Actor {
     /**
      * A map list of behaviours and their corresponding priorities
      */
@@ -82,7 +77,6 @@ public abstract class EnemyActor extends Actor implements Droppable{
      * @param item the item being dropped
      * @param chance the chance of it dropping
      */
-    @Override
     public void drop(Location location, Item item, float chance) {
         Random random = new Random();
         if(random.nextFloat() < chance){
@@ -117,12 +111,6 @@ public abstract class EnemyActor extends Actor implements Droppable{
             if (action != null)
                 return action;
         }
-
-        // do what you want with this, if the actor steps on void this will be executed
-        if(!this.isConscious()){
-            this.unconscious(map);
-        }
-
         return new DoNothingAction();
     }
 
@@ -139,7 +127,7 @@ public abstract class EnemyActor extends Actor implements Droppable{
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction, otherActor.getIntrinsicWeapon()));
         }
-
         return actions;
     }
+
 }
