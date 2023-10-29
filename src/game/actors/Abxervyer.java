@@ -102,11 +102,19 @@ public class Abxervyer extends EnemyActor {
     public void addBattleGameMap(GameMap map){
         battleGameMap = map;
     }
+
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(INTRINSIC_DAMAGE, " ATTACKS", INTRINSIC_HIT_RATE);
+    }
+
     /**
     * Adds a GameMap to the list of leave GameMap
     * 
     * @param map - The GameMap to be
     */
+
+
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

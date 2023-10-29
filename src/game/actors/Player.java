@@ -2,7 +2,6 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
@@ -10,12 +9,9 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.DieAction;
 import game.general.Ability;
 import game.general.FancyMessage;
-import game.general.GameManager;
 import game.general.Status;
 import game.items.*;
 
@@ -61,12 +57,6 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
-        this.addBalance(10000);
-        this.addItemToInventory(new Broadsword());
-        this.addItemToInventory(new HealingVial());
-        this.addItemToInventory(new RefreshingFlask());
-        this.addItemToInventory(new GreatKnife());
-        this.addItemToInventory(new GiantHammer());
     }
 
     /**
@@ -88,34 +78,20 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            unconscious(map);
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+                try {
+                    Thread.sleep(MILLIS);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            System.exit(EXIT_STATUS);
+
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
-    }
-
-    public void die(GameMap map){
-        Location lastStand = map.locationOf(this);
-        Runes droppedRunes = new Runes(getBalance());
-        droppedRunes.removeCapability(Status.AFFECTED_BY_RESPAWN);
-        lastStand.addItem(droppedRunes);
-        deductBalance(getBalance());
-        modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
-        modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
-        map.removeActor(this);
-    }
-
-    @Override
-    public String unconscious(GameMap map) {
-        die(map);
-        return super.unconscious(map);
-    }
-
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        die(map);
-        return super.unconscious(actor, map);
     }
 
     /**
@@ -132,7 +108,7 @@ public class Player extends Actor {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(INTRINSIC_DAMAGE, "Punches", INTRINSIC_HIT_RATE);
+        return new IntrinsicWeapon(10000, "Punches", 100);
     }
 
     /**
