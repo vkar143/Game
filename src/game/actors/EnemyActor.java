@@ -66,6 +66,7 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
      * @param hitPoints sets hitPoints
      * @param runeAmount sets runeAmount
      */
+    private int REMOVE_ENEMY_HP = 0;
     public EnemyActor(String name, char displayChar, int hitPoints, int runeAmount) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
@@ -74,6 +75,7 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         this.runeAmount = runeAmount;
         this.addCapability(Status.AFFECTED_BY_RESPAWN);
         PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
+        //TODO: REMOVE tester
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 10);
     }
 
@@ -138,7 +140,7 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
     @Override
     public void notifyDeath(){
         if(!this.hasCapability(Status.BOSS)){
-            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, Integer.MAX_VALUE);
+            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
         }else{
             this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, Integer.MAX_VALUE);
         }

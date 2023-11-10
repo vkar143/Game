@@ -51,17 +51,21 @@ public class Player extends Actor{
      */
     private final int INTRINSIC_HIT_RATE = 80;
     private PlayerDeathMessageBus messageBus = new PlayerDeathMessageBus();
+    private GameMap birthMap;
+    private int BIRTH_POINT_X = 29;
+    private int BIRTH_POINT_Y = 5;
     /**
      * Constructor.
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hit points
      */
-    public Player(String name, char displayChar, int hitPoints){
+    public Player(String name, char displayChar, int hitPoints, GameMap birthMap){
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
+        this.birthMap = birthMap;
     }
 
     /**
@@ -83,7 +87,9 @@ public class Player extends Actor{
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
+            respawn(display);
             messageBus.publishDeath();
+            
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
@@ -114,6 +120,11 @@ public class Player extends Actor{
     @Override
     public String toString() {
         return super.toString();
+    }
+    public void respawn(Display display){
+        display.println(this.getName() + "'s HP hits 0. Respawned to where they started the game.");
+        birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
+        this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
     }
 
 }

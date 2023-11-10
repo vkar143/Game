@@ -11,5 +11,6 @@ package game.general;
  * @version 2.0.0
  */
 public enum Status {
+            //TODO: do we need AFFECTED_BY_RESPAWN
     HOSTILE_TO_ENEMY, ABXERVYER_DEFEATED, ENEMY, AFFECTED_BY_RESPAWN, BOSS
 }
