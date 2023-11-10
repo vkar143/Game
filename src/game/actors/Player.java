@@ -1,5 +1,7 @@
 package game.actors;
 
+import java.util.ArrayList;
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -14,6 +16,9 @@ import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.*;
+import game.notification.DeathPublisher;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 /**
  * Class representing the Player.
@@ -24,7 +29,7 @@ import game.items.*;
  * @see Actor
  */
 
-public class Player extends Actor {
+public class Player extends Actor{
     /**
      * The maximum health of the player
      */
@@ -45,14 +50,14 @@ public class Player extends Actor {
      * The rate in which the intrinsic weapon is successful in its execution
      */
     private final int INTRINSIC_HIT_RATE = 80;
-
+    private PlayerDeathMessageBus messageBus = new PlayerDeathMessageBus();
     /**
      * Constructor.
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hit points
      */
-    public Player(String name, char displayChar, int hitPoints) {
+    public Player(String name, char displayChar, int hitPoints){
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Ability.WALK_ON_FLOOR);
@@ -78,16 +83,7 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            for (String line : FancyMessage.YOU_DIED.split("\n")) {
-                new Display().println(line);
-                try {
-                    Thread.sleep(MILLIS);
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-            System.exit(EXIT_STATUS);
-
+            messageBus.publishDeath();
         }
         // return/print the console menu
         Menu menu = new Menu(actions);
@@ -119,4 +115,5 @@ public class Player extends Actor {
     public String toString() {
         return super.toString();
     }
+
 }

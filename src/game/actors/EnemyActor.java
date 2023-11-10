@@ -5,12 +5,16 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DieAction;
 import game.general.Status;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
@@ -26,7 +30,7 @@ import java.util.Random;
  * @version 1.0.0
  * @see Actor
  */
-public abstract class EnemyActor extends Actor {
+public abstract class EnemyActor extends Actor implements DeathSubcriber {
     /**
      * A map list of behaviours and their corresponding priorities
      */
@@ -55,7 +59,6 @@ public abstract class EnemyActor extends Actor {
      * the odds of runes being dropped 1/1 currently
       */
     protected final float RUNE_DROP_CHANCE = 1.0f;
-
     /**
      * construct for the enemyActor abstract class.
      * @param name sets name
@@ -69,6 +72,8 @@ public abstract class EnemyActor extends Actor {
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = runeAmount;
+        this.addCapability(Status.AFFECTED_BY_RESPAWN);
+        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
     }
 
     /**
@@ -129,5 +134,10 @@ public abstract class EnemyActor extends Actor {
         }
         return actions;
     }
-
+    @Override
+    public void notifyDeath(){
+        if(this.hasCapability(Status.AFFECTED_BY_RESPAWN)){
+            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, Integer.MAX_VALUE);
+        }
+    }
 }
