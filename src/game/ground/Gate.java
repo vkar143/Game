@@ -37,7 +37,7 @@ public class Gate extends Ground implements DeathSubcriber {
     public Gate() {
         super('=');
         this.unlocked = false;
-        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
+        PlayerDeathMessageBus.addSubscriber(this);
     }
 
     /**

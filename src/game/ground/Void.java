@@ -41,7 +41,7 @@ public class Void extends Ground {
     public void tick(Location location) {
         super.tick(location);
         if (location.containsAnActor() && (!location.getActor().hasCapability(Ability.WALK_ON_VOID))) {
-            location.getActor().modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 0);
+            location.getActor().unconscious(location.map());
         }
     }
 

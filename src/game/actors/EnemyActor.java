@@ -74,7 +74,7 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = runeAmount;
         this.addCapability(Status.AFFECTED_BY_RESPAWN);
-        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
+        PlayerDeathMessageBus.addSubscriber(this);
         //TODO: REMOVE tester
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 10);
     }

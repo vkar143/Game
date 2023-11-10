@@ -52,7 +52,7 @@ public class Player extends Actor{
      * The rate in which the intrinsic weapon is successful in its execution
      */
     private final int INTRINSIC_HIT_RATE = 80;
-    private PlayerDeathMessageBus messageBus = new PlayerDeathMessageBus();
+    private DeathPublisher messageBus = new PlayerDeathMessageBus();
     private GameMap birthMap;
     private int BIRTH_POINT_X = 29;
     private int BIRTH_POINT_Y = 5;
@@ -89,9 +89,7 @@ public class Player extends Actor{
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            messageBus.publishDeath();
-            respawn(display, map);
-            actions.remove(pickUpRuneAction);
+            respawn(map);
         }
         printPlayerStatus(display);
         // return/print the console menu
@@ -124,8 +122,8 @@ public class Player extends Actor{
     public String toString() {
         return super.toString();
     }
-    public void respawn(Display display, GameMap map){
-        display.println(this.getName() + "'s HP hits 0. Respawned to where they started the game.");
+    public void resetPlayer(Display display, GameMap map){
+        display.println(this.getName() + "You Died. Respawned to where they started the game.");
         display.println(this.getName() + " dropped " + getBalance() + " runes.");
         dropRune(map.locationOf(this));
         resetAttributes();
@@ -149,12 +147,12 @@ public class Player extends Actor{
         display.print(getBalance() + " Runes\n");      
     }
     @Override
-    public void addItemToInventory(Item item) {
-        if(!item.hasCapability(Status.REMOVED)){
-            super.addItemToInventory(item);
-        }else{
-            Display display = new Display();
-            display.println(item + " is removed, cannot pick up. Ignore default PickUpAction menudescription printed below.");
-        }
+    public String unconscious(GameMap map){
+        respawn(map);
+        return "Player unconscious.";
+    }
+    public void respawn(GameMap map){
+        messageBus.publishDeath();
+        resetPlayer(new Display(), map);
     }
 }

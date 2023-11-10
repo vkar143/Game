@@ -32,7 +32,7 @@ public class Runes extends Item implements Consumable, DeathSubcriber{
     public Runes(int amount) {//TODO: refactor Rune argument to show who dropped Rune?
         super("Runes", '$', true);
         this.amount = amount;
-        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
+        PlayerDeathMessageBus.addSubscriber(this);
     }
 
     /**

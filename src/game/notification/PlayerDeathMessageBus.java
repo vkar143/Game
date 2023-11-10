@@ -10,7 +10,7 @@ public void publishDeath(){
         _deathSubcribers.notifyDeath();
     }
 }
-public static void addPlayerDeathSubscriber(DeathSubcriber subscriber){
+public static void addSubscriber(DeathSubcriber subscriber){
     deathSubcribers.add(subscriber);
 }
 }
