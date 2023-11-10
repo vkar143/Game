@@ -10,7 +10,9 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.general.FancyMessage;
@@ -68,6 +70,7 @@ public class Player extends Actor{
         this.birthMap = birthMap;
         //TODO: remove tester
         this.addItemToInventory(new BloodBerry());
+        this.addBalance(100);
     }
 
     /**
@@ -89,7 +92,7 @@ public class Player extends Actor{
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            respawn(display);
+            respawn(display, map);
             messageBus.publishDeath();
             
         }
@@ -123,11 +126,20 @@ public class Player extends Actor{
     public String toString() {
         return super.toString();
     }
-    public void respawn(Display display){
+    public void respawn(Display display, GameMap map){
         display.println(this.getName() + "'s HP hits 0. Respawned to where they started the game.");
+        display.println(this.getName() + " dropped " + getBalance() + " runes.");
+        dropRune(map.locationOf(this));
+        resetAttributes();
+    }
+
+    public void dropRune(Location location){
+        location.addItem(new Runes(this.getBalance()));
+        this.deductBalance(this.getBalance());
+    }
+    public void resetAttributes(){
         birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
         this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
     }
-
 }
