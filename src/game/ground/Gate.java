@@ -3,11 +3,14 @@ package game.ground;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.OpenGateAction;
 import game.general.Ability;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ import java.util.ArrayList;
  *  @version 1.0.0
  *  @see Ground
  */
-public class Gate extends Ground {
+public class Gate extends Ground implements DeathSubcriber {
     /**
      * Variable which holds the action that is used by this class
      */
@@ -34,6 +37,7 @@ public class Gate extends Ground {
     public Gate() {
         super('=');
         this.unlocked = false;
+        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
     }
 
     /**
@@ -84,5 +88,6 @@ public class Gate extends Ground {
         }
         return actionList;
     }
+
 }
 

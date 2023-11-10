@@ -2,9 +2,13 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.general.Status;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 /**
  * Runes are dropped by enemies and used to trade with
@@ -16,19 +20,19 @@ import game.general.Status;
  * @see Item
  * @see Consumable
  */
-public class Runes extends Item implements Consumable{
+public class Runes extends Item implements Consumable, DeathSubcriber{
     /**
      * The Amount of runes for the object
      */
-    private final int amount;
+    private final Integer amount;
     /***
      * Constructor.
      * @param amount The amount of runes the object is worth.
      */
-    public Runes(int amount) {
+    public Runes(int amount) {//TODO: refactor Rune argument to show who dropped Rune?
         super("Runes", '$', true);
         this.amount = amount;
-        addCapability(Status.AFFECTED_BY_RESPAWN);
+        PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
     }
 
     /**
@@ -51,5 +55,21 @@ public class Runes extends Item implements Consumable{
     public void consume(Actor actor) {
         actor.addBalance(amount);
         actor.removeItemFromInventory(this);
+    }
+    public String getAmount(){
+        return amount.toString();
+    }
+    @Override
+    public void notifyDeath(){
+        this.addCapability(Status.REMOVED);
+        
+    }
+    @Override
+    public void tick(Location currentLocation){
+        if(this.hasCapability(Status.REMOVED)){
+            currentLocation.removeItem(this);
+            Display display = new Display();
+            display.println("Player dies again. " + this.getAmount() + " amount of " + this + " on ground is removed.");
+        }
     }
 }

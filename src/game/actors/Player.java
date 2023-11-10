@@ -56,6 +56,7 @@ public class Player extends Actor{
     private GameMap birthMap;
     private int BIRTH_POINT_X = 29;
     private int BIRTH_POINT_Y = 5;
+    private Action pickUpRuneAction;
     /**
      * Constructor.
      * @param name        Name to call the player in the UI
@@ -84,18 +85,15 @@ public class Player extends Actor{
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, getAttributeMaximum(BaseActorAttributes.STAMINA)/100);
-        display.print(getName()+ "\n");
-        display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
-        display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
-        display.print(getBalance() + " Runes\n");
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
         if(!this.isConscious()) {
-            respawn(display, map);
             messageBus.publishDeath();
-            
+            respawn(display, map);
+            actions.remove(pickUpRuneAction);
         }
+        printPlayerStatus(display);
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
@@ -134,12 +132,29 @@ public class Player extends Actor{
     }
 
     public void dropRune(Location location){
-        location.addItem(new Runes(this.getBalance()));
+        Runes dropped = new Runes(getBalance());
+        location.addItem(dropped);
         this.deductBalance(this.getBalance());
+        pickUpRuneAction = dropped.getPickUpAction(this);
     }
     public void resetAttributes(){
         birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
         this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
+    }
+    public void printPlayerStatus(Display display){
+        display.print(getName()+ "\n");
+        display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
+        display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
+        display.print(getBalance() + " Runes\n");      
+    }
+    @Override
+    public void addItemToInventory(Item item) {
+        if(!item.hasCapability(Status.REMOVED)){
+            super.addItemToInventory(item);
+        }else{
+            Display display = new Display();
+            display.println(item + " is removed, cannot pick up. Ignore default PickUpAction menudescription printed below.");
+        }
     }
 }

@@ -91,7 +91,6 @@ public class  Application {
 
         ancientWoodsGameMap.at(30,5).setGround(new Bush(new RedWolfSpawner(0.3f,new Random())));
         ancientWoodsGameMap.at(20,7).setGround(new Hut(new ForestKeeperSpawner(0.15f,new Random())));
-        ancientWoodsGameMap.at(27,6).addItem(new Runes(0));
         ancientWoodsGameMap.at(18, 3).addActor(new Traveller());
         ancientWoodsGameMap.at(20, 4).addItem(new GreatKnife());
 
