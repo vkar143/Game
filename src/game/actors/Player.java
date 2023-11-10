@@ -66,6 +66,8 @@ public class Player extends Actor{
         this.addCapability(Ability.WALK_ON_FLOOR);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(MAX_HEALTH));
         this.birthMap = birthMap;
+        //TODO: remove tester
+        this.addItemToInventory(new BloodBerry());
     }
 
     /**
@@ -125,6 +127,7 @@ public class Player extends Actor{
         display.println(this.getName() + "'s HP hits 0. Respawned to where they started the game.");
         birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
+        this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
     }
 
 }
