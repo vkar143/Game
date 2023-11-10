@@ -123,7 +123,7 @@ public class Player extends Actor{
         return super.toString();
     }
     public void resetPlayer(Display display, GameMap map){
-        display.println(this.getName() + "You Died. Respawned to where they started the game.");
+        display.println(this.getName() + " Died. Respawned to where they started the game.");
         display.println(this.getName() + " dropped " + getBalance() + " runes.");
         dropRune(map.locationOf(this));
         resetAttributes();

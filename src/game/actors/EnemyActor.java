@@ -73,7 +73,6 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         this.behaviours.put(ATTACK_BEHAVIOUR_PRIORITY, new AttackBehavior());
         this.capabilitySet.addCapability(Status.ENEMY);
         this.runeAmount = runeAmount;
-        this.addCapability(Status.AFFECTED_BY_RESPAWN);
         PlayerDeathMessageBus.addSubscriber(this);
         //TODO: REMOVE tester
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 10);
@@ -142,7 +141,9 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         if(!this.hasCapability(Status.BOSS)){
             this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
         }else{
-            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, Integer.MAX_VALUE);
+            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
+            Display display = new Display();
+            display.println(name + "'s HP is resetted to " + getAttributeMaximum(BaseActorAttributes.HEALTH));
         }
     }
 }
