@@ -74,6 +74,7 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         this.runeAmount = runeAmount;
         this.addCapability(Status.AFFECTED_BY_RESPAWN);
         PlayerDeathMessageBus.addPlayerDeathSubscriber(this);
+        this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 10);
     }
 
     /**
@@ -136,8 +137,10 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
     }
     @Override
     public void notifyDeath(){
-        if(this.hasCapability(Status.AFFECTED_BY_RESPAWN)){
+        if(!this.hasCapability(Status.BOSS)){
             this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, Integer.MAX_VALUE);
+        }else{
+            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, Integer.MAX_VALUE);
         }
     }
 }
