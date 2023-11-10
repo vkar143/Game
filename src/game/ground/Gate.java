@@ -88,6 +88,10 @@ public class Gate extends Ground implements DeathSubcriber {
         }
         return actionList;
     }
-
+    public void notifyDeath(){
+        this.unlocked = false;
+        Display display = new Display();
+        display.println("Gate is locked again.");
+    }
 }
 
