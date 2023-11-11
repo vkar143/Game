@@ -11,5 +11,5 @@ package game.general;
  * @version 2.0.0
  */
 public enum Status {
-    HOSTILE_TO_ENEMY, ABXERVYER_DEFEATED, ENEMY, BOSS, REMOVED
+    HOSTILE_TO_ENEMY, ABXERVYER_DEFEATED, ENEMY, REMOVED
 }

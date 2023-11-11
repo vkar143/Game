@@ -141,8 +141,6 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         resetEnemy();
     }
     public void resetEnemy(){
-        if(!this.hasCapability(Status.BOSS)){
-            modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
-        }
+        modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
     }
 }
