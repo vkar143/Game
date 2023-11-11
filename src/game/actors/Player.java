@@ -56,7 +56,6 @@ public class Player extends Actor{
     private GameMap birthMap;
     private int BIRTH_POINT_X = 29;
     private int BIRTH_POINT_Y = 5;
-    private Action pickUpRuneAction;
     /**
      * Constructor.
      * @param name        Name to call the player in the UI
@@ -133,7 +132,6 @@ public class Player extends Actor{
         Rune dropped = new Rune(getBalance());
         location.addItem(dropped);
         this.deductBalance(this.getBalance());
-        pickUpRuneAction = dropped.getPickUpAction(this);
     }
     public void resetAttributes(){
         birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
