@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.general.Ability;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
-import game.items.Runes;
+import game.items.Rune;
 
 /**
  * Class for the EldentreeGuardian enemy
@@ -70,7 +70,7 @@ public class EldentreeGuardian extends ForestEnemy {
         Location location = map.locationOf(this);
         drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
         drop(location, new RefreshingFlask(), REFRESHING_FLASK_DROP_CHANCE);
-        drop(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
+        drop(location, new Rune(runeAmount), RUNE_DROP_CHANCE);
         return super.unconscious(actor, map);
     }
 }

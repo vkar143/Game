@@ -1,4 +1,4 @@
-package game.notification;
+package game.notifications;
 
 import java.util.ArrayList;
 

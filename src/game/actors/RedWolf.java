@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
-import game.items.Runes;
+import game.items.Rune;
 
 /**
  * RedWolf enemy actor class
@@ -61,7 +61,7 @@ public class RedWolf extends ForestEnemy {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location location = map.locationOf(this);
-        drop(location, new Runes(runeAmount), RUNE_DROP_CHANCE);
+        drop(location, new Rune(runeAmount), RUNE_DROP_CHANCE);
         drop(location, new HealingVial(), HEALING_VIAL_DROP_CHANCE);
         return super.unconscious(actor, map);
     }

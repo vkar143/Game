@@ -15,7 +15,7 @@ import game.extended.ForestGameMap;
 import game.general.Ability;
 import game.general.Status;
 import game.ground.Gate;
-import game.items.Runes;
+import game.items.Rune;
 import game.weather.AncientWoodWeatherController;
 /**
  * Boss of Ancient Wood.

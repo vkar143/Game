@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.general.Status;
-import game.notification.DeathSubcriber;
-import game.notification.PlayerDeathMessageBus;
+import game.notifications.DeathSubcriber;
+import game.notifications.PlayerDeathMessageBus;
 
 /**
  * Runes are dropped by enemies and used to trade with
@@ -20,7 +20,7 @@ import game.notification.PlayerDeathMessageBus;
  * @see Item
  * @see Consumable
  */
-public class Runes extends Item implements Consumable, DeathSubcriber{
+public class Rune extends Item implements Consumable, DeathSubcriber{
     /**
      * The Amount of runes for the object
      */
@@ -29,7 +29,7 @@ public class Runes extends Item implements Consumable, DeathSubcriber{
      * Constructor.
      * @param amount The amount of runes the object is worth.
      */
-    public Runes(int amount) {//TODO: refactor Rune argument to show who dropped Rune?
+    public Rune(int amount) {//TODO: refactor Rune argument to show who dropped Rune?
         super("Runes", '$', true);
         this.amount = amount;
         PlayerDeathMessageBus.addSubscriber(this);

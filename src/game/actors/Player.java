@@ -18,9 +18,9 @@ import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.*;
-import game.notification.DeathPublisher;
-import game.notification.DeathSubcriber;
-import game.notification.PlayerDeathMessageBus;
+import game.notifications.DeathPublisher;
+import game.notifications.DeathSubcriber;
+import game.notifications.PlayerDeathMessageBus;
 
 /**
  * Class representing the Player.
@@ -130,7 +130,7 @@ public class Player extends Actor{
     }
 
     public void dropRune(Location location){
-        Runes dropped = new Runes(getBalance());
+        Rune dropped = new Rune(getBalance());
         location.addItem(dropped);
         this.deductBalance(this.getBalance());
         pickUpRuneAction = dropped.getPickUpAction(this);
