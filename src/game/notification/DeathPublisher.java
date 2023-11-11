@@ -1,4 +1,4 @@
-package game.notifications;
+package game.notification;
 
 public interface DeathPublisher {
     void publishDeath();

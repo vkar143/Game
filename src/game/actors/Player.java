@@ -18,9 +18,9 @@ import game.general.Ability;
 import game.general.FancyMessage;
 import game.general.Status;
 import game.items.*;
-import game.notifications.DeathPublisher;
-import game.notifications.DeathSubcriber;
-import game.notifications.PlayerDeathMessageBus;
+import game.notification.DeathPublisher;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 /**
  * Class representing the Player.

@@ -13,8 +13,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DieAction;
 import game.general.Status;
-import game.notifications.DeathSubcriber;
-import game.notifications.PlayerDeathMessageBus;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 import game.actions.AttackAction;
 import game.behaviours.AttackBehavior;
 import game.behaviours.WanderBehaviour;
@@ -138,12 +138,11 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
     }
     @Override
     public void notifyDeath(){
+        resetEnemy();
+    }
+    public void resetEnemy(){
         if(!this.hasCapability(Status.BOSS)){
-            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
-        }else{
-            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
-            Display display = new Display();
-            display.println(name + "'s HP is resetted to " + getAttributeMaximum(BaseActorAttributes.HEALTH));
+            modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
         }
     }
 }

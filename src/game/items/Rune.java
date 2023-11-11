@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumableAction;
 import game.general.Status;
-import game.notifications.DeathSubcriber;
-import game.notifications.PlayerDeathMessageBus;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 /**
  * Runes are dropped by enemies and used to trade with

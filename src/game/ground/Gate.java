@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.OpenGateAction;
 import game.general.Ability;
-import game.notifications.DeathSubcriber;
-import game.notifications.PlayerDeathMessageBus;
+import game.notification.DeathSubcriber;
+import game.notification.PlayerDeathMessageBus;
 
 import java.util.ArrayList;
 

@@ -28,7 +28,7 @@ import game.weather.AncientWoodWeatherController;
  * @version 1.0.0
  * @see EnemyActor
  */
-public class Abxervyer extends BossEnemy {
+public class Abxervyer extends BossEnemy{
     /**
      * game map where the boss exists
      */
