@@ -52,9 +52,21 @@ public class Player extends Actor{
      * The rate in which the intrinsic weapon is successful in its execution
      */
     private final int INTRINSIC_HIT_RATE = 80;
+    /***
+     * message bus to publish player death
+     */
     private DeathPublisher messageBus = new PlayerDeathMessageBus();
+    /***
+     * the map player will be respawned to
+     */
     private GameMap birthMap;
+    /**
+     * x coordinate of respawn location
+     */
     private int BIRTH_POINT_X = 29;
+    /**
+     * y coordinate of respawn location
+     */
     private int BIRTH_POINT_Y = 5;
     /**
      * Constructor.
@@ -121,34 +133,57 @@ public class Player extends Actor{
     public String toString() {
         return super.toString();
     }
+    
+    
+    /** reset player once it's dead by calling reset max attributes method, drop runes and printing out relavent console message.
+     * @param display display object
+     * @param map Gamemap where player fell unconscious
+     */
     public void resetPlayer(Display display, GameMap map){
         display.println(this.getName() + " Died. Respawned to where they started the game.");
         display.println(this.getName() + " dropped " + getBalance() + " runes.");
         dropRune(map.locationOf(this));
         resetAttributes();
     }
-
+/**
+ * drop runes to ground
+ * @param location the location that the runes will be dropped
+ */
     public void dropRune(Location location){
         Rune dropped = new Rune(getBalance());
         location.addItem(dropped);
         this.deductBalance(this.getBalance());
     }
+    /**
+     * reset player max attributes and move player to birth point
+     */
     public void resetAttributes(){
         birthMap.moveActor(this, birthMap.at(BIRTH_POINT_X,BIRTH_POINT_Y));
         this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.HEALTH));
         this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, getAttributeMaximum(BaseActorAttributes.STAMINA));
     }
+    /**
+     * print out player status
+     * @param display display object
+     */
     public void printPlayerStatus(Display display){
         display.print(getName()+ "\n");
         display.print(getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + " HP" + "\n");
         display.print(getAttribute(BaseActorAttributes.STAMINA) + "/" + getAttributeMaximum(BaseActorAttributes.STAMINA) + " Stamina" + "\n");
         display.print(getBalance() + " Runes\n");      
     }
+    /**
+     * @param map the map where player fell unconscious
+     */
     @Override
     public String unconscious(GameMap map){
         respawn(map);
         return "Player unconscious.";
     }
+    /**
+     * the method that collects all operations that are needed to perform the respawn operation
+     * @param map gamemap where player fell unconscious
+     */
     public void respawn(GameMap map){
         messageBus.publishDeath();
         resetPlayer(new Display(), map);

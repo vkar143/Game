@@ -88,6 +88,9 @@ public class Gate extends Ground implements DeathSubcriber {
         }
         return actionList;
     }
+     /***
+     * prompt operations on gate once death of the actor it subscribes to happens.
+     */   
     public void notifyDeath(){
         this.unlocked = false;
         Display display = new Display();

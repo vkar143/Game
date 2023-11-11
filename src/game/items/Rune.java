@@ -56,14 +56,26 @@ public class Rune extends Item implements Consumable, DeathSubcriber{
         actor.addBalance(amount);
         actor.removeItemFromInventory(this);
     }
+    /**
+     * get amount of rune item
+     * @return string of rune amount
+     */
     public String getAmount(){
         return amount.toString();
     }
+    /***
+     * prompt operations on rune once death of the actor it subscribes to happens.
+     */
     @Override
     public void notifyDeath(){
         this.addCapability(Status.REMOVED);
         
     }
+	
+	/**
+	 * Called once per turn, so that Locations can experience the passage time. If that's
+	 * important to them.
+	 */
     @Override
     public void tick(Location currentLocation){
         if(this.hasCapability(Status.REMOVED)){

@@ -60,13 +60,16 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
       */
     protected final float RUNE_DROP_CHANCE = 1.0f;
     /**
+     * HP that the enemy will be setted to remove the enemy
+     */
+    private int REMOVE_ENEMY_HP = 0;
+    /**
      * construct for the enemyActor abstract class.
      * @param name sets name
      * @param displayChar sets display char
      * @param hitPoints sets hitPoints
      * @param runeAmount sets runeAmount
      */
-    private int REMOVE_ENEMY_HP = 0;
     public EnemyActor(String name, char displayChar, int hitPoints, int runeAmount) {
         super(name, displayChar, hitPoints);
         this.behaviours.put(WANDER_BEHAVIOUR_PRIORITY, new WanderBehaviour());
@@ -136,10 +139,16 @@ public abstract class EnemyActor extends Actor implements DeathSubcriber {
         }
         return actions;
     }
+    /***
+     * prompt operations on enemy once death of the actor it subscribes to happens.
+     */
     @Override
     public void notifyDeath(){
         resetEnemy();
     }
+    /**
+    * perform operation to enemy. Execution may vary depending on implemetation.
+    */
     public void resetEnemy(){
         modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, REMOVE_ENEMY_HP);
     }
