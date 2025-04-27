@@ -1,4 +1,4 @@
-# FIT2099 Assignment (Semester 2, 2023)
+# FIT2099 Assignment 
 
 # Designborne
 
